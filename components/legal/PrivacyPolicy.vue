@@ -1,6 +1,6 @@
 <template>
   <div class="lh-26">
-    <h2 class="font-bold text-dark-gray text-3xl ls--08 mb-4">
+    <h2 class="font-bold text-dark-gray text-[38px] ls--08 mb-4">
       Privacy Policy
     </h2>
     <section>
@@ -26,7 +26,7 @@
       </ol>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">
         Information, collection, use, and sharing
       </h4>
       <p>
@@ -82,7 +82,7 @@
       </p>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">Security</h4>
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">Security</h4>
       <p>
         We take precautions to protect your information. When you submit
         sensitive information via the website, your information is protected
@@ -100,7 +100,7 @@
       </p>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">Security</h4>
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">Updates</h4>
       <p>
         Our Privacy Policy may change from time to time and all updates will be
         posted on this page. <br />
@@ -110,7 +110,7 @@
       </p>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">Registration</h4>
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">Registration</h4>
       <p>
         For effective use of this website, users are advised to complete the
         registration form. During registration a user is required to give
@@ -122,7 +122,7 @@
       </p>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">Cookies</h4>
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">Cookies</h4>
       <p>
         We use "cookies" on this site. A cookie is a piece of data stored on a
         site visitor's hard drive to help us improve your access to our site and
@@ -139,7 +139,7 @@
       </p>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">Sharing</h4>
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">Sharing</h4>
       <p>
         We share aggregated demographic information with our partners and
         advertisers. This is not linked to any personal information that can
@@ -195,7 +195,7 @@
       </p>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">Links</h4>
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">Links</h4>
       <p>
         This web site contains links to other sites. Our website includes
         hyperlinks to, and details of, third party websites.
@@ -209,7 +209,7 @@
       </p>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">
         Visiting our website out for Nigeria
       </h4>
       <p>
@@ -225,7 +225,7 @@
       </p>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">Surveys & contest/promotions</h4>
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">Surveys & contest/promotions</h4>
       <p>
         From time-to-time our site requests information via surveys or contests.
         Participation in these surveys or contests is completely voluntary and
@@ -238,14 +238,14 @@
       </p>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">Online privacy policy only</h4>
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">Online privacy policy only</h4>
       <p>
         This privacy policy applies only to information collected through our
         website and not to information collected offline.
       </p>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">Terms and Conditions</h4>
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">Terms and Conditions</h4>
       <p>
         Please also visit our Terms and Conditions section establishing the use,
         disclaimers and limitations of liability governing the use of our
@@ -253,7 +253,7 @@
       </p>
     </section>
     <section class="mt-12">
-      <h4 class="mb-4 font-bold text-xl">Your consent</h4>
+      <h4 class="mb-4 font-bold text-[24px] l-sp-1">Your consent</h4>
       <p>By using our site, you consent to our Privacy Policy.</p>
     </section>
   </div>
@@ -267,11 +267,15 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 ol {
-  list-style-type: decimal;
   padding-left: 20px;
+  li {
+    list-style-type: decimal;
+  }
 }
 ul {
-  list-style-type: disc;
   padding-left: 20px;
+  li {
+    list-style-type: disc;
+  }
 }
 </style>
