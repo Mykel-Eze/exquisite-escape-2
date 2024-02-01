@@ -165,17 +165,17 @@ button.dnps-btn.flex-div {
 section#getting-started-section {
     margin: 100px 0;
 }
-.section-title-header {
+section#getting-started-section .section-title-header {
     margin-bottom: 34px;
 }
-.section-title {
+section#getting-started-section .section-title {
     color: #141414;
     font-size: 32px;
     margin: 0;
     letter-spacing: -0.64px;
     font-family: var(--font);
 }
-.section-title-link {
+section#getting-started-section .section-title-link {
     font-size: 18px;
     color: var(--pry-color);
 }
@@ -225,7 +225,7 @@ section#getting-started-section {
         width: 100%;
         justify-content: flex-end;
     }
-    .section-title {
+    section#getting-started-section .section-title {
         font-size: 30px;
     }
 }
