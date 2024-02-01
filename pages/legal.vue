@@ -3,7 +3,7 @@
         <h2 class="text-dark-gray page-title text-center ls--128 mb-[30px]">
             Legal Agreement
         </h2>
-        <div class="text-center flex flex-wrap justify-center gap-4">
+        <div class="text-center flex flex-wrap justify-center gap-4 max-w-[843px] m-auto">
             <base-button :variant="termsObject.termsFlag === 'termsServiced' ? 'primary' : 'neutral'
                 " class="rounded-lg" @click="termsHandler('termsServiced')">Terms of service</base-button>
             <base-button :variant="termsObject.termsFlag === 'privacyPolicy' ? 'primary' : 'neutral'
