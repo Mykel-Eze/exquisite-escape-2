@@ -10,19 +10,19 @@
                             <nuxt-link to="/help" class="footer-link">Help Center</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Cancel your flight</nuxt-link>
+                            <nuxt-link to="/help/topics" class="footer-link">Cancel your flight</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Contact customer care</nuxt-link>
+                            <nuxt-link to="/help/topics" class="footer-link">Contact customer care</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Cancel your transfer booking </nuxt-link>
+                            <nuxt-link to="/help/topics" class="footer-link">Cancel your transfer booking </nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Cancel your hotel booking</nuxt-link>
+                            <nuxt-link to="/help/topics" class="footer-link">Cancel your hotel booking</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Refund timeline and polices & process</nuxt-link>
+                            <nuxt-link to="/help/topics" class="footer-link">Refund timeline and polices & process</nuxt-link>
                         </li>
                     </ul>
                 </div>
@@ -31,13 +31,13 @@
                     <div class="footer-block-title">Exquisite Escape</div>
                     <ul class="footer-block-links">
                         <li>
-                            <nuxt-link to="/#" class="footer-link">About us</nuxt-link>
+                            <nuxt-link to="/about" class="footer-link">About us</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Blog</nuxt-link>
+                            <nuxt-link to="/blog" class="footer-link">Blog</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Jobs</nuxt-link>
+                            <nuxt-link to="/careers" class="footer-link">Jobs</nuxt-link>
                         </li>
                         <li>
                             <nuxt-link to="/#" class="footer-link">Contact us </nuxt-link>

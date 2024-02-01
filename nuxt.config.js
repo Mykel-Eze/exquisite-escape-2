@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+// import svgLoader from 'vite-svg-loader'
+
 export default {
   ssr: false,
   target: 'static',
@@ -38,10 +40,15 @@ export default {
     color: '#00A79D',
     height: '5px',
   },
+  plugins: [
+    '@/plugins/vue-plugins/antd-ui.js', 
+    '@/plugins/components/global-components'
+  ],
   css: [
     '@/assets/css/main.css',
     'materialize-css/dist/css/materialize.min.css',
     '@/assets/css/fonts.css',
+    '@/assets/scss/main.scss',
     '@/assets/css/styles.css',
   ],
   components: [
