@@ -379,7 +379,11 @@ ul.breadcrumb span {
     color: var(--pry-color);
     text-decoration: underline;
 }
-.breadcrumb-item a.nuxt-link-exact-active {
+/* .breadcrumb-item:last-child a {
+    color: #606161;
+    text-decoration: none;
+} */
+.breadcrumb-item a.router-link-exact-active {
     color: #606161;
     text-decoration: none;
 }
@@ -402,7 +406,7 @@ ul.breadcrumb span {
 .topic-block-title {
     font-size: 24px;
     margin-bottom: 24px;
-    font-family: var(--font-light);
+    color: #141414;
 }
 ul.topic-links-wrapper {
     display: flex;
