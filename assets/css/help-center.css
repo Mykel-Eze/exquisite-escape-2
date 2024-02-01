@@ -8,6 +8,9 @@ h1.page-title {
     line-height: 77px;
     color: #141414;
 }
+h1.page-title.pry-color {
+    color: var(--pry-color);
+}
 .search-help-wrapper {
     max-width: 450px;
     margin: 30px auto 0;

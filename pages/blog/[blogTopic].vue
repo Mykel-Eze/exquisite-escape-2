@@ -204,6 +204,9 @@ input.inp-field {
     box-sizing: border-box;
     background: white;
 }
+#blog-topic-page h3 {
+    letter-spacing: -1px;
+}
 
 ol {
 
