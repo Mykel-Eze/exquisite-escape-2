@@ -323,7 +323,7 @@ export default defineComponent({
         };
         const router = useRouter();
         const jobByIdHandler = (id: number) => {
-            router.push(`/career/${id}`);
+            router.push(`/careers/${id}`);
         };
         return {
             activeKey,
