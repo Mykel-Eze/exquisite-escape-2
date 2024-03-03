@@ -24,7 +24,7 @@
                       <span class="text-[12px]">Economy ∙ 1 Passenger </span>
                     </div>
                   </div>
-                  <NuxtLink to="#" class="ats-get-started-btn pry-bg flex-div gap-2 justify-center hover-scale">
+                  <NuxtLink to="/affiliate/register" class="ats-get-started-btn pry-bg flex-div gap-2 justify-center hover-scale">
                     <span>Get Started</span>
                     <img src="@/assets/images/arrow-up-right.svg" alt="arrow-up-right">
                   </NuxtLink>
