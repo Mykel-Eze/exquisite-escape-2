@@ -30,10 +30,10 @@
     border-radius: 4px;
 }
 .result-contents-side {
-    background-color: #F3F3F3;
+    /* background-color: #F3F3F3; */
     width: 100%;
     min-height: 100%;
-    border: 1px solid #CCEDEB;
+    /* border: 1px solid #CCEDEB; */
     border-radius: 10px;
 }
 .noUi-target.noUi-horizontal .noUi-handle {

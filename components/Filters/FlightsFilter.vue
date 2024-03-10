@@ -59,7 +59,23 @@
     </div>
 
     <!-- Travel & Baggage Filter -->
-    <!-- Similar structure as Stops filter -->
+    <!-- <div class="filter-block">
+        <div class="filter-block-header">
+            <span>Travel & Baggage</span>
+            <small class="pry-color clear-btn" @click="clear(selectedBaggages, stops)">Clear</small>
+        </div>
+        <div class="filter-list-items">
+            <label v-for="(stop, index) in stops" :key="index" :for="stop.item">
+                <input type="checkbox" :id="stop.item" v-model="selectedBaggages" :value="stop.item" class="filled-in">
+                <span class="w-full">
+                    <span class="flex-div justify-between">
+                        <span class="filter-block-item">{{ stop.item }}</span>
+                        <span class="filter-block-item-value">₦{{ formatNumber(stop.value) }}</span>
+                    </span>
+                </span>
+            </label>
+        </div>
+    </div> -->
 
     <!-- Departure Time Filter -->
     <!-- Similar structure as Stops filter -->
@@ -111,12 +127,12 @@ const airlines = ref([
         value: 500000
     },
     {
-        name: 'British Airways',
+        name: 'British Air',
         number: 2,
         value: 3000000
     },
     {
-        name: 'American Airlines',
+        name: 'American A.',
         number: 1,
         value: 500000
     },
@@ -126,7 +142,7 @@ const airlines = ref([
         value: 5000000
     },
     {
-        name: 'Kenya Airways',
+        name: 'Kenya Air',
         number: 12,
         value: 3000000
     },
@@ -136,12 +152,12 @@ const airlines = ref([
         value: 300000
     },
     {
-        name: 'Swiss International',
+        name: 'Lufthansa',
         number: 2,
         value: 5000000
     },
     {
-        name: 'Qatar Airways',
+        name: 'Qatar Air',
         number: 1,
         value: 5000000
     },

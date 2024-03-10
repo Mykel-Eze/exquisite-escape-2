@@ -17,11 +17,15 @@
                     <div class="result-filter-side">
                         <FlightsFilter />
                     </div>
-                    <div class="result-contents-side"></div>
+                    <div class="result-contents-side">
+                        <img src="@/assets/images/Results.png" alt="Results" class="results full-w">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- <div class=""></div> -->
   </div>
 </template>
 
