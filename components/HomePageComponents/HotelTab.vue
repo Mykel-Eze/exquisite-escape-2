@@ -1,5 +1,5 @@
 <template>
-    <form action="#" class="search-inputs flex items-end">
+    <form action="/search-results/hotels" class="search-inputs flex items-end">
         <div class="input-field-wrapper">
             <div class="purpose-wrapper flex-div gap-[20px] mb-[30px]">
                 <span>What is the purpose of your travel?</span>

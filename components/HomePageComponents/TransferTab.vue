@@ -1,5 +1,5 @@
 <template>
-    <form action="#" class="search-inputs flex items-end">
+    <form action="/search-results/transfers" class="search-inputs flex items-end">
         <div class="input-field-wrapper">
             <div class="select-field-wrapper flex-div gap-[10px] mb-[30px]">
                 <SelectField 
