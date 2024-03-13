@@ -1,5 +1,5 @@
 <template>
-    <form action="flights-result" id="book-flight-tab" class="search-inputs flex items-end">
+    <form action="/search-results/flights" id="book-flight-tab" class="search-inputs flex items-end">
         <div class="input-field-wrapper">
             <div class="select-field-wrapper flex-div gap-[10px] mb-[30px]">
                 <!-- <SelectField 

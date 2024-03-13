@@ -1,5 +1,13 @@
 <template>
   <div class="filter-blocks-wrapper">
+    <!-- Reset Filter -->
+    <div class="filter-block">
+        <div class="filter-block-header mb-5">
+            <span>Filter</span>
+            <small class="pry-color clear-btn">Reset</small>
+        </div>
+    </div>
+    
     <!-- Price Filter -->
     <div class="filter-block">
         <div class="filter-block-header">
@@ -43,7 +51,7 @@
                 <input type="checkbox" :id="airline.name" v-model="selectedAirlines" :value="airline.name" class="filled-in">
                 <span class="w-full">
                     <span class="flex-div justify-between">
-                        <span class="filter-block-item">{{ airline.name }}({{ airline.number }})</span>
+                        <span class="filter-block-item truncate">({{ airline.number }}) - {{ airline.name }}</span>
                         <span class="filter-block-item-value">₦{{ formatNumber(airline.value) }}</span>
                     </span>
                 </span>
@@ -59,29 +67,61 @@
     </div>
 
     <!-- Travel & Baggage Filter -->
-    <!-- <div class="filter-block">
+    <div class="filter-block">
         <div class="filter-block-header">
             <span>Travel & Baggage</span>
-            <small class="pry-color clear-btn" @click="clear(selectedBaggages, stops)">Clear</small>
+            <small class="pry-color clear-btn" @click="clear(selectedBaggages, baggages)">Clear</small>
         </div>
         <div class="filter-list-items">
-            <label v-for="(stop, index) in stops" :key="index" :for="stop.item">
-                <input type="checkbox" :id="stop.item" v-model="selectedBaggages" :value="stop.item" class="filled-in">
+            <label v-for="(baggage, index) in baggages" :key="index" :for="baggage.item">
+                <input type="checkbox" :id="baggage.item" v-model="selectedBaggages" :value="baggage.item" class="filled-in">
                 <span class="w-full">
                     <span class="flex-div justify-between">
-                        <span class="filter-block-item">{{ stop.item }}</span>
-                        <span class="filter-block-item-value">₦{{ formatNumber(stop.value) }}</span>
+                        <span class="filter-block-item">{{ baggage.item }}</span>
+                        <span class="filter-block-item-value">₦{{ formatNumber(baggage.value) }}</span>
                     </span>
                 </span>
             </label>
         </div>
-    </div> -->
+    </div>
 
     <!-- Departure Time Filter -->
-    <!-- Similar structure as Stops filter -->
+    <div class="filter-block">
+        <div class="filter-block-header">
+            <span>Departure Time</span>
+            <small class="pry-color clear-btn" @click="clear(selectedDepartures, departures)">Clear</small>
+        </div>
+        <div class="filter-list-items">
+            <label v-for="(departure, index) in departures" :key="index" :for="departure.time">
+                <input type="checkbox" :id="departure.time" v-model="selectedDepartures" :value="departure.time" class="filled-in">
+                <span class="w-full">
+                    <span class="flex-div justify-between">
+                        <span class="filter-block-item">{{ departure.time }}</span>
+                        <span class="filter-block-item-value">{{ departure.startTime }} - {{ departure.endTime }}</span>
+                    </span>
+                </span>
+            </label>
+        </div>
+    </div>
 
     <!-- Arrival Time Filter -->
-    <!-- Similar structure as Stops filter -->
+    <div class="filter-block">
+        <div class="filter-block-header">
+            <span>Arrival Time</span>
+            <small class="pry-color clear-btn" @click="clear(selectedArrivals, arrivals)">Clear</small>
+        </div>
+        <div class="filter-list-items">
+            <label v-for="(arrival, index) in arrivals" :key="index" :for="arrival.time+index">
+                <input type="checkbox" :id="arrival.time+index" v-model="selectedArrivals" :value="arrival.time" class="filled-in">
+                <span class="w-full">
+                    <span class="flex-div justify-between">
+                        <span class="filter-block-item">{{ arrival.time }}</span>
+                        <span class="filter-block-item-value">{{ arrival.startTime }} - {{ arrival.endTime }}</span>
+                    </span>
+                </span>
+            </label>
+        </div>
+    </div>
   </div>
 </template>
 
@@ -90,90 +130,22 @@ import { onMounted, ref, computed } from 'vue';
 import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 
+import { 
+    stops, airlines, baggages, departures, arrivals
+} from '~/data/FlightsFilterData.js';
+
 let slider = ref(null);
 const minPrice = ref(90000);
 const maxPrice = ref(10000000);
 
-const stops = ref([
-    {
-        item: '0 Stop',
-        value: 5000000
-    },
-    {
-        item: '1 Stop',
-        value: 5000000
-    },
-    {
-        item: '2+ Stop',
-        value: 5000000
-    },
-]);
 const selectedStops = ref([]);
 
-const airlines = ref([
-    {
-        name: 'Air France',
-        number: 12,
-        value: 5000000
-    },
-    {
-        name: 'KLM',
-        number: 16,
-        value: 1000000
-    },
-    {
-        name: 'Air Canada',
-        number: 8,
-        value: 500000
-    },
-    {
-        name: 'British Air',
-        number: 2,
-        value: 3000000
-    },
-    {
-        name: 'American A.',
-        number: 1,
-        value: 500000
-    },
-    {
-        name: 'Delta',
-        number: 1,
-        value: 5000000
-    },
-    {
-        name: 'Kenya Air',
-        number: 12,
-        value: 3000000
-    },
-    {
-        name: 'Lufthansa',
-        number: 3,
-        value: 300000
-    },
-    {
-        name: 'Lufthansa',
-        number: 2,
-        value: 5000000
-    },
-    {
-        name: 'Qatar Air',
-        number: 1,
-        value: 5000000
-    },
-    {
-        name: 'Air France',
-        number: 12,
-        value: 5000000
-    },
-    {
-        name: 'Air France',
-        number: 12,
-        value: 5000000
-    },
-]);
 const selectedAirlines = ref([]);
 const showMore = ref(false);
+
+const selectedBaggages = ref([]);
+const selectedDepartures = ref([]);
+const selectedArrivals = ref([]);
 
 const displayedAirlines = computed(() => {
   return showMore.value ? airlines.value : airlines.value.slice(0, 10);
@@ -208,6 +180,4 @@ function formatNumber(num) {
 </script>
 
 
-<style scoped>
-/* Add your CSS styling here */
-</style> 
+<style></style> 

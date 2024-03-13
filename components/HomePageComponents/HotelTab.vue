@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="tab-form-btn-wrapper">
-            <div class="flex-div justify-center gap-[10px] text-[18px] mb-[20px]">
+            <div class="tfbw-div flex-div justify-center gap-[10px] text-[18px] mb-[20px]">
                 <img src="~/assets/images/best-check.svg" alt="best-check" class="best-check">
                 <span>Best Deal Guaranteed </span>
             </div>

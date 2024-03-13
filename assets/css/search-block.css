@@ -1,3 +1,4 @@
+/*---=== Filter Section ===---*/
 .search-tab-wrapper {
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.10);
@@ -14,7 +15,7 @@
     grid-template-columns: 265px 1fr;
     gap: 30px;
 }
-.result-filter-side {
+.result-filter-side > div.rfs {
     padding: 30px 15px;
     border: 1px solid #CCEDEB;
     border-radius: 10px;
@@ -30,10 +31,10 @@
     border-radius: 4px;
 }
 .result-contents-side {
-    /* background-color: #F3F3F3; */
+    background-color: #F3F3F3;
     width: 100%;
     min-height: 100%;
-    /* border: 1px solid #CCEDEB; */
+    border: 1px solid #CCEDEB;
     border-radius: 10px;
 }
 .noUi-target.noUi-horizontal .noUi-handle {
@@ -87,3 +88,23 @@ span.filter-block-item-value {
 .show-more-btn-wrapper button {
     background-color: transparent !important;
 }
+input#search-hotel {
+    border: 1px solid #EDEDED;
+    padding: 10px 14px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: none;
+}
+/*---=== end of Filter Section ===---*/
+
+
+/*---=== Search-Results Section ===---*/
+.top-snack-bar {
+    font-size: 24px;
+    padding: 10px;
+    background: #000;
+    border-radius: 10px;
+    width: fit-content;
+}
+/*---=== end of Search-Results Section ===---*/
