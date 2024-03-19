@@ -41,7 +41,7 @@
                   <img :src="trip.image" alt="Trip Image" class="trip-image" />
                 </div>
                 <div class="trip-txt-div p-5 pb-[70px]">
-                  <h3 class="trip-title">{{ trip.title }}</h3>
+                  <h3 class="trip-title">{{ trip.destination }}</h3>
                   <div class="trip-tags">
                     <span
                       v-for="(tag, tagIndex) in trip.tags"
@@ -50,7 +50,9 @@
                       >{{ tag }}</span
                     >
                   </div>
-                  <p class="trip-price">{{ trip.price }}</p>
+                  <p class="trip-price">
+                    {{ `${trip.currencySymbol}${trip.price.total}` }}
+                  </p>
                 </div>
               </a>
             </swiper-slide>
@@ -94,8 +96,16 @@ export default defineComponent({
       const { data, error } = await useApiPost("/flight/flight-inspiration", {
         origin: "SYD",
       });
+
       if (data) {
-        TripList.value = [...data];
+        TripList.value = [...data.value.data];
+        TripList.value = TripList.value.map((elem: any) => {
+          return {
+            ...elem,
+            tags: ["Visa", "Flight", "Transfer", "Tour", "Insurance"],
+            currencySymbol: "$",
+          };
+        });
       }
     });
 

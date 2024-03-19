@@ -1,5 +1,5 @@
 <template>
-  <form action="#" id="book-flight-tab" class="search-inputs flex items-end">
+  <form id="book-flight-tab" class="search-inputs flex items-end">
     <div class="input-field-wrapper">
       <div class="select-field-wrapper flex-div gap-[10px] mb-[30px]">
         <!-- <SelectField 
@@ -12,52 +12,95 @@
                     v-model="tripType"
                     id="tripType"
                 /> -->
-        <div class="select-field rel">
-          <select v-model="flightObj.tripType" id="tripType">
-            <option value="one-way">One Way</option>
-            <option value="round-trip">Round Trip</option>
-            <option value="multi-city">Multi City</option>
-          </select>
-          <SvgIcons icon="caret" />
-        </div>
+
         <SelectField
           :options="[
-            { value: '1 passenger', label: '1 Passenger' },
-            { value: '2 passenger', label: '2 Passenger' },
-            { value: '3 passenger', label: '3 Passenger' },
+            { value: 'one-way', name: 'one-way' },
+            { value: 'round-trip', name: 'round-trip' },
+            { value: 'multi-city', name: 'multi-city' },
           ]"
           label=""
-          v-model="flightObj.passengersNumber"
+          selectKey="value"
+          selectName="name"
+          v-model:value="flightObj.tripType"
+          @select="flightObjSelectHandler($event, 'tripType')"
+        />
+        <SelectField
+          :options="[
+            { value: '1', name: '1 Passenger' },
+            { value: '2', name: '2 Passenger' },
+            { value: '3', name: '3 Passenger' },
+          ]"
+          label=""
+          selectKey="value"
+          selectName="name"
+          v-model:value="flightObj.passengersNumber"
+          @select="flightObjSelectHandler($event, 'passengersNumber')"
         />
       </div>
       <div class="flex flex-col gap-7">
         <div class="flex-div gap-3 grid-sm-break">
           <div class="flex-div gap-3 rel arrival-depature-inputs">
-            <InputField
-              label="From where?"
-              placeholder="City or Airport"
-              id="depature"
-              type="text"
-              inputClass="ls-inp-field"
-              divClass="input-white-wrapper"
-              v-model="flightObj.originLocationCode"
-              @input="($event) => inputHandler($event, 'to')"
-            />
+            <div>
+              <InputField
+                label="From where?"
+                placeholder="City or Airport"
+                id="depature"
+                type="text"
+                inputClass="ls-inp-field"
+                divClass="input-white-wrapper relative"
+                :value="flightObj.originLocationName"
+                @input="($event) => inputHandler($event, 'from')"
+              />
+              <div
+                v-if="showDropdown.showFromDropdown"
+                class="absolute bg-white mt-1"
+              >
+                <ul>
+                  <li
+                    v-for="(flight, index) in fromFlightList"
+                    :key="index"
+                    class="text-dark-gray py-2 px-4"
+                    @click="selectFlightHandler(flight, 'from')"
+                  >
+                    {{ flight.name }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
             <img
               src="~/assets/images/transfer-arrow.svg"
               alt="transfer-arrow"
-              class="transfer-arrow"
+              class="transfer-arrosw"
             />
-            <InputField
-              label="To where?"
-              placeholder="City or Airport"
-              id="destination"
-              type="text"
-              inputClass="ls-inp-field"
-              divClass="input-white-wrapper"
-              v-model="flightObj.destinationLocationCode"
-              @input="($event) => inputHandler($event, 'from')"
-            />
+            <div>
+              <InputField
+                label="To where?"
+                placeholder="City or Airport"
+                id="destination"
+                type="text"
+                inputClass="ls-inp-field"
+                divClass="input-white-wrapper"
+                :value="flightObj.destinationLocationName"
+                @input="($event) => inputHandler($event, 'to')"
+              />
+              <div
+                v-if="showDropdown.showToDropdown"
+                class="absolute bg-white mt-1"
+              >
+                <ul>
+                  <li
+                    v-for="(flight, index) in toFlightList"
+                    :key="index"
+                    class="text-dark-gray py-2 px-4"
+                    @click="selectFlightHandler(flight, 'to')"
+                  >
+                    {{ flight.name }}
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
           <div class="input-white-wrapper flex-div flex-row">
             <InputField
@@ -80,7 +123,7 @@
           </div>
 
           <InputField
-            label="To where?"
+            label="Cabin Type"
             defaultValue="Economy"
             id="cabin-type"
             type="text"
@@ -88,10 +131,34 @@
             divClass="input-white-wrapper"
             v-model="flightObj.cabinType"
           />
+          <div class="tab-form-btn-wrapper">
+            <div
+              class="tfbw-div flex-div justify-center gap-[10px] text-[18px] mb-[20px]"
+            >
+              <img
+                src="~/assets/images/best-check.svg"
+                alt="best-check"
+                class="best-check"
+              />
+              <span>Best Deal Guaranteed </span>
+            </div>
+            <button
+              v-if="flightObj.tripType === 'multi-city'"
+              class="tab-form-btn tfb-2 flex-div gap-3"
+              type="button"
+              @click="duplicateGridSmBreak"
+            >
+              <span>Add Flight</span>
+              <img src="~/assets/images/plus-rectangle.svg" alt="plus-icon" />
+            </button>
+            <button class="tab-form-btn flex-div gap-3" @click="searchFlight()">
+              <span>Search Flights</span>
+              <img src="~/assets/images/plane-icon.svg" alt="plane-icon" />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="tab-form-btn-wrapper">
+      <!-- <div class="tab-form-btn-wrapper">
       <div class="flex-div justify-center gap-[10px] text-[18px] mb-[20px]">
         <img
           src="~/assets/images/best-check.svg"
@@ -113,6 +180,7 @@
         <span>Search Flights</span>
         <img src="~/assets/images/plane-icon.svg" alt="plane-icon" />
       </button>
+    </div> -->
     </div>
   </form>
 </template>
@@ -127,14 +195,24 @@ export default defineComponent({
   setup() {
     const flightObj = ref({
       tripType: "one-way",
-      passengersNumber: "1 passenger",
+      passengersNumber: "1",
       depature: "",
       destination: "",
       depatureDate: "",
       returnDate: "",
       cabinType: "",
+      originLocationName: "",
+      originLocationCode: "",
+      destinationLocationName: "",
+      destinationLocationCode: "",
     });
     const duplicatedRows = ref([]);
+    const toFlightList = ref([]);
+    const fromFlightList = ref([]);
+    const showDropdown = ref({
+      showToDropdown: false,
+      showFromDropdown: false,
+    });
 
     onMounted(async () => {
       const elemsDatepicker = document.querySelectorAll(".datepicker");
@@ -187,18 +265,74 @@ export default defineComponent({
           keyword: e.target.value,
           subType: "CITY",
         });
-        console.log(data);
+        if (inputKey === "to") {
+          toFlightList.value = data.value.data;
+          showDropdown.value.showToDropdown = true;
+        } else {
+          fromFlightList.value = data.value.data;
+          showDropdown.value.showFromDropdown = true;
+        }
       }
+    };
+    const searchFlight = async () => {
+      const payload = {
+        currencyCode: "USD",
+        originDestinations: [
+          {
+            originLocationCode: flightObj.value.originLocationCode,
+            destinationLocationCode: flightObj.value.destinationLocationCode,
+            departureDateTimeRange: {
+              date: flightObj.value.depatureDate,
+              time: "00:00:00",
+            },
+            travelers: {
+              travelerType: "adult",
+              fareOptions: ["STANDARD"],
+            },
+            // sources: ["GDS"],
+          },
+        ],
+      };
+      await useApiPost("/flight/search-offer", payload);
+    };
+    const selectFlightHandler = async (flight: any, inputKey: string) => {
+      if (inputKey === "from") {
+        flightObj.value = {
+          ...flightObj.value,
+          originLocationName: flight.name,
+          originLocationCode: flight.iataCode,
+        };
+        showDropdown.value.showFromDropdown = false;
+      } else {
+        flightObj.value = {
+          ...flightObj.value,
+          destinationLocationName: flight.name,
+          destinationLocationCode: flight.iataCode,
+        };
+        showDropdown.value.showToDropdown = false;
+      }
+    };
+    const flightObjSelectHandler = (e: string, inputKey: string) => {
+      flightObj.value = {
+        ...flightObj.value,
+        [inputKey]: e,
+      };
     };
     return {
       duplicatedRows,
       currentDate,
       flightObj,
+      toFlightList,
+      fromFlightList,
       getCurrentDate,
+      showDropdown,
       duplicateGridSmBreak,
       removeRow,
       datePicker,
       inputHandler,
+      searchFlight,
+      selectFlightHandler,
+      flightObjSelectHandler,
     };
   },
 });

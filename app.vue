@@ -6,6 +6,8 @@
 
 <script></script>
 
+<style src="@/assets/css/search-block.css"></style>
+
 <style>
 div#wrapper {
   float: left;
