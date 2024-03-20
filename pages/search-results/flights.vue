@@ -32,7 +32,11 @@
                             </div>
                         </div>
 
+                        <CheapFlights />
 
+                        <FlightStops />
+
+                        <SortFlights />
                     </div>
                 </div>
             </div>
