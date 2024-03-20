@@ -21,16 +21,19 @@
         </div>
 
         <div class="container">
-            <div class="tickets-overview-wrapper my-[30px]">
-                <FlightTicketOverviewBlock />
-                <FlightTicketOverviewBlock />
-            </div>
+            <FlightTicketOverviewBlock />
 
             <div class="other-tickets-header my-[20px] text-[24px] text-[#141414]">Other tickets vailable </div>
 
-            <div class="tickets-overview-wrapper my-[30px]">
+            <div class="other-tickets-overview-wrapper my-[30px]">
                 <FlightTicketOverviewBlock />
-                <FlightTicketOverviewBlock />
+
+                <div class="show-more-wrapper mt-[50px]">
+                    <button class="show-more-btn flex-div gap-2">
+                        <span>Show More</span> 
+                        <img src="@/assets/images/caret-down-white.svg" alt="caret">
+                    </button>
+                </div>
             </div>
         </div>
     </section>
