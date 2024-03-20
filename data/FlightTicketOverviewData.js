@@ -38,8 +38,8 @@ export const FlightTicketOverviewData = [
         bottomLabels: [
             "carry-one-bag", "no-changes-fee"
         ],
-        daysLeft: 2,
-        ticketsLeft: 4,
+        daysLeft: 3,
+        ticketsLeft: 12,
         tickets: 90,
         ticketPrice: "4,964,000 ",
         travelDetails: [

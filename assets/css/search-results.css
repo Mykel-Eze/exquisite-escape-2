@@ -240,6 +240,11 @@ button.view-ticket-btn {
     font-size: 18px;
     margin: auto;
 }
+.ticket-left-label {
+    position: absolute;
+    top: 20px;
+    right: 10%;
+}
 
 /*---=== end of Ticket-Overview-Block ===---*/
 
