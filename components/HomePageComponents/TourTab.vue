@@ -37,17 +37,18 @@
             inputClass="ls-inp-field"
             divClass="input-white-wrapper long-inp-wrapper"
             :value="tourObj.countryCode"
+            @input="($event) => inputHandler($event, 'countryCode')"
           />
           <div
-            v-if="showDropdown.showFromDropdown"
+            v-if="showDropdown.countryDropdown"
             class="absolute bg-white mt-1"
           >
             <ul>
               <li
-                v-for="(flight, index) in fromFlightList"
+                v-for="(flight, index) in countryList"
                 :key="index"
                 class="text-dark-gray py-2 px-4"
-                @click="selectFlightHandler(flight, 'from')"
+                @click="selectTourHandler(flight, 'countryCode')"
               >
                 {{ flight.name }}
               </li>
@@ -63,17 +64,15 @@
             inputClass="ls-inp-field"
             divClass="input-white-wrapper"
             :value="tourObj.stateCode"
+            @input="($event) => inputHandler($event, 'stateCode')"
           />
-          <div
-            v-if="showDropdown.showFromDropdown"
-            class="absolute bg-white mt-1"
-          >
+          <div v-if="showDropdown.stateDropdown" class="absolute bg-white mt-1">
             <ul>
               <li
-                v-for="(flight, index) in fromFlightList"
+                v-for="(flight, index) in stateList"
                 :key="index"
                 class="text-dark-gray py-2 px-4"
-                @click="selectFlightHandler(flight, 'from')"
+                @click="selectTourHandler(flight, 'stateCode')"
               >
                 {{ flight.name }}
               </li>
@@ -88,7 +87,7 @@
             id="departure-date"
             type="text"
             inputClass="ls-inp-field datepicker"
-            :value="tourObj.originLocationName"
+            :value="tourObj.departureDate"
           />
           <span class="range-divider">-</span>
           <InputField
@@ -97,7 +96,7 @@
             id="return-date"
             type="text"
             inputClass="ls-inp-field datepicker"
-            :value="tourObj.originLocationName"
+            :value="tourObj.destinationDate"
           />
         </div>
       </div>
@@ -132,7 +131,15 @@ export default defineComponent({
       noOfNight: "1 Night",
       countryCode: "",
       stateCode: "",
+      departureDate: "",
+      destinationDate: "",
     });
+    const showDropdown = ref({
+      countryDropdown: false,
+      stateDropdown: false,
+    });
+    const countryList = ref({});
+    const stateList = ref({});
     onMounted(async () => {
       const elemsDatepicker = document.querySelectorAll(".datepicker");
       M.Datepicker.init(elemsDatepicker, {
@@ -154,9 +161,32 @@ export default defineComponent({
         [inputKey]: e,
       };
     };
+    const inputHandler = async (e: any, inputKey: string) => {
+      if (e.target.value.length >= 3) {
+        if (inputKey === "countryCode") {
+          const { data }: any = await useApiPost("", {
+            keyword: e.target.value,
+            subType: "CITY",
+          });
+          countryList.value = data.value.data;
+          showDropdown.value.countryDropdown = true;
+        } else {
+          const { data }: any = await useApiPost("", {
+            keyword: e.target.value,
+            subType: "CITY",
+          });
+          stateList.value = data.value.data;
+          showDropdown.value.stateDropdown = true;
+        }
+      }
+    };
     return {
       currentDate,
       tourObj,
+      showDropdown,
+      countryList,
+      stateList,
+      inputHandler,
       tourObjSelectHandler,
     };
   },

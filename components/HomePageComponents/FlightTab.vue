@@ -261,7 +261,7 @@ export default defineComponent({
     };
     const inputHandler = async (e: any, inputKey: string) => {
       if (e.target.value.length >= 3) {
-        const { data } = await useApiPost("/flight/airport-nearby", {
+        const { data }: any = await useApiPost("/flight/airport-nearby", {
           keyword: e.target.value,
           subType: "CITY",
         });
