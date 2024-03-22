@@ -36,20 +36,25 @@
 
                         <FlightStops />
 
-                        <SortFlights />
+                        <SortFlights @view-ticket-clicked="showPopup = true"/>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- <div class=""></div> -->
+    <FlightsSidePopup :class="{ open: showPopup }" @close-popup="showPopup = false" />
   </div>
 </template>
 
 <script>
 export default {
-    name: "FlightsResultPage"
+    name: "FlightsResultPage",
+    data() {
+        return {
+            showPopup: false
+        }
+    }
 }
 </script>
 

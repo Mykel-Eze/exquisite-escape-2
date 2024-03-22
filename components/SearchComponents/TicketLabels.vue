@@ -55,9 +55,9 @@
         <span>Seat choice included</span>
     </div>
 
-    <div v-if="label === 'average-co2'" class="ticket-labels flex-div">
+    <div v-if="label === 'average-co'" class="ticket-labels flex-div">
         <img src="@/assets/images/cloud.svg" alt="ticket-label-icon" class="ticket-label-icon">
-        <span>Average CO2</span>
+        <span>Average CO<sub>2</sub></span>
     </div>
 </template>
 

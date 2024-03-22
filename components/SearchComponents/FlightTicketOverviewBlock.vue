@@ -1,7 +1,7 @@
 <template>
     <div class="tickets-overview-wrapper mt-[30px]">
         <div class="ticket-overview-block" v-for="ticket in FlightTicketOverviewData" :key="ticket.id">
-            <div class="left-sdie">
+            <div class="left-side">
                 <div class="ticket-labels-wrapper flex-div gap-[18px]">
                     <TicketLabels v-for="label in ticket.topLabels" :key="label" :label="label" :daysLeft="ticket.daysLeft" />
                 </div>
@@ -40,14 +40,16 @@
                     <TicketLabels v-for="label in ticket.bottomLabels" :key="label" :label="label" />
                 </div>
             </div>
-            <div class="right-sdie rel min-h-[200px]">
+            <div class="right-side rel min-h-[200px]">
                 <div class="ticket-left-label" v-if="ticket.ticketsLeft < 10">
                     <TicketLabels label="tickets-left" :ticketsLeft="ticket.ticketsLeft" />
                 </div>
+                
                 <div class="ticket-amount-wrapper">
                     <div class="ticket-amount">₦{{ ticket.ticketPrice }}</div>
+
                     <div class="view-ticket-btn-wrapper w-full">
-                        <button class="view-ticket-btn flex-div">
+                        <button class="view-ticket-btn flex-div" @click="$emit('view-ticket-clicked')">
                             <span>View {{ ticket.tickets }} ticket(s)</span>
                             <img src="@/assets/images/chevy-right.svg" alt="right arrow">
                         </button>
@@ -64,11 +66,11 @@
 import { FlightTicketOverviewData } from '~/data/FlightTicketOverviewData.js'
 
 export default {
-    name: "TicketOverviewBlock",
+    name: "FlightTicketOverviewBlock",
     data() {
         return {
             FlightTicketOverviewData
         }
-    }
+    },
 }
 </script>

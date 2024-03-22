@@ -17,7 +17,7 @@ section#cheap-flights {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    cursor: pointer;
+    /* cursor: pointer; */
     font-size: 15px;
 }
 .results-section .custom-nav-icon {
@@ -131,11 +131,11 @@ section#sort-flights {
 .ticket-overview-block .flex-div {
     flex-wrap: wrap;
 }
-.ticket-overview-block .left-sdie {
+.ticket-overview-block .left-side {
     padding: 20px 0;
     padding-left: 12px;
 }
-.ticket-overview-block .right-sdie {
+.ticket-overview-block .right-side {
     background: rgba(10, 10, 10, 0.08);
 }
 .ticket-labels-wrapper {
@@ -247,5 +247,141 @@ button.view-ticket-btn {
 }
 
 /*---=== end of Ticket-Overview-Block ===---*/
+
+/*---=== Side-Pop-Up ===---*/
+.side-popup {
+    position: fixed;
+    width: 480px;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    background: white;
+    z-index: 100;
+    padding: 20px 20px 20px 40px;
+    display: none;
+    overflow-y: auto;
+}
+.side-popup[data-ticket-type="multiple"] {
+    width: 720px;
+}
+.side-popup-overlay {
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    display: none;
+}
+.open .side-popup, .open .side-popup-overlay {
+    display: block;
+}
+img.close-popup-icon {
+    cursor: pointer;
+}
+.ticket-items-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 15px 0;
+}
+.ticket-amount-div h2 {
+    font-size: 34px;
+    color: #141414;
+    margin: 0;
+}
+.ticket-amount-div span {
+    font-size: 14px;
+}
+.tickets-wrapper {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+}
+.tickets-block {
+    background-color: #F6F6F6;
+    backdrop-filter: blur(5px);
+    padding: 15px 30px;
+    min-width: 415px;
+    width: 415px;
+    border-radius: 20px;
+    min-height: 100%;
+}
+.ticket-item-title {
+    font-size: 22px;
+    color: #141414;
+}
+.ticket-item-content.flex-div {
+    font-size: 16px;
+    margin-top: 5px;
+}
+.tickets-bottom-side {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 25px;
+    margin-top: 25px;
+    border-top: 1px dashed;
+    position: relative;
+}
+.tickets-bottom-side [type="checkbox"].filled-in:not(:checked)+span:not(.lever):after,
+.tickets-bottom-side [type="checkbox"].filled-in:checked+span:not(.lever):after {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    top: 4px;
+}
+.tickets-bottom-side [type="checkbox"].filled-in:not(:checked)+span:not(.lever):after {
+    border: 1px solid #d0d5dd;
+}
+.tickets-bottom-side [type="checkbox"].filled-in:checked+span:not(.lever):before {
+    top: 3px;
+    width: 6px;
+    height: 11px;
+}
+.tickets-bottom-side [type="checkbox"]+span:not(.lever) {
+    padding-left: 24px;
+}
+button.select-ticket-btn {
+    color: white;
+    width: 100%;
+    height: 58px;
+    background: var(--pry-color);
+    font-size: 18px;
+    border-radius: 10px;
+}
+.tickets-block .cup-curves {
+    background: white;
+    top: -25px;
+}
+.tickets-block .cup-curves.left-curve {
+    left: -50px;
+}
+.tickets-block .cup-curves.right-curve {
+    right: -50px;
+    left: initial;
+}
+.spf-note-2.flex-div {
+    gap: 5px;
+    padding: 10px;
+    background: #F9F9F9;
+    border-radius: 40px;
+}
+.hidden-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 16px;
+}
+.layover-row span {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    padding: 8px 11px;
+    padding-left: 0;
+    margin: 10px 0;
+    display: inline-block;
+}
+/*---=== end of Side-Pop-Up ===---*/
 
 /*---=== end of Search-Results Section ===---*/
