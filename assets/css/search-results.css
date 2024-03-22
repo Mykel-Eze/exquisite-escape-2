@@ -74,7 +74,7 @@ ul.sb-contents li {
 
 section#sort-flights {
     position: relative;
-    padding: 30px 0;
+    padding: 30px 0 10px;
 }
 .sort-bar {
     background: black;
@@ -150,6 +150,11 @@ section#sort-flights {
     padding: 24px 36px 24px 20px;
     border-radius: 20px 0 0 20px;
 }
+.toc-row:not(:first-child) {
+    border-top: 1px solid rgba(10, 10, 10, 0.08);
+    margin-top: 15px;
+    padding-top: 15px;
+}
 .ticket-airline {
     display: flex;
     flex-direction: column;
@@ -223,6 +228,22 @@ button.view-ticket-btn {
 }
 .cup-curves.down-curve {
     bottom: -25px;
+}
+.other-tickets-overview-wrapper .show-more-wrapper button {
+    color: white;
+    background-color: var(--pry-color) !important;
+    width: 209px;
+    height: 58px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin: auto;
+}
+.ticket-left-label {
+    position: absolute;
+    top: 20px;
+    right: 10%;
 }
 
 /*---=== end of Ticket-Overview-Block ===---*/
