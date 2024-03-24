@@ -54,6 +54,7 @@ export default {
     "@/plugins/vue-plugins/antd-ui.js",
     "@/plugins/components/global-components",
     "@/plugins/vue-plugins/pinia.js",
+    "@/plugins/vue-plugins/dayjs.js",
   ],
 
   css: [
