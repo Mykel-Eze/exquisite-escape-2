@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                             <div class="upgarde-btn-wrapper mt-[30px]">
-                                <button class="upgrade-btn">See upgrade options</button>
+                                <button class="upgrade-btn" @click="showPopup = true">See upgrade options</button>
                             </div>
                         </div>
 
@@ -159,7 +159,9 @@
                             </div>
 
                             <div class="summary-checkout-btn-wrapper px-[20px] py-[14px]">
-                                <button class="summary-checkout-btn">Checkout</button>
+                                <nuxt-link to="/flight-checkout">
+                                    <button class="summary-checkout-btn">Checkout</button>
+                                </nuxt-link>
                             </div>
                         </div>
 
@@ -174,6 +176,8 @@
                         </div>
                     </div>
                 </div>
+
+                <ChooseSeatsPopup :class="{ open: showPopup }" @close-popup="showPopup = false" />
             </div>
         </div>
     </div>
@@ -181,7 +185,12 @@
 
 <script>
 export default {
-    name: "FlightTIcketReview"
+    name: "FlightTIcketReview",
+    data() {
+        return {
+            showPopup: false
+        }
+    }
 }
 </script>
 
