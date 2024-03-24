@@ -14,7 +14,6 @@ import {
   Switch,
   Carousel,
 } from "ant-design-vue";
-
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(Table);
   nuxtApp.vueApp.use(Dropdown);

@@ -1,7 +1,7 @@
 <template>
     <div class="input-field-div" :class="divClass">
         <label :for="id">{{ label }}</label>
-        <input :type="type" :name="id" :id="id" :placeholder="placeholder" :v-model="id" :class="inputClass" :value="defaultValue">
+        <input :type="type" :name="id" :id="id" :placeholder="placeholder" :class="inputClass" :value="value">
     </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
             type: String,
             default: ""
         },
-        defaultValue: {
+        value: {
             type: String,
             default: ""
         },
