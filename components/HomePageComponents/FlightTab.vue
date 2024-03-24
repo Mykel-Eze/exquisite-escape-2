@@ -210,8 +210,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import M from "materialize-css";
-import DatePicker from "../DatePicker.vue";
-
+import { useRouter } from "vue-router";
 export default defineComponent({
   name: "FlightTab",
 
@@ -236,6 +235,7 @@ export default defineComponent({
       showToDropdown: false,
       showFromDropdown: false,
     });
+    const router = useRouter();
 
     onMounted(async () => {
       const elemsDatepicker = document.querySelectorAll(".datepicker");
@@ -309,7 +309,7 @@ export default defineComponent({
         max: "10",
         currencyCode: "NGN",
       };
-      const { data } = await useApiPost("/flight/get/search-offer", payload);
+      router.push({ path: "/search-results/flights", query: { ...payload } });
     };
     const selectFlightHandler = async (flight: any, inputKey: string) => {
       if (inputKey === "from") {
