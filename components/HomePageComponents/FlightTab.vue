@@ -1,5 +1,9 @@
 <template>
-  <form id="book-flight-tab" class="search-inputs flex items-end">
+  <form
+    id="book-flight-tab"
+    class="search-inputs flex items-end"
+    autocomplete="off"
+  >
     <div class="input-field-wrapper">
       <div class="select-field-wrapper flex-div gap-[10px] mb-[30px]">
         <!-- <SelectField 
@@ -15,9 +19,9 @@
 
         <SelectField
           :options="[
-            { value: 'one-way', name: 'one-way' },
-            { value: 'round-trip', name: 'round-trip' },
-            { value: 'multi-city', name: 'multi-city' },
+            { value: 'one-way', name: 'One-way' },
+            { value: 'round-trip', name: 'Round-trip' },
+            { value: 'multi-city', name: 'Multi-city' },
           ]"
           label=""
           selectKey="value"
@@ -27,9 +31,9 @@
         />
         <SelectField
           :options="[
-            { value: '1', name: '1 Passenger' },
-            { value: '2', name: '2 Passenger' },
-            { value: '3', name: '3 Passenger' },
+            { value: 1, name: '1 Passenger' },
+            { value: 2, name: '2 Passenger' },
+            { value: 3, name: '3 Passenger' },
           ]"
           label=""
           selectKey="value"
@@ -70,12 +74,14 @@
             </div>
 
             <img
+              v-if="flightObj.tripType !== 'one-way'"
               src="~/assets/images/transfer-arrow.svg"
               alt="transfer-arrow"
               class="transfer-arrosw"
             />
             <div>
               <InputField
+                v-if="flightObj.tripType !== 'one-way'"
                 label="To where?"
                 placeholder="City or Airport"
                 id="destination"
@@ -103,22 +109,27 @@
             </div>
           </div>
           <div class="input-white-wrapper flex-div flex-row">
-            <InputField
+            <DatePicker
               label="Leaving on"
               :defaultValue="currentDate"
               id="departure-date"
               type="text"
               inputClass="ls-inp-field datepicker"
-              v-model="flightObj.depatureDate"
+              v-model="flightObj.departureDate"
+              @input="flightObjSelectHandler($event, 'departureDate')"
             />
-            <span class="range-divider">-</span>
-            <InputField
+            <span v-if="flightObj.tripType !== 'one-way'" class="range-divider"
+              >-</span
+            >
+            <DatePicker
+              v-if="flightObj.tripType !== 'one-way'"
               label="Returning on"
               :defaultValue="currentDate"
               id="return-date"
               type="text"
               inputClass="ls-inp-field datepicker"
               v-model="flightObj.returnDate"
+              @input="flightObjSelectHandler($event, 'returnDate')"
             />
           </div>
 
@@ -129,15 +140,15 @@
             inputClass="ls-inp-field remove-border"
             divClass="input-white-wrapper remove-border "
             :options="[
-              { value: '1', name: 'Economy' },
-              { value: '2', name: 'Premium Economy' },
-              { value: '3', name: 'Business' },
-              { value: '3', name: 'First Class' },
+              { value: 'ECONOMY', name: 'Economy' },
+              { value: 'PREMIUM_ECONOMY', name: 'Premium Economy' },
+              { value: 'BUSINESS', name: 'Business' },
+              { value: 'FIRST', name: 'First Class' },
             ]"
             selectKey="value"
             selectName="name"
-            v-model:value="flightObj.cabinType"
-            @select="flightObjSelectHandler($event, 'cabinType')"
+            v-model:value="flightObj.travelClass"
+            @select="flightObjSelectHandler($event, 'travelClass')"
           />
           <div class="tab-form-btn-wrapper">
             <div
@@ -199,19 +210,19 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import M from "materialize-css";
-
+import { useRouter } from "vue-router";
 export default defineComponent({
   name: "FlightTab",
 
   setup() {
     const flightObj = ref({
       tripType: "one-way",
-      passengersNumber: "1",
+      passengersNumber: 1,
       depature: "",
       destination: "",
-      depatureDate: "",
+      departureDate: "",
       returnDate: "",
-      cabinType: "",
+      travelClass: "",
       originLocationName: "",
       originLocationCode: "",
       destinationLocationName: "",
@@ -224,6 +235,7 @@ export default defineComponent({
       showToDropdown: false,
       showFromDropdown: false,
     });
+    const router = useRouter();
 
     onMounted(async () => {
       const elemsDatepicker = document.querySelectorAll(".datepicker");
@@ -287,24 +299,17 @@ export default defineComponent({
     };
     const searchFlight = async () => {
       const payload = {
-        currencyCode: "USD",
-        originDestinations: [
-          {
-            originLocationCode: flightObj.value.originLocationCode,
-            destinationLocationCode: flightObj.value.destinationLocationCode,
-            departureDateTimeRange: {
-              date: flightObj.value.depatureDate,
-              time: "00:00:00",
-            },
-            travelers: {
-              travelerType: "adult",
-              fareOptions: [flightObj.value.cabinType],
-            },
-            // sources: ["GDS"],
-          },
-        ],
+        originLocationCode: flightObj.value.originLocationCode,
+        destinationLocationCode: flightObj.value.destinationLocationCode,
+        departureDate: flightObj.value.departureDate,
+        returnDate: flightObj.value.returnDate,
+        adults: flightObj.value.passengersNumber,
+        // includedAirlineCodes: "TG",
+        travelClass: flightObj.value.travelClass,
+        max: "10",
+        currencyCode: "NGN",
       };
-      await useApiPost("/flight/search-offer", payload);
+      router.push({ path: "/search-results/flights", query: { ...payload } });
     };
     const selectFlightHandler = async (flight: any, inputKey: string) => {
       if (inputKey === "from") {

@@ -13,6 +13,7 @@ import {
   Badge,
   Switch,
   Carousel,
+  DatePicker,
 } from "ant-design-vue";
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(Table);
@@ -23,6 +24,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(Radio);
   nuxtApp.vueApp.use(Drawer);
   nuxtApp.vueApp.use(Collapse);
+  nuxtApp.vueApp.use(DatePicker);
 
   // nuxtApp.vueApp.use(Antd);
   nuxtApp.vueApp.use(Checkbox);
