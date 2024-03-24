@@ -1,18 +1,21 @@
 <template>
   <div class="input-field-div" :class="divClass">
     <label :for="id">{{ label }}</label>
-    <input
+    <!-- <input
       :type="type"
       :name="id"
       :id="id"
       :placeholder="placeholder"
       :class="inputClass"
       :value="value"
-    />
+      @input="inputHandler"
+    /> -->
+    <a-date-picker :value="value" @change="changeHandler" />
   </div>
 </template>
 
 <script>
+import dayjs from "dayjs";
 export default {
   name: "InputField",
   props: {
@@ -43,6 +46,15 @@ export default {
     value: {
       type: String,
       default: "",
+    },
+    // defaultPickerValue: {
+    //   type: st,
+    //   default: "",
+    // },
+  },
+  methods: {
+    changeHandler(date, dateString) {
+      this.$emit("input", dateString, dayjs(date).format());
     },
   },
 };
