@@ -21,12 +21,12 @@
         </div>
 
         <div class="container">
-            <FlightTicketOverviewBlock />
+            <FlightTicketOverviewBlock @view-ticket-clicked="$emit('view-ticket-clicked')" />
 
             <div class="other-tickets-header my-[20px] text-[24px] text-[#141414]">Other tickets vailable </div>
 
             <div class="other-tickets-overview-wrapper my-[30px]">
-                <FlightTicketOverviewBlock />
+                <FlightTicketOverviewBlock @view-ticket-clicked="$emit('view-ticket-clicked')" />
 
                 <div class="show-more-wrapper mt-[50px]">
                     <button class="show-more-btn flex-div gap-2">
