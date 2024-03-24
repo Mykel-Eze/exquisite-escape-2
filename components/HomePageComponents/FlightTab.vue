@@ -122,14 +122,22 @@
             />
           </div>
 
-          <InputField
+          <SelectField
             label="Cabin Type"
-            defaultValue="Economy"
             id="cabin-type"
             type="text"
-            inputClass="ls-inp-field"
-            divClass="input-white-wrapper"
-            v-model="flightObj.cabinType"
+            inputClass="ls-inp-field remove-border"
+            divClass="input-white-wrapper remove-border "
+            :options="[
+              { value: '1', name: 'Economy' },
+              { value: '2', name: 'Premium Economy' },
+              { value: '3', name: 'Business' },
+              { value: '3', name: 'First Class' },
+            ]"
+            selectKey="value"
+            selectName="name"
+            v-model:value="flightObj.cabinType"
+            @select="flightObjSelectHandler($event, 'cabinType')"
           />
           <div class="tab-form-btn-wrapper">
             <div
@@ -151,7 +159,10 @@
               <span>Add Flight</span>
               <img src="~/assets/images/plus-rectangle.svg" alt="plus-icon" />
             </button>
-            <button class="tab-form-btn flex-div gap-3" @click="searchFlight()">
+            <button
+              class="tab-form-btn flex-div gap-3"
+              @click.prevent="searchFlight()"
+            >
               <span>Search Flights</span>
               <img src="~/assets/images/plane-icon.svg" alt="plane-icon" />
             </button>
@@ -287,7 +298,7 @@ export default defineComponent({
             },
             travelers: {
               travelerType: "adult",
-              fareOptions: ["STANDARD"],
+              fareOptions: [flightObj.value.cabinType],
             },
             // sources: ["GDS"],
           },
@@ -338,12 +349,17 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style lang="scss" scoped>
 .remove-btn {
   background: red;
   border: none;
   cursor: pointer;
   position: absolute;
   top: 0;
+}
+.remove-border {
+  .select-wrapper input.select-dropdown {
+    border: none !important;
+  }
 }
 </style>

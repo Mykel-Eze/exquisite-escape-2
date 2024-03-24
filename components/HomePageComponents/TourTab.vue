@@ -29,7 +29,22 @@
       </div>
       <div class="flex-div gap-3 grid-sm-break">
         <div>
-          <InputField
+          <SelectField
+            label="Going to?"
+            placeholder="Country"
+            id="country"
+            type="text"
+            inputClass="ls-inp-field"
+            divClass="input-white-wrapper long-inp-wrapper"
+            v-model:value="tourObj.countryCode"
+            selectKey="value"
+            selectName="name"
+            :options="countryList"
+            @input="($event) => inputHandler($event, 'countryCode')"
+          />
+        </div>
+        <div>
+          <SelectField
             label="Going to?"
             placeholder="Country"
             id="country"
@@ -37,47 +52,22 @@
             inputClass="ls-inp-field"
             divClass="input-white-wrapper long-inp-wrapper"
             :value="tourObj.countryCode"
-            @input="($event) => inputHandler($event, 'countryCode')"
+            selectKey="value"
+            selectName="name"
+            :option="[]"
+            @select="tourObjSelectHandler($event, 'countryCode')"
           />
-          <div
-            v-if="showDropdown.countryDropdown"
-            class="absolute bg-white mt-1"
-          >
-            <ul>
-              <li
-                v-for="(flight, index) in countryList"
-                :key="index"
-                class="text-dark-gray py-2 px-4"
-                @click="selectTourHandler(flight, 'countryCode')"
-              >
-                {{ flight.name }}
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <InputField
+          <SelectField
             label="Things to do at?"
             placeholder="Province/State"
             id="things-to-do"
             type="text"
             inputClass="ls-inp-field"
             divClass="input-white-wrapper"
-            :value="tourObj.stateCode"
-            @input="($event) => inputHandler($event, 'stateCode')"
+            v-model:value="tourObj.stateCode"
+            :option="[]"
+            @select="tourObjSelectHandler($event, 'stateCode')"
           />
-          <div v-if="showDropdown.stateDropdown" class="absolute bg-white mt-1">
-            <ul>
-              <li
-                v-for="(flight, index) in stateList"
-                :key="index"
-                class="text-dark-gray py-2 px-4"
-                @click="selectTourHandler(flight, 'stateCode')"
-              >
-                {{ flight.name }}
-              </li>
-            </ul>
-          </div>
         </div>
 
         <div class="input-white-wrapper flex-div flex-row">
@@ -112,7 +102,7 @@
         />
         <span>Best Deal Guaranteed </span>
       </div>
-      <button class="tab-form-btn flex-div gap-3">
+      <button class="tab-form-btn flex-div gap-3" @click="searchTourHandler">
         <span>Search Tour</span>
         <img src="~/assets/images/beach-icon.svg" alt="beach-icon" />
       </button>
@@ -134,10 +124,7 @@ export default defineComponent({
       departureDate: "",
       destinationDate: "",
     });
-    const showDropdown = ref({
-      countryDropdown: false,
-      stateDropdown: false,
-    });
+
     const countryList = ref({});
     const stateList = ref({});
     onMounted(async () => {
@@ -147,6 +134,11 @@ export default defineComponent({
         format: "mmm dd",
         minDate: new Date(),
       });
+      const { data } = await useApiPost("/hotel/countries/en", {
+        language: "en",
+        fields: "all",
+      });
+      countryList.value = data.value.data;
     });
     const getCurrentDate = () => {
       const date = new Date();
@@ -155,39 +147,32 @@ export default defineComponent({
       return `${month} ${day}`;
     };
     const currentDate = getCurrentDate();
-    const tourObjSelectHandler = (e: string, inputKey: string) => {
+    const tourObjSelectHandler = async (e: string, inputKey: string) => {
       tourObj.value = {
         ...tourObj.value,
         [inputKey]: e,
       };
-    };
-    const inputHandler = async (e: any, inputKey: string) => {
-      if (e.target.value.length >= 3) {
-        if (inputKey === "countryCode") {
-          const { data }: any = await useApiPost("", {
-            keyword: e.target.value,
-            subType: "CITY",
-          });
-          countryList.value = data.value.data;
-          showDropdown.value.countryDropdown = true;
-        } else {
-          const { data }: any = await useApiPost("", {
-            keyword: e.target.value,
-            subType: "CITY",
-          });
-          stateList.value = data.value.data;
-          showDropdown.value.stateDropdown = true;
-        }
+      if (inputKey === "countryCode") {
+        const { data } = await useApiPost("/hotel/destination", {
+          countryCode: [e],
+          language: "en",
+        });
+        stateList.value = data.value.data;
       }
+    };
+    const searchTourHandler = async () => {
+      const payload = {
+        ...tourObj.value,
+      };
+      await useApiPost("/flight/search-offer", payload);
     };
     return {
       currentDate,
       tourObj,
-      showDropdown,
       countryList,
       stateList,
-      inputHandler,
       tourObjSelectHandler,
+      searchTourHandler,
     };
   },
 });

@@ -65,7 +65,6 @@ export default {
     //         M.FormSelect.init(elemsDropdown);
     //     },
     changeHandler(e) {
-      console.log(e, "target!");
       this.$nextTick(() => {
         this.$emit("select", e.target.value);
       });
