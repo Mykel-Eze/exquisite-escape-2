@@ -1,10 +1,12 @@
 <template>
     <div class="select-field rel" :class="divClass">
-        <select class="select-inp">
+        <select class="select-inp" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
             <!-- <option value="">{{ label }}</option> -->
             <option v-for="option in options" :value="option.value" :key="option.index">{{ option.label }}</option>
         </select>
-        <label>{{ label }}</label>
+        <label>
+            {{ label }} <sup v-if="requiredSign" class="required-sign">*</sup>
+        </label>
         <SvgIcons icon="caret" />
     </div>
 </template>
@@ -27,25 +29,20 @@ export default {
             type: String,
             required: false
         },
+        modelValue: {
+            type: String,
+            required: true
+        },
+        requiredSign: {
+            type: Boolean,
+            default: false
+        },
     },
     mounted() {
         const elemsDropdown = document.querySelectorAll('select');
         M.FormSelect.init(elemsDropdown);
     },
-    // watch: {
-    //     // Watch for changes in the 'options' prop and reinitialize Materialize CSS
-    //     options: 'initMaterialize',
-    // },
-    // methods: {
-    //     initMaterialize() {
-    //         // Destroy existing Materialize CSS instances
-    //         const elemsDropdown = document.querySelectorAll('select');
-    //         M.FormSelect.init(elemsDropdown, { destroy: true });
-
-    //         // Initialize Materialize CSS again
-    //         M.FormSelect.init(elemsDropdown);
-    //     },
-    // },
+    emits: [ 'update:modelValue' ]
 }
 </script>
 

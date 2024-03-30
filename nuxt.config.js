@@ -42,7 +42,7 @@ export default {
   },
   plugins: [
     '@/plugins/vue-plugins/antd-ui.js', 
-    '@/plugins/components/global-components'
+    '@/plugins/components/global-components',
   ],
   css: [
     '@/assets/css/main.css',
