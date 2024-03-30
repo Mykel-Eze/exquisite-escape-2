@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="account-items-wrapper">
-                    <NuxtLink to="" class="account-item-block">
+                    <NuxtLink to="/dashboard/profile-info" class="account-item-block">
                         <img src="@/assets/images/icons/profile-icon.svg" alt="profile-icon" class="aib-icon">
                         <div class="aib-title">Profile</div>
                         <p class="aib-desc">
