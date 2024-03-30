@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="result-contents-side py-10">
-                        <div class="px-[30px]">
+                        <!-- <div class="px-[30px]">
                             <div class="top-snack-bar flex-div gap-2 mb-[30px]">
                                 <span class="text-white">46 hotels in Oakville-On </span>
                                 <img src="@/assets/images/chevron-right.svg" alt="chevron-right" class="right-arr">
@@ -30,9 +30,9 @@
                                 Prices displayed include taxes and may change based on availability. You can review any
                                 additional fees before checkout. Prices are not final until you complete your purchase.
                             </div>
-                        </div>
+                        </div> -->
 
-
+                        <img src="@/assets/images/Hotel-Results.jpg" alt="" class="results-img">
                     </div>
                 </div>
             </div>

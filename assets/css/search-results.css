@@ -505,4 +505,21 @@ ul.flight-seat-tabs-wrapper > li.active {
 }
 /*---=== end of Flight-Side-Pop-Up ===---*/
 
+/*---=== Flight-Checkout-Page ===---*/
+.ticket-summary-side .grid-div-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 50px;
+}
+.ticket-summary-block input#phone-field {
+    border: none;
+    height: auto;
+    outline: none;
+    box-shadow: none;
+}
+sup.required-sign {
+    color: #D44333;
+}
+/*---=== end of Flight-Checkout-Page ===---*/
+
 /*---=== end of Search-Results Section ===---*/

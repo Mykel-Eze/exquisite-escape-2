@@ -10,7 +10,9 @@
         {{ option[selectName] }}
       </option>
     </select>
-    <label>{{ label }}</label>
+    <label>
+        {{ label }} <sup v-if="requiredSign" class="required-sign">*</sup>
+    </label>
     <SvgIcons icon="caret" />
   </div>
 </template>
