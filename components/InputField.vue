@@ -3,8 +3,15 @@
         <label :for="id">
             {{ label }} <sup v-if="requiredSign" class="required-sign">*</sup>
         </label>
-        <input :type="type" :name="id" :id="id" :placeholder="placeholder" :class="inputClass" :value="value"
-            @input="updateValue">
+        <input 
+          :type="type"
+          :name="id" 
+          :id="id" 
+          :placeholder="placeholder" 
+          :class="inputClass" 
+          :value="value"
+          @input="updateValue"
+        />
     </div>
 </template>
 
@@ -53,6 +60,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
