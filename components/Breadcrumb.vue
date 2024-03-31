@@ -21,3 +21,37 @@ export default {
     },
 }
 </script>
+
+<style>
+ul.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul.breadcrumb span {
+    padding: 0 5px;
+}
+
+.breadcrumb-item {
+    color: #606161;
+}
+
+.breadcrumb-item a {
+    font-size: 16px;
+    color: var(--pry-color);
+    text-decoration: underline;
+}
+
+/* .breadcrumb-item:last-child a {
+    color: #606161;
+    text-decoration: none;
+} */
+.breadcrumb-item a.router-link-exact-active {
+    color: #606161;
+    text-decoration: none;
+}
+
+.breadcrumb-item:last-child span {
+    display: none;
+}
+</style>

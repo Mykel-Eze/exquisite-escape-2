@@ -40,7 +40,7 @@
                             All your contacts and saved recipients on Exquisite Escape account
                         </p>
                     </NuxtLink>
-                    <NuxtLink to="" class="account-item-block">
+                    <NuxtLink to="/dashboard/payments" class="account-item-block">
                         <img src="@/assets/images/icons/wallet-icon.svg" alt="wallet-icon" class="aib-icon">
                         <div class="aib-title">Payments</div>
                         <p class="aib-desc">
