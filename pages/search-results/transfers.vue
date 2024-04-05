@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="result-contents-side py-10">
-                        <div class="px-[30px]">
+                        <!-- <div class="px-[30px]">
                             <div class="top-snack-bar flex-div gap-2 mb-[30px]">
                                 <span class="text-white">46 transfer (s) available   </span>
                                 <img src="@/assets/images/chevron-right.svg" alt="chevron-right" class="right-arr">
@@ -35,9 +35,9 @@
                                     We work closely with all of our Transfers Suppliers to protect our mutual customers.
                                 </p>
                             </div>
-                        </div>
+                        </div> -->
 
-
+                        <img src="@/assets/images/Transfers-Results.png" alt="" class="results-img">
                     </div>
                 </div>
             </div>

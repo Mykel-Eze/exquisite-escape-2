@@ -49,3 +49,80 @@ p.account-page-title-desc a {
     }
 }
 /*---=== end of Account-Overview Page ===---*/
+
+/*---=== Profile-Info Page ===---*/
+.dashboard-page-title {
+    font-size: 32px;
+    font-family: var(--font-smbold);
+    color: #141414;
+    margin: 12px auto;
+}
+h2.dashboard-page-title-desc {
+    font-size: 14px;
+}
+.dashboard-page-header .breadcrumb-item a {
+    font-size: 13px;
+}
+hr.dashboard-page-divider {
+    border: none;
+    height: 1px;
+    background: rgba(119, 119, 119, 0.5);
+    margin: 60px 0;
+}
+.profile-items-wrapper {
+    width: 100%;
+    max-width: 635px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+fieldset.profile-item-block {
+    width: 100%;
+    border-bottom: 1px solid rgba(119, 119, 119, 0.5);
+    padding-bottom: 20px;
+}
+.profile-block-header {
+    font-size: 14px;
+}
+button.profile-button {
+    background: none !important;
+    text-decoration: underline;
+}
+.profile-block-value {
+    font-size: 12px;
+    margin: 5px 0;
+}
+input.profile-inp-field {
+    height: 57px !important;
+    border: 1px solid rgba(119, 119, 119, 0.5) !important;
+    border-radius: 10px !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    box-shadow: none !important;
+    display: block;
+    width: 100%;
+    font-size: 14px !important;
+}
+.input-field-div.profile-inp-field-block label {
+    position: relative;
+    left: 15px;
+    bottom: -4px;
+}
+.input-field-div.profile-inp-field-block {
+    margin: 30px 0 25px;
+}
+button.profile-save-btn {
+    background: var(--pry-color);
+    color: white;
+    font-size: 16px;
+    font-family: var(--font-smbold);
+    width: 130px;
+    height: 48px;
+    border-radius: 10px;
+}
+input#upload-file.profile-inp-field {
+    cursor: pointer;
+    padding-top: 15px !important;
+}
+/*---=== end of Profile-Info Page ===---*/
