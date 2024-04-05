@@ -306,3 +306,54 @@ ul.htw-tabs > li.active {
     }
 }
 /*---=== end of Hotel-And-Tours Page ===---*/
+
+/*---=== Notifications Page ===---*/
+.notifications-wrapper {
+    max-width: 890px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.notification-item {
+    width: 100%;
+    border: 1px solid #606161;
+    border-radius: 12px;
+    padding: 25px;
+}
+.notification-item img.noti-icon {
+    width: 64px;
+    border-radius: 50%;
+}
+.notifications-action-icons img {
+    width: 25px;
+}
+button.mark-read-btn {
+    width: 184px;
+    height: 48px;
+    background: var(--pry-color);
+    color: white;
+    font-size: 15px;
+    font-family: var(--font-smbold);
+    border-radius: 6px;
+}
+.empty-notification-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.empty-notification-block {
+    max-width: 375px;
+    padding: 36px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+@media(max-width: 992px) {}
+
+@media(max-width: 600px) {}
+/*---=== end of Notifications Page ===---*/
