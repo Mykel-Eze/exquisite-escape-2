@@ -6,17 +6,6 @@
   >
     <div class="input-field-wrapper">
       <div class="select-field-wrapper flex-div gap-[10px] mb-[30px]">
-        <!-- <SelectField 
-                    :options="[
-                        { value: 'one-way', label: 'One Way' },
-                        { value: 'round-trip', label: 'Round Trip' },
-                        { value: 'multi-city', label: 'Multi City' }
-                    ]"
-                    label=""
-                    v-model="tripType"
-                    id="tripType"
-                /> -->
-
         <SelectField
           :options="[
             { value: 'one-way', name: 'One-way' },
@@ -81,7 +70,6 @@
             />
             <div>
               <InputField
-                v-if="flightObj.tripType !== 'one-way'"
                 label="To where?"
                 placeholder="City or Airport"
                 id="destination"
@@ -208,17 +196,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, defineProps, watch } from "vue";
 import M from "materialize-css";
 import { useRouter } from "vue-router";
 export default defineComponent({
   name: "FlightTab",
+  props: {
+    searchObject: {
+      type: Object,
+      default: null,
+    },
+  },
+  setup(props: any) {
+    watch(
+      props.searchObject,
+      (newValue) => {
+        if (newValue) {
+          flightObj.value = {
+            ...newValue,
+            passengersNumber: newValue.adults,
+          };
+        }
+      },
+      { deep: true, immediate: true }
+    );
 
-  setup() {
     const flightObj = ref({
       tripType: "one-way",
       passengersNumber: 1,
-      depature: "",
+      departure: "",
       destination: "",
       departureDate: "",
       returnDate: "",
@@ -300,7 +306,9 @@ export default defineComponent({
     const searchFlight = async () => {
       const payload = {
         originLocationCode: flightObj.value.originLocationCode,
+        originLocationName: flightObj.value.originLocationName,
         destinationLocationCode: flightObj.value.destinationLocationCode,
+        destinationLocationName: flightObj.value.destinationLocationName,
         departureDate: flightObj.value.departureDate,
         returnDate: flightObj.value.returnDate,
         adults: flightObj.value.passengersNumber,
@@ -309,7 +317,8 @@ export default defineComponent({
         max: "10",
         currencyCode: "NGN",
       };
-      router.push({ path: "/search-results/flights", query: { ...payload } });
+      sessionStorage.setItem("flightSearchObject", JSON.stringify(payload));
+      router.push("/search-results/flights");
     };
     const selectFlightHandler = async (flight: any, inputKey: string) => {
       if (inputKey === "from") {

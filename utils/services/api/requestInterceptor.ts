@@ -49,7 +49,7 @@ const RequestInterceptorConfig = {
 
   // ON REQUEST ERROR INTERCEPTOR
   onRequestError({ error }: Pick<ApiRequestParams, "error">) {
-    LOGGER("Request Error: ", error);
+    // LOGGER("Request Error: ", error);
     // Api Request error interception code goes here
     if (error && error.data) {
       // notification.error({

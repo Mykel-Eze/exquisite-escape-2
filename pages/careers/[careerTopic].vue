@@ -5,11 +5,15 @@
         <p class="lg:text-xl text-dark-gray">
           {{ `${careerObj.category} team` }}
         </p>
-        <p class="text-primary text-2xl md:text-3xl lg:text-5xl font-bold lh-77">
+        <p
+          class="text-primary text-2xl md:text-3xl lg:text-5xl font-bold lh-77"
+        >
           {{ `${careerObj.roleName}` }}
         </p>
         <div class="lg:flex justify-between lg:text-lg">
-          <p>{{ `${careerObj.location} | ${careerObj.roleType} | Full time` }}</p>
+          <p>
+            {{ `${careerObj.location} | ${careerObj.roleType} | Full time` }}
+          </p>
           <NuxtLink to="/career" class="underline text-primary"
             >See open roles</NuxtLink
           >
@@ -35,25 +39,27 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, ref } from "vue";
-  import { useRouter } from "vue-router";
-  import type { RoleObjInterface } from "@/constants/interface/career";
-  import CareerDescription from "@/components/careers/CareerDescription.vue";
-  export default defineComponent({
-    components: {
-      CareerDescription,
-    },
-    setup() {
-      const careerObj = ref<RoleObjInterface>({});
-      const activeKey = ref(1);
-      const router = useRouter();
-      onMounted(() => {
-        careerObj.value = router.currentRoute.value.query;
-      });
-      return {
-        careerObj,
-        activeKey,
-      };
-    },
-  });
+import { defineComponent, onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+import type { RoleObjInterface } from "@/constants/interface/career";
+import CareerDescription from "@/components/careers/CareerDescription.vue";
+export default defineComponent({
+  components: {
+    CareerDescription,
+  },
+  setup() {
+    // const careerObj = ref<RoleObjInterface>({});
+    const careerObj = ref({});
+
+    const activeKey = ref(1);
+    const router = useRouter();
+    onMounted(() => {
+      careerObj.value = router.currentRoute.value.query;
+    });
+    return {
+      careerObj,
+      activeKey,
+    };
+  },
+});
 </script>
