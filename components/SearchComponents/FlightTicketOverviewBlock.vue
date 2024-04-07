@@ -7,14 +7,16 @@
     >
       <div class="left-side">
         <div class="ticket-labels-wrapper flex-div gap-[18px]">
-          <div v-if="ticket.topLabels && ticket.topLabels.length !== 0">
-            <TicketLabels
-              v-for="label in ticket.topLabels"
-              :key="label"
-              :label="label"
-              :daysLeft="ticket.daysLeft"
-            />
-          </div>
+          <TicketLabels :key="label" label="fastest" />
+          <TicketLabels
+            :key="label"
+            :label="ticket.oneway ? 'one-way' : 'round-trip'"
+          />
+          <TicketLabels
+            key="days-after"
+            label="days-after"
+            :daysLeft="dayDifference(ticket.lastTicketingDate)"
+          />
         </div>
 
         <div class="ticket-overview-content">
@@ -67,7 +69,9 @@
                 <div class="from-to-divider">
                   <SvgIcons icon="flight_2" />
                   <div>
-                    <span>{{ ticket.travelLength }}</span>
+                    <span class="lowerCase">{{
+                      durationStringHandler(detail.duration)
+                    }}</span>
                     <span v-if="detail.segments.length - 1 !== 0">{{
                       `∙ ${detail.segments.length - 1} ${
                         detail.segments.length - 1 === 1 ? "stop" : "stops"
@@ -151,7 +155,7 @@ export default defineComponent({
       default: () => {},
     },
   },
-  setup(props: any) {
+  setup(props: any, { emit }) {
     const flightArrayList = ref<any>([]);
     const flightDictionary = ref<any>({});
     watch(
@@ -170,10 +174,21 @@ export default defineComponent({
     const dateConversionHandler = (date: string, formatKey: string) => {
       return dayjs(date).format(formatKey);
     };
+    const durationStringHandler = (duration: string) => {
+      const newStr = duration.replace("PT", "");
+      return newStr;
+    };
+    const dayDifference = (date: string) => {
+      const currentDate = dayjs().startOf("day");
+      const lastDate = dayjs(date);
+      return lastDate.diff(currentDate, "day");
+    };
     return {
       flightArrayList,
       checkDictionaries,
       dateConversionHandler,
+      durationStringHandler,
+      dayDifference,
     };
   },
 });

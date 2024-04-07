@@ -196,7 +196,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, defineProps, watch } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import M from "materialize-css";
 import { useRouter } from "vue-router";
 export default defineComponent({

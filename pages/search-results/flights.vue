@@ -1,7 +1,7 @@
 <template>
   <div id="flight-result-page">
     <div v-if="isLoading">
-      <p class="center text-2xl mt-16">This Page is loading</p>
+      <p class="center text-2xl mt-16">Loading...</p>
     </div>
     <div v-else>
       <div class="top-section black-bg">
@@ -58,7 +58,9 @@
       </section>
 
       <FlightsSidePopup
+        v-if="showPopup"
         :class="{ open: showPopup }"
+        :selectedFlightObj="selectedFlightObj"
         @close-popup="showPopup = false"
       />
     </div>
@@ -104,13 +106,17 @@ export default defineComponent({
       isLoading.value = false;
     });
     const viewHandler = (selectedFlight: any) => {
-      selectedFlightObj.value = { ...selectedFlight };
+      selectedFlightObj.value = {
+        selectedFlight: { ...selectedFlight },
+        flightDictionaries: { ...flightObj.value.dictionaries },
+      };
       showPopup.value = true;
     };
     return {
       showPopup,
       isLoading,
       flightObj,
+      selectedFlightObj,
       viewHandler,
     };
   },

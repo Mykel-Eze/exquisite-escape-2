@@ -25,17 +25,17 @@
         <span>{{ ticketsLeft }} ticket(s) left</span>
     </div>
 
-    <div v-if="label === 'one-way-per-traveller'" class="ticket-labels flex-div">
+    <div v-if="label === 'one-way'" class="ticket-labels flex-div">
         <img src="@/assets/images/one.svg" alt="ticket-label-icon" class="ticket-label-icon">
         <span>One way per traveller</span>
     </div>
 
-    <div v-if="label === 'multi-city-per-traveller'" class="ticket-labels flex-div">
+    <div v-if="label === 'multi-city'" class="ticket-labels flex-div">
         <img src="@/assets/images/double-arr.svg" alt="ticket-label-icon" class="ticket-label-icon">
         <span>Mult-city per traveller</span>
     </div>
 
-    <div v-if="label === 'round-trip-per-traveller'" class="ticket-labels flex-div">
+    <div v-if="label === 'round-trip'" class="ticket-labels flex-div">
         <img src="@/assets/images/round.svg" alt="ticket-label-icon" class="ticket-label-icon">
         <span>Round trip per traveller</span>
     </div>

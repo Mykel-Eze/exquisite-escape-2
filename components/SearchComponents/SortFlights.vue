@@ -23,7 +23,7 @@
     <div class="container">
       <FlightTicketOverviewBlock
         :flightsStopsObj="flightsStopsObj"
-        @view-ticket-clicked="viewTicketHandler"
+        @view-ticket-clicked="viewHandler"
       />
 
       <div class="other-tickets-header my-[20px] text-[24px] text-[#141414]">
@@ -33,8 +33,9 @@
       <div class="other-tickets-overview-wrapper my-[30px]">
         <FlightTicketOverviewBlock
           :flight-list="flightsStopsObj"
-          @view-ticket-clicked="viewTicketHandler"
+          @view-ticket-clicked="viewHandler"
         />
+        <!-- @view-ticket-clicked="$emit('view-ticket-clicked', $arg)" -->
 
         <div class="show-more-wrapper mt-[50px]">
           <button class="show-more-btn flex-div gap-2">
@@ -49,7 +50,6 @@
 
 <script lang="ts">
 import { defineComponent, defineEmits } from "vue";
-const emits = defineEmits(["view-ticket-clicked"]);
 
 export default defineComponent({
   props: {
@@ -59,7 +59,7 @@ export default defineComponent({
     },
   },
 
-  setup(props) {
+  setup(props, { emit }) {
     const flightsStopsObj = ref({}) as any;
     watch(
       props.flightObj,
@@ -68,12 +68,12 @@ export default defineComponent({
       },
       { deep: true, immediate: true }
     );
-    const viewTicketHandler = (ticket: any) => {
-      emits("view-ticket-clicked", ticket);
+    const viewHandler = (selectedFlight: any) => {
+      emit("view-ticket-clicked", selectedFlight);
     };
     return {
       flightsStopsObj,
-      viewTicketHandler,
+      viewHandler,
     };
   },
 });

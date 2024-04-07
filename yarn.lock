@@ -2139,6 +2139,11 @@ core-js@^3.15.1:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.36.0.tgz#e752fa0b0b462a0787d56e9d73f80b0f7c0dde68"
   integrity sha512-mt7+TUBbTFg5+GngsAxeKBTl5/VS0guFeJacYge9OmHb+m058UwwIm41SE9T4Den7ClatV57B6TYTuJ0CX1MAw==
 
+core-js@^3.6.5:
+  version "3.36.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.36.1.tgz#c97a7160ebd00b2de19e62f4bbd3406ab720e578"
+  integrity sha512-BTvUrwxVBezj5SZ3f10ImnX2oRByMxql3EimVqMysepbC9EeMUOpLwdy6Eoili2x6E4kf+ZUB5k/+Jv55alPfA==
+
 core-util-is@~1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.3.tgz#a6042d3634c2b27e9328f837b965fac83808db85"
@@ -3402,6 +3407,11 @@ lazystream@^1.0.0:
   integrity sha512-b94GiNHQNy6JNTrt5w6zNyffMrNkXZb3KTkCZJb2V1xaEGCk093vkZ2jk3tpaeP33/OiXC+WvK9AxUebnf5nbw==
   dependencies:
     readable-stream "^2.0.5"
+
+libphonenumber-js@^1.9.6:
+  version "1.10.60"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.60.tgz#1160ec5b390d46345032aa52be7ffa7a1950214b"
+  integrity sha512-Ctgq2lXUpEJo5j1762NOzl2xo7z7pqmVWYai0p07LvAkQ32tbPv3wb+tcUeHEiXhKU5buM4H9MXsXo6OlM6C2g==
 
 lilconfig@^2.1.0:
   version "2.1.0"
@@ -5621,6 +5631,11 @@ urlpattern-polyfill@8.0.2:
   resolved "https://registry.yarnpkg.com/urlpattern-polyfill/-/urlpattern-polyfill-8.0.2.tgz#99f096e35eff8bf4b5a2aa7d58a1523d6ebc7ce5"
   integrity sha512-Qp95D4TPJl1kC9SKigDcqgyM2VDVO4RiJc2d4qe5GrYm+zbIQCWWKAFaJNQ4BhdFeDGwBmAxqJBwWSJDb9T3BQ==
 
+user@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/user/-/user-0.0.0.tgz#f27f1b23fc511f2a8efa40db55cfba123824e02a"
+  integrity sha512-eRNM5isOvr6aEFAGi1CqAkmLkYxW2NJ5ThhbD+6IJXYKM1mo7Gtxx4mQIveHz/5K3p/SVnlW9k17ETn+QAu8IQ==
+
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
@@ -5789,7 +5804,17 @@ vue-types@^3.0.0:
   dependencies:
     is-plain-object "3.0.1"
 
-vue@^3.4.14, vue@^3.4.19:
+vue3-tel-input@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/vue3-tel-input/-/vue3-tel-input-1.0.4.tgz#ed26cb808d124aebb5073d03f366b23e686804d6"
+  integrity sha512-C60OyAq5ORDErSJ4x7UmJJbF95CDncMswnySmAUtbuBP0pcVcJBu6DOTxKquykvTbJEh9I73DXyqMtDxtLrwJg==
+  dependencies:
+    core-js "^3.6.5"
+    libphonenumber-js "^1.9.6"
+    user "^0.0.0"
+    vue "^3.0.0-beta.1"
+
+vue@^3.0.0-beta.1, vue@^3.4.14, vue@^3.4.19:
   version "3.4.21"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.4.21.tgz#69ec30e267d358ee3a0ce16612ba89e00aaeb731"
   integrity sha512-5hjyV/jLEIKD/jYl4cavMcnzKwjMKohureP8ejn3hhEjwhWIhWeuzL2kJAjzl/WyVsgPY56Sy4Z40C3lVshxXA==
