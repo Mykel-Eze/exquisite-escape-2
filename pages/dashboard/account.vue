@@ -57,7 +57,7 @@
                                 You get to Setup and manage all payments here
                             </p>
                         </NuxtLink>
-                        <NuxtLink to="" class="account-item-block hover-scale">
+                        <NuxtLink to="/dashboard/notifications" class="account-item-block hover-scale">
                             <img src="@/assets/images/icons/notification-icon.svg" alt="notification-icon"
                                 class="aib-icon">
                             <div class="aib-title">Notifications</div>
