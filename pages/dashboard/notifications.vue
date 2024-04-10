@@ -1,5 +1,5 @@
 <template>
-    <div id="hotel-and-tours" class="pt-[60px] pb-[40px]">
+    <div id="notifications" class="pt-[60px] pb-[40px]">
         <div class="row">
             <div class="container">
                 <div class="dashboard-page-header">
@@ -46,6 +46,7 @@
                                     icon="/icons/noti-1.svg"
                                     title="Kindly confirm Hotel booking - Edo hotel"
                                     date="22-10-2023"
+                                    readStatus="read"
                                 />
                             </div>
 
