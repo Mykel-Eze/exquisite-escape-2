@@ -4,10 +4,10 @@
             <span>{{ mainLabel }}</span>
             <sup v-if="requiredSign" class="required-sign">*</sup>
         </div>
-        <div class="divClass_2">
+        <div class="divClass_2 flex-div gap-[20px]">
             <label v-for="option in options" :key="option.index">
                 <input class="with-gap" :name="inputName" type="radio" :value="option.value" :v-model="inputName" />
-                <span>{{ option.label }}</span>
+                <span class="text-[16px] text-[#545454]">{{ option.label }}</span>
             </label>
         </div>
     </div>
