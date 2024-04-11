@@ -84,6 +84,7 @@
 <script>
 export default {
     name: "ProfileInfoPage",
+    layout: "authLayout",
     data() {
         return {
             fullName: "Kehinde Olagoke",
