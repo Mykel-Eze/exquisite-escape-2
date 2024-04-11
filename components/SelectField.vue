@@ -1,18 +1,14 @@
 <template>
   <div class="select-field rel" :class="divClass">
+    <label>
+      {{ label }} <sup v-if="requiredSign" class="required-sign">*</sup>
+    </label>
     <select class="select-inp" :value="value" @change="changeHandler">
       <!-- <option value="">{{ label }}</option> -->
-      <option
-        v-for="option in options"
-        :value="option[selectKey]"
-        :key="option.index"
-      >
+      <option v-for="option in options" :value="option[selectKey]" :key="option.index">
         {{ option[selectName] }}
       </option>
     </select>
-    <label>
-        {{ label }} <sup v-if="requiredSign" class="required-sign">*</sup>
-    </label>
     <SvgIcons icon="caret" />
   </div>
 </template>
@@ -47,6 +43,10 @@ export default {
     selectName: {
       type: String,
       default: "value",
+    },
+    requiredSign: {
+      type: Boolean,
+      default: false
     },
   },
   mounted() {

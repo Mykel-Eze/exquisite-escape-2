@@ -125,4 +125,235 @@ input#upload-file.profile-inp-field {
     cursor: pointer;
     padding-top: 15px !important;
 }
+
+@media(max-width: 992px) {}
+
+@media(max-width: 600px) {}
 /*---=== end of Profile-Info Page ===---*/
+
+/*---=== Payments Page ===---*/
+button.add-payment-btn.flex-div {
+    background: var(--pry-color);
+    color: white;
+    gap: 8px;
+    width: 200px;
+    height: 42px;
+    font-size: 15px;
+    justify-content: center;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+}
+.payments-wrapper {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    font-size: 14px;
+}
+.payments-block {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(119, 119, 119, 0.5);
+}
+.payment-block-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.delete-btn {
+    background: none !important;
+    text-decoration: underline;
+    color: #D44333;
+}
+
+@media(max-width: 992px) {}
+
+@media(max-width: 600px) {
+    .payments-wrapper {
+        width: 100%;
+    }
+}
+/*---=== end of Payments Page ===---*/
+
+/*---=== Hotel-And-Tours Page ===---*/
+.htw-tab-wrapper {
+    border-bottom: 1px solid rgba(32, 45, 63, 0.5);
+}
+ul.htw-tabs {
+    font-size: 14px;
+}
+ul.htw-tabs > li {
+    padding: 10px 25px 10px;
+    color: #8C8C8C;
+    cursor: pointer;
+}
+ul.htw-tabs > li.active {
+    color: #202D3F;
+    border-bottom: 2px solid var(--pry-color);
+}
+.hotel-block-img {
+    height: 250px;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}
+.hotel-block-img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.hotel-block-content {
+    padding: 12px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.hotel-block-title {
+    color: #232323;
+    font-size: 24px;
+}
+.hotel-block-txt {
+    font-size: 14px;
+    color: #606161;
+}
+.hotel-block-price {
+    font-size: 18px;
+    font-family: var(--font-smbold);
+    color: var(--pry-color);
+}
+.recent-hotel-block-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+.recent-hotel-block > img {
+    width: 180px;
+    border-radius: 10px;
+}
+.recent-hotel-block.flex-div h4 {
+    color: #232323;
+    font-size: 24px;
+    letter-spacing: -1px;
+    font-family: var(--font);
+    margin: 0;
+}
+.tour-block-item {
+    background-color: #F9F9F9;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.tbc-top-title {
+    color: #9D9D9D;
+    font-size: 12px;
+}
+.tour-block-content {
+    padding: 10px 15px;
+} 
+.tbc-row-1 {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    gap: 15px;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgb(237 237 237);
+    margin-bottom: 5px;
+}
+.tbc-row-1 > div:nth-child(1) {
+    border-right: 1px solid var(--pry-color);
+}
+.tbc-row-3 {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 15px;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    border-top: 1px solid rgb(237 237 237);
+    margin-top: 5px;
+}
+.tbc-row-3 > div:first-child {
+    border-right: 1px solid var(--pry-color);
+}
+.tour-block-title {
+    font-size: 22px;
+}
+.tour-block-img {
+    height: 150px;
+    overflow: hidden;
+}
+.tour-block-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media(max-width: 992px) {
+    .recent-hotel-block-wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width: 600px) {
+    .recent-hotel-block-wrapper {
+        grid-template-columns: 100%;
+    }
+    .tour-block-title {
+        font-size: 18px;
+    }
+}
+/*---=== end of Hotel-And-Tours Page ===---*/
+
+/*---=== Notifications Page ===---*/
+.notifications-wrapper {
+    max-width: 890px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.notification-item {
+    width: 100%;
+    border: 1px solid #606161;
+    border-radius: 12px;
+    padding: 25px;
+}
+.notification-item img.noti-icon {
+    width: 64px;
+    border-radius: 50%;
+}
+.notifications-action-icons img {
+    width: 25px;
+}
+button.mark-read-btn {
+    width: 184px;
+    height: 48px;
+    background: var(--pry-color);
+    color: white;
+    font-size: 15px;
+    font-family: var(--font-smbold);
+    border-radius: 6px;
+}
+.empty-notification-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.empty-notification-block {
+    max-width: 375px;
+    padding: 36px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+@media(max-width: 992px) {}
+
+@media(max-width: 600px) {}
+/*---=== end of Notifications Page ===---*/

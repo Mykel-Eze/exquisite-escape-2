@@ -6,7 +6,7 @@
         </div>
         <div class="profile-block-value" v-show="!editMode">{{ value || 'Not provided' }}</div>
         <div class="profile-edit-block" v-show="editMode">
-            <div class="text-[12px] leading-[18px] w-[70%]">{{ description }}</div>
+            <div class="text-[12px] leading-[18px] md:w-[70%]">{{ description }}</div>
             <InputField 
                 :label="label"
                 divClass="profile-inp-field-block"
