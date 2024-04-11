@@ -40,11 +40,18 @@
                 </div>
               </div>
 
-              <CheapFlights />
+              <!--=== Note to Dev: When the search is empty, uncomment the below component👇🏽 ===-->
+              <!-- <div class="full-height rel">
+                <EmptySearch />
+              </div> -->
 
-              <FlightStops />
+              <div hidden>
+                <CheapFlights />
 
-              <SortFlights @view-ticket-clicked="showPopup = true" />
+                <FlightStops />
+
+                <SortFlights @view-ticket-clicked="showPopup = true" />
+              </div>
             </div>
           </div>
         </div>
