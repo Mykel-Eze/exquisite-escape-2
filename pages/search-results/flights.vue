@@ -41,14 +41,14 @@
               </div>
 
               <!--=== Note to Dev: When the search is empty, uncomment the below component👇🏽 ===-->
-              <div class="full-height rel">
+              <!-- <div class="full-height rel">
                 <EmptySearch
                   title="Sorry, we couldn't find any flights that match your criteria"
                   description="Try searching nearby airports or alternative dates"
                 />
-              </div>
+              </div> -->
 
-              <div hidden>
+              <div>
                 <CheapFlights />
 
                 <FlightStops />
