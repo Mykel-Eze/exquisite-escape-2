@@ -18,6 +18,9 @@
     <div v-if="label === 'days-after'" class="ticket-labels bg-[#FADBD7] text-[#5C1D16]">
         {{ daysLeft }} Day(s) after
     </div>
+    <div v-if="label === 'rooms-left'" class="ticket-labels text-[#3F2EB1]" style="background-color: rgba(63, 46, 177, 0.1)">
+        100 Rooms Left
+    </div>
 
     <!--=== Labels with Icons ===-->
     <div v-if="label === 'tickets-left'" class="ticket-labels flex-div tl-2 bg-[#FADBD7] text-[#5C1D16]">
@@ -58,6 +61,56 @@
     <div v-if="label === 'average-co'" class="ticket-labels flex-div">
         <img src="@/assets/images/cloud.svg" alt="ticket-label-icon" class="ticket-label-icon">
         <span>Average CO<sub>2</sub></span>
+    </div>
+
+    <div v-if="label === 'sustainable'" class="ticket-labels flex-div">
+        <img src="@/assets/images/sustainable.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Sustainable</span>
+    </div>
+
+    <div v-if="label === 'business'" class="ticket-labels flex-div">
+        <img src="@/assets/images/business.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Business</span>
+    </div>
+
+    <div v-if="label === 'pet-friendly'" class="ticket-labels flex-div">
+        <img src="@/assets/images/paw-print.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Pet Friendly</span>
+    </div>
+
+    <div v-if="label === 'design'" class="ticket-labels flex-div">
+        <img src="@/assets/images/pen.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Design</span>
+    </div>
+
+    <div v-if="label === 'sport'" class="ticket-labels flex-div">
+        <img src="@/assets/images/sport.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Sport</span>
+    </div>
+
+    <div v-if="label === 'spa'" class="ticket-labels flex-div">
+        <img src="@/assets/images/spa.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Spa</span>
+    </div>
+
+    <div v-if="label === 'golf-hotel'" class="ticket-labels flex-div">
+        <img src="@/assets/images/golf.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Golf Hotel</span>
+    </div>
+
+    <div v-if="label === 'charms'" class="ticket-labels flex-div">
+        <img src="@/assets/images/charms.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Charms</span>
+    </div>
+
+    <div v-if="label === 'free-cancellation'" class="ticket-labels flex-div">
+        <img src="@/assets/images/round.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Free cancellation 10/06/2023</span>
+    </div>
+
+    <div v-if="label === 'safe2stay'" class="ticket-labels flex-div tl-2 bg-[#DAF0E3] text-[#1C472F]">
+        <img src="@/assets/images/safe2stay.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Safe2Stay</span>
     </div>
 </template>
 
