@@ -25,7 +25,7 @@
                                 <div>
                                     <div class="flex-div gap-[10px]">
                                         <img src="@/assets/images/ticket-location.svg" alt="ticket-location">
-                                        <span>Downtown ∙ Ottawa-ON</span>
+                                        <span>{{ ticket.location }}</span>
                                     </div>
                                 </div>
                             </div>

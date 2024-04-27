@@ -18,8 +18,13 @@
     <div v-if="label === 'days-after'" class="ticket-labels bg-[#FADBD7] text-[#5C1D16]">
         {{ daysLeft }} Day(s) after
     </div>
-    <div v-if="label === 'rooms-left'" class="ticket-labels text-[#3F2EB1]" style="background-color: rgba(63, 46, 177, 0.1)">
+    <div v-if="label === 'rooms-left'" class="ticket-labels text-[#3F2EB1]"
+        style="background-color: rgba(63, 46, 177, 0.1)">
         100 Rooms Left
+    </div>
+    <div v-if="label === 'exclusive'" class="ticket-labels text-[#3F2EB1]"
+        style="background-color: rgba(63, 46, 177, 0.1)">
+        Exclusive
     </div>
 
     <!--=== Labels with Icons ===-->
@@ -111,6 +116,16 @@
     <div v-if="label === 'safe2stay'" class="ticket-labels flex-div tl-2 bg-[#DAF0E3] text-[#1C472F]">
         <img src="@/assets/images/safe2stay.svg" alt="ticket-label-icon" class="ticket-label-icon">
         <span>Safe2Stay</span>
+    </div>
+
+    <div v-if="label === 'services'" class="ticket-labels flex-div">
+        <img src="@/assets/images/services.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Meet & greet Service - English </span>
+    </div>
+
+    <div v-if="label === 'round-trip'" class="ticket-labels flex-div">
+        <img src="@/assets/images/round.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Round Trip</span>
     </div>
 </template>
 
