@@ -1,5 +1,5 @@
 <template>
-  <div id="flight-result-page">
+  <div id="hotel-result-page">
     <div class="top-section black-bg">
         <div class="row">
             <div class="container py-5">

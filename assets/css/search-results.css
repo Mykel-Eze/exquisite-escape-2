@@ -724,4 +724,28 @@ button.view-ticket-btn.pry-btn {
 }
 /*---=== end of Hotel-Ticket-Overview Page ===---*/
 
+/*---=== Transfers-Ticket-Overview Page ===---*/
+#sort-transfers .transfers-ticket-img-wrapper {
+    width: 130px;
+}
+#sort-transfers .ticket-overview-content {
+    margin: 25px 0;
+}
+button.ticket-details-btn.flex-div {
+    color: white;
+    background: var(--pry-color);
+    width: 225px;
+    height: 58px;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 16px 20px;
+}
+#sort-transfers .tc-row-wrapper {
+    padding: 15px 26px 14px 20px;
+}
+#sort-transfers .ticket-amount-wrapper {
+    bottom: 10%;
+}
+/*---=== end of Transfers-Ticket-Overview Page ===---*/
+
 /*---=== end of Search-Results Section ===---*/
