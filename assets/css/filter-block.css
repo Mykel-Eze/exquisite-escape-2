@@ -90,7 +90,7 @@ span.filter-block-item-value {
 .show-more-btn-wrapper button {
     background-color: transparent !important;
 }
-input#search-hotel {
+input#search-hotel, input#search-tours {
     border: 1px solid #EDEDED;
     padding: 10px 14px;
     box-sizing: border-box;
