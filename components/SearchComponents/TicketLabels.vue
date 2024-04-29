@@ -26,6 +26,10 @@
         style="background-color: rgba(63, 46, 177, 0.1)">
         Exclusive
     </div>
+    <div v-if="label === 'skip-the-line'" class="ticket-labels text-[#3F2EB1]"
+        style="background-color: rgba(63, 46, 177, 0.1)">
+        Skip the line
+    </div>
 
     <!--=== Labels with Icons ===-->
     <div v-if="label === 'tickets-left'" class="ticket-labels flex-div tl-2 bg-[#FADBD7] text-[#5C1D16]">
@@ -126,6 +130,21 @@
     <div v-if="label === 'round-trip'" class="ticket-labels flex-div">
         <img src="@/assets/images/round.svg" alt="ticket-label-icon" class="ticket-label-icon">
         <span>Round Trip</span>
+    </div>
+
+    <div v-if="label === 'bus-tickets'" class="ticket-labels flex-div">
+        <img src="@/assets/images/pen.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Bus Tickets</span>
+    </div>
+
+    <div v-if="label === 'air-conditioned-transportation'" class="ticket-labels flex-div">
+        <img src="@/assets/images/round.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Air-conditioned transportation</span>
+    </div>
+
+    <div v-if="label === 'guide'" class="ticket-labels flex-div">
+        <img src="@/assets/images/golf.svg" alt="ticket-label-icon" class="ticket-label-icon">
+        <span>Guide</span>
     </div>
 </template>
 
