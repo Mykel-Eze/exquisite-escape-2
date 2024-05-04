@@ -10,12 +10,27 @@
             class="close-popup-icon"
             @click="$emit('close-popup')"
           />
-          <span>Select fare to london</span>
+          <span
+            >Select fare to
+            {{
+              checkDictionaries(
+                selectedFlightDetailsObj.itineraries[0].segments[
+                  selectedFlightDetailsObj.itineraries[0].segments.length - 1
+                ].arrival.iataCode,
+                "locations"
+              ).cityCode
+            }}</span
+          >
         </div>
 
         <div class="amenities-wrapper flex-div gap-[10px]">
           <img src="/icons/qatar.svg" alt="qatar" class="w-[30px]" />
-          <span class="text-[16px]">Qatar Airways</span>
+          <span class="text-[16px]">{{
+            checkDictionaries(
+              selectedFlightDetailsObj.validatingAirlineCodes[0],
+              "carriers"
+            )
+          }}</span>
           <img
             src="@/assets/images/plug.svg"
             alt="plug"
@@ -152,26 +167,29 @@
       <div class="tickets-wrapper">
         <div
           class="tickets-block"
-          v-for="(pricing, index) in selectedFlightDetailsObj.travelerPricings"
+          v-for="(fare, index) in selectedFlightDetailsObj.travelerPricings[0]
+            .fareDetailsBySegment"
           :key="index"
         >
           <div class="tickets-top-side">
             <div class="ticket-amount-div">
               <h2 class="m-0">
-                {{ `${pricing.price.currency} ${pricing.price.total}` }}
+                {{
+                  `${selectedFlightDetailsObj.travelerPricings[0].price.currency} ${selectedFlightDetailsObj.travelerPricings[0].price.total}`
+                }}
               </h2>
               <span>{{
-                `${pricing.price.total} ${
+                `${selectedFlightDetailsObj.travelerPricings[0].price.total} ${
                   selectedFlightDetailsObj.oneway ? "one-way" : "round-trip"
                 } for 1 traveler`
               }}</span>
             </div>
             <div class="ticket-items-wrapper">
               <div class="ticket-item">
-                <div class="ticket-item-title">Economy Lightbag</div>
+                <div class="ticket-item-title">{{ fare.cabin }}</div>
                 <div class="ticket-item-content flex-div">
                   <div class="flex-div gap-[10px] text-[#9D9D9D]">
-                    <span class="text-[#606161]">Cabin:</span> Economy
+                    <span class="text-[#606161]">Cabin:</span> {{ fare.cabin }}
                   </div>
                 </div>
               </div>
@@ -279,7 +297,7 @@
             <div class="select-ticket-btn-wrapper mt-5">
               <button
                 class="select-ticket-btn"
-                @click="selectTicketHandler(pricing)"
+                @click="selectTicketHandler(fare)"
               >
                 Select ticket
               </button>
@@ -377,8 +395,12 @@ export default defineComponent({
       const newStr = duration.replace("PT", "");
       return newStr;
     };
-    const selectTicketHandler = (selectedPrice: any) => {
-      sessionStorage.setItem("selectedPrice", selectedPrice);
+    const selectTicketHandler = (selectedFare: any) => {
+      const payload = {
+        selectedFare: { ...selectedFare },
+        selectedFlightDetailsObj: { ...selectedFlightDetailsObj.value },
+      };
+      sessionStorage.setItem("selectedFare", JSON.stringify(payload));
       router.push("/flight-ticket-review");
     };
     return {
