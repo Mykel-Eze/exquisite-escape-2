@@ -23,7 +23,7 @@
                         <nuxt-link to="/" class="" @click="scrollToTop()">Find Hotel</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link to="/" class="" @click="scrollToTop()">Become an Affiliate</nuxt-link>
+                        <nuxt-link to="/affiliate" class="" @click="scrollToTop()">Become an Affiliate</nuxt-link>
                     </li>
                     <li>
                         <a href="#" class="dropdown-trigger" data-target="company-dropdown" @click="scrollToTop()">
@@ -79,7 +79,7 @@
             <nuxt-link to="/#" class="sidenav-close" @click="scrollToTop()">Find Hotel</nuxt-link>
         </li>
         <li>
-            <nuxt-link to="/#" class="sidenav-close" @click="scrollToTop()">Become an Affiliate</nuxt-link>
+            <nuxt-link to="/affiliate" class="sidenav-close" @click="scrollToTop()">Become an Affiliate</nuxt-link>
         </li>
         <li>
             <nuxt-link to="/#" class="sidenav-close" @click="scrollToTop()">Company</nuxt-link>

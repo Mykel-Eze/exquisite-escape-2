@@ -23,3 +23,5 @@ export default {
     layout: "authLayout",
 }
 </script>
+
+<style src="~/assets/css/auth.css"></style>

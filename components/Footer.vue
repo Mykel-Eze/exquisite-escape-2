@@ -7,22 +7,22 @@
                     <div class="footer-block-title">Support</div>
                     <ul class="footer-block-links">
                         <li>
-                            <nuxt-link to="/help" class="footer-link">Help Center</nuxt-link>
+                            <nuxt-link to="/help" class="footer-link" @click="scrollToTop()">Help Center</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Cancel your flight</nuxt-link>
+                            <nuxt-link to="/help/topics" class="footer-link" @click="scrollToTop()">Cancel your flight</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Contact customer care</nuxt-link>
+                            <nuxt-link to="/help/topics" class="footer-link" @click="scrollToTop()">Contact customer care</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Cancel your transfer booking </nuxt-link>
+                            <nuxt-link to="/help/topics" class="footer-link" @click="scrollToTop()">Cancel your transfer booking </nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Cancel your hotel booking</nuxt-link>
+                            <nuxt-link to="/help/topics" class="footer-link" @click="scrollToTop()">Cancel your hotel booking</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Refund timeline and polices & process</nuxt-link>
+                            <nuxt-link to="/help/topics" class="footer-link" @click="scrollToTop()">Refund timeline and polices & process</nuxt-link>
                         </li>
                     </ul>
                 </div>
@@ -31,22 +31,22 @@
                     <div class="footer-block-title">Exquisite Escape</div>
                     <ul class="footer-block-links">
                         <li>
-                            <nuxt-link to="/#" class="footer-link">About us</nuxt-link>
+                            <nuxt-link to="/about" class="footer-link" @click="scrollToTop()">About us</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Blog</nuxt-link>
+                            <nuxt-link to="/blog" class="footer-link" @click="scrollToTop()">Blog</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Jobs</nuxt-link>
+                            <nuxt-link to="/careers" class="footer-link" @click="scrollToTop()">Jobs</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Contact us </nuxt-link>
+                            <nuxt-link to="/#" class="footer-link" @click="scrollToTop()">Contact us </nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Press</nuxt-link>
+                            <nuxt-link to="/#" class="footer-link" @click="scrollToTop()">Press</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Feedback</nuxt-link>
+                            <nuxt-link to="/#" class="footer-link" @click="scrollToTop()">Feedback</nuxt-link>
                         </li>
                     </ul>
                 </div>
@@ -55,19 +55,19 @@
                     <div class="footer-block-title">Explore</div>
                     <ul class="footer-block-links">
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Hotels</nuxt-link>
+                            <nuxt-link to="/#" class="footer-link" @click="scrollToTop()">Hotels</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Flights</nuxt-link>
+                            <nuxt-link to="/#" class="footer-link" @click="scrollToTop()">Flights</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Tours</nuxt-link>
+                            <nuxt-link to="/#" class="footer-link" @click="scrollToTop()">Tours</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Transfers</nuxt-link>
+                            <nuxt-link to="/#" class="footer-link" @click="scrollToTop()">Transfers</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Packages</nuxt-link>
+                            <nuxt-link to="/#" class="footer-link" @click="scrollToTop()">Packages</nuxt-link>
                         </li>
                     </ul>
                 </div>
@@ -76,10 +76,10 @@
                     <div class="footer-block-title">Account</div>
                     <ul class="footer-block-links">
                         <li>
-                            <nuxt-link to="/auth" class="footer-link">My account</nuxt-link>
+                            <nuxt-link to="/auth" class="footer-link" @click="scrollToTop()">My account</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/#" class="footer-link">Become an affliiate</nuxt-link>
+                            <nuxt-link to="/#" class="footer-link" @click="scrollToTop()">Become an affliiate</nuxt-link>
                         </li>
                     </ul>
                 </div>
@@ -124,6 +124,11 @@
 <script>
 export default {
     name: "FooterCompoent",
+    methods: {
+        scrollToTop() {
+            window.scrollTo(0, 0)
+        }
+    }
 }
 </script>
 

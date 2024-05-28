@@ -6,6 +6,9 @@
 
 <script></script>
 
+<style src="@/assets/css/filter-block.css"></style>
+<style src="@/assets/css/search-results.css"></style>
+
 <style>
 div#wrapper {
   float: left;

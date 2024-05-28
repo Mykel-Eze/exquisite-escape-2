@@ -1,6 +1,7 @@
 :root {
     --pry-color: #00A79D;
     --sec-color: #606161;
+    --cyan-color: #E5F6F5;
 	--font: 'LotaGrotesque', sans-serif;
     --font-bold: 'LotaGrotesque-bold', sans-serif;
     --font-smbold: 'LotaGrotesque-smbold', sans-serif;
@@ -194,6 +195,19 @@ h5, h6{
 .toastWrapper.toast-error {
     color: #FC3E3E;
     background: #EAFFF2;
+}
+
+.l-sp-0 {
+    letter-spacing: 0;
+}
+.l-sp-1 {
+    letter-spacing: -1px;
+}
+.l-sp-2 {
+    letter-spacing: -2px;
+}
+.l-sp-3 {
+    letter-spacing: -3px;
 }
 
 @media(min-width: 601px) {

@@ -1,5 +1,5 @@
 <template>
-    <form action="#" class="search-inputs flex items-end">
+    <form action="/search-results/hotels" class="search-inputs flex items-end">
         <div class="input-field-wrapper">
             <div class="purpose-wrapper flex-div gap-[20px] mb-[30px]">
                 <span>What is the purpose of your travel?</span>
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="tab-form-btn-wrapper">
-            <div class="flex-div justify-center gap-[10px] text-[18px] mb-[20px]">
+            <div class="tfbw-div flex-div justify-center gap-[10px] text-[18px] mb-[20px]">
                 <img src="~/assets/images/best-check.svg" alt="best-check" class="best-check">
                 <span>Best Deal Guaranteed </span>
             </div>
