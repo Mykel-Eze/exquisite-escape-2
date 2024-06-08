@@ -29,6 +29,13 @@
         </button>
       </div>
     </div>
+    <!-- <div v-if="user">
+      {{isLoggedIn}}
+      <p>Welcome, {{ user.displayName || user.email }}</p>
+    </div>
+    <div v-if="error">
+      <p>Error: {{ error.message }}</p>
+    </div> -->
     <!-- <div>
       <form @submit.prevent="handleEmailSignIn">
         <input v-model="email" type="email" placeholder="Email" />
@@ -53,16 +60,13 @@
 <script setup lang="ts">
 import { useFirebase } from '../../composables/useFirebase';
 const { user, error, signInWithGoogle, signInWithFacebook, signInWithTwitter, signInWithApple, signInWithEmail, signUpWithEmail } = useFirebase();
-const email = ref('');
-const password = ref('');
+// const handleEmailSignIn = () => {
+//   signInWithEmail(email.value, password.value);
+// };
 
-const handleEmailSignIn = () => {
-  signInWithEmail(email.value, password.value);
-};
-
-const handleEmailSignUp = () => {
-  signUpWithEmail(email.value, password.value);
-};
+// const handleEmailSignUp = () => {
+//   signUpWithEmail(email.value, password.value);
+// };
 </script>
 
 <style></style>

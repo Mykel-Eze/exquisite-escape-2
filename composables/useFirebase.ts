@@ -1,21 +1,37 @@
-// composables/useFirebase.ts
 import { ref } from 'vue';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, TwitterAuthProvider, OAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, TwitterAuthProvider, OAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { firebaseConfig } from '@/config/firebaseConfig';
+import { useUser } from '@/composables/auth/user'
+const { createUser, setToken } = useUser()
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const router = useRouter()
+const user = ref(null) as any;
+
+onAuthStateChanged(auth, (firebaseUser) => {
+    user.value = firebaseUser;
+  });
 
 export const useFirebase = () => {
-  const user = ref(null) as any;
   const error = ref(null) as any;
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider) as Record<string, any>;
+      const responsePayload = {
+         userObj: {
+            displayName: result.displayName,
+            email: result.email
+         },
+         tokenObj: result.stsTokenManager
+      }
       user.value = result.user;
+      createUser(responsePayload)
+      setToken(responsePayload.tokenObj)
+      router.push('/dashboard/account')
     } catch (err: any) {
       error.value = err;
     }
@@ -24,8 +40,18 @@ export const useFirebase = () => {
   const signInWithFacebook = async () => {
     const provider = new FacebookAuthProvider();
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider) as Record<string, any>;;
+        const responsePayload = {
+         userObj: {
+            displayName: result.displayName,
+            email: result.email
+         },
+         tokenObj: result.stsTokenManager
+      }
       user.value = result.user;
+      createUser(responsePayload)
+      setToken(responsePayload.tokenObj)
+      router.push('/dashboard/account')
     } catch (err: any) {
       error.value = err;
     }
@@ -34,8 +60,18 @@ export const useFirebase = () => {
   const signInWithTwitter = async () => {
     const provider = new TwitterAuthProvider();
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider) as Record<string, any>;;
+        const responsePayload = {
+         userObj: {
+            displayName: result.displayName,
+            email: result.email
+         },
+         tokenObj: result.stsTokenManager
+      }
       user.value = result.user;
+      createUser(responsePayload)
+      setToken(responsePayload.tokenObj)
+      router.push('/dashboard/account')
     } catch (err: any) {
       error.value = err;
     }
@@ -44,8 +80,18 @@ export const useFirebase = () => {
   const signInWithApple = async () => {
     const provider = new OAuthProvider('apple.com');
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider) as Record<string, any>;;
+        const responsePayload = {
+         userObj: {
+            displayName: result.displayName,
+            email: result.email
+         },
+         tokenObj: result.stsTokenManager
+      }
       user.value = result.user;
+      createUser(responsePayload)
+      setToken(responsePayload.tokenObj)
+      router.push('/dashboard/account')
     } catch (err: any) {
       error.value = err;
     }
@@ -62,8 +108,18 @@ export const useFirebase = () => {
 
   const signUpWithEmail = async (email: string, password: string) => {
     try {
-      const result = await createUserWithEmailAndPassword(auth, email, password);
+      const result = await createUserWithEmailAndPassword(auth, email, password) as Record<string, any>;;
+        const responsePayload = {
+         userObj: {
+            displayName: result.displayName,
+            email: result.email
+         },
+         tokenObj: result.stsTokenManager
+      }
       user.value = result.user;
+      createUser(responsePayload)
+      setToken(responsePayload.tokenObj)
+      router.push('/dashboard/account')
     } catch (err: any) {
       error.value = err;
     }

@@ -8,7 +8,6 @@
             Please enter your details to sign in or create a new account
           </p>
         </div>
-
         <!--=== Auth-Methods Section ===-->
         <AuthMethods />
         <!--=== end of Auth-Methods Section ===-->
@@ -19,9 +18,8 @@
 
 <script>
 export default {
-    name: "SignInView",
-    layout: "authLayout",
+  name: "SignInView",
+  layout: "authLayout",
 }
 </script>
-
 <style src="~/assets/css/auth.css"></style>
