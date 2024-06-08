@@ -1,6 +1,6 @@
-import { axiosInstance } from "./axios.config";
+import { axiosInstance } from "../axios.config";
 
-export const hotelApiFactory = {
+export const cmsApiFactory = {
   $_get_blogs(data: any) {
     return axiosInstance.post("/blogs", data);
   },
@@ -11,6 +11,9 @@ export const hotelApiFactory = {
     return axiosInstance.post("/footer", data);
   },
   $_get_blogs_by_id(data: any) {
+    return axiosInstance.post("", data);
+  },
+  $_get_all_blogs(data: any) {
     return axiosInstance.post("", data);
   },
   $_get_subscribers(data: any) {

@@ -1,4 +1,4 @@
-import { axiosInstance } from './axios.config'
+import { axiosInstance } from '../axios.config'
 
 export const authApiFactory = {
   $_login(data: any) {

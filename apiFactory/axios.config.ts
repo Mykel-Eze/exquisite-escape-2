@@ -1,32 +1,100 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { useAlert } from "@/composables/core/notification";
+import { useUser } from "@/composables/auth/user";
+
+const { token, logOut } = useUser()
 
 export const axiosInstance = axios.create({
   baseURL: "https://api.exquisiteescape.com/api",
 });
+const $GATEWAY_ENDPOINT = import.meta.env.VITE_BASE_URL
 
-axiosInstance.interceptors.request.use((config: any) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
+export const GATEWAY_ENDPOINT = axios.create({
+	baseURL: $GATEWAY_ENDPOINT
+})
+export interface CustomAxiosResponse extends AxiosResponse {
+  value?: any;
+  type?: string;
+}
+
+const instanceArray = [
+  GATEWAY_ENDPOINT,
+];
+
+instanceArray.forEach((instance) => {
+  instance.interceptors.request.use((config) => {
+    if (token.value) {
+      config.headers.Authorization = `Bearer ${token.value}`;
+    }
+    return config;
+  });
+
+  instance.interceptors.response.use(
+    (response: CustomAxiosResponse) => {
+      return response;
+    },
+    (err: any) => {
+      if (typeof err.response === "undefined") {
+        useAlert().openAlert({
+          type: "ERROR",
+          msg: "kindly check your network connection",
+        });
+        return {
+          type: "ERROR",
+          ...err.response,
+        };
+      }
+      if (err.response.status === 401) {
+        logOut();
+        useAlert().openAlert({ type: "ERROR", msg: "Unauthorised ERROR" });
+        return {
+          type: "ERROR",
+          ...err.response,
+        };
+      } else if (statusCodeStartsWith(err.response.status, 4)) {
+        if (err.response.data.message) {
+          useAlert().openAlert({
+            type: "ERROR",
+            msg: err.response.data.message,
+          });
+        } else {
+          useAlert().openAlert({ type: "ERROR", msg: err.response.data.error });
+        }
+        return {
+          type: "ERROR",
+          ...err.response,
+        };
+      } else if (err.response.status === 500) {
+        useAlert().openAlert({
+          type: "ERROR",
+          msg:
+            err?.response?.data?.message ||
+            err?.response?.data?.error ||
+            "An error occured",
+        });
+        return {
+          type: "ERROR",
+          ...err.response,
+        };
+      } else if (err.response.status === 409) {
+        useAlert().openAlert({
+          type: "ERROR",
+          msg:
+            err?.response?.data?.message ||
+            err?.response?.data?.error ||
+            "An error occured",
+        });
+      }
+    }
+  );
 });
 
-axiosInstance.interceptors.response.use(
-  (response: any) => {
-    return response;
-  },
-  (error) => {
-    if (typeof error.response === "undefined") {
-      useNuxtApp().$toast.error("kindly check your network connection", {
-        autoClose: 5000,
-        dangerouslyHTMLString: true,
-      });
-    } else {
-      useNuxtApp().$toast.error(error.response.data.message, {
-        autoClose: 5000,
-        dangerouslyHTMLString: true,
-      });
-    }
-  }
-);
+const statusCodeStartsWith = (
+  statusCode: number,
+  startNumber: number
+): boolean => {
+  const statusCodeString = statusCode.toString();
+  const startNumberString = startNumber.toString();
+
+  return statusCodeString.startsWith(startNumberString);
+};

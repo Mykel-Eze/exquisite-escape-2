@@ -1,4 +1,4 @@
-import { axiosInstance } from "./axios.config";
+import { axiosInstance } from "../axios.config";
 
 export const transferApiFactory = {
   $_check_availability(data: any) {

@@ -1,4 +1,4 @@
-import { axiosInstance } from "./axios.config";
+import { axiosInstance } from "../axios.config";
 
 export const tourApiFactory = {
   $_availability_search(data: any) {

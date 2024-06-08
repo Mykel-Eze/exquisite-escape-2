@@ -1,6 +1,6 @@
-import { axiosInstance } from "./axios.config";
+import { axiosInstance } from "../axios.config";
 
-export const transferApiFactory = {
+export const paymentApiFactory = {
   $_check_availability(data: any) {
     return axiosInstance.post("/transfer/check-availability", data);
   },
