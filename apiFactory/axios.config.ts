@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { type AxiosResponse } from "axios";
 import { useAlert } from "@/composables/core/notification";
 import { useUser } from "@/composables/auth/user";
 

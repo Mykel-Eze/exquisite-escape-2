@@ -2,16 +2,16 @@ import { ref, computed } from '@vue/reactivity'
 import { useStorage } from '@vueuse/core'
 
 const runtimeData = {
-	auth: ref(),
-	user: ref({} as any),
-	token: ref(''),
-	redirect: ref()
+	auth: ref() as Record<string, any>,
+	user: ref({}) as Record<string, any>,
+	token: ref('') as Record<string, any>,
+	redirect: ref() as Record<string, any>
 }
 const localstorageDate = {
-	auth: ref(),
-	user: useStorage('user', {} as any),
-	token: useStorage('token', ''),
-	redirect: useStorage('redirect', '')
+	auth: ref() as Record<string, any>,
+	user: useStorage('user', {} as Record<string, any>),
+	token: useStorage('token', '') as Record<string, any>,
+	redirect: useStorage('redirect', '') as Record<string, any>
 }
 watch(runtimeData.user, (val) => {
 	Object.keys(val).forEach((key) => {
@@ -45,14 +45,14 @@ export const useUser = () => {
 		runtimeData.user.value = null
 		location.href = '/auth/login'
 	}
-	const setToken = (token: string) => {
-		runtimeData.token.value = token
-		localstorageDate.token.value = token
+	const setToken = (token: Record<string, any>) => {
+		runtimeData.token.value = token?.accessToken
+		localstorageDate.token.value = token?.accessToken
 	}
 	const createUser = (user: any) => {
-		runtimeData.user.value = user
-		localstorageDate.token.value = user?.token?.token
-		runtimeData.token.value = user?.token?.token
+		runtimeData.user.value = user.userObj
+		localstorageDate.token.value = user?.tokenObj?.accessToken
+		runtimeData.token.value = user?.tokenObj?.accessToken
 	}
 	const updateUser = (user: any) => {
 		runtimeData.user.value = user
