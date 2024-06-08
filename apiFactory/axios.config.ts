@@ -2,18 +2,16 @@ import axios, { AxiosResponse } from "axios";
 import { useAlert } from "@/composables/core/notification";
 import { useUser } from "@/composables/auth/user";
 
-const { token, logOut } = useUser();
-const $GATEWAY_ENDPOINT = import.meta.env.VITE_BASE_URL as string
+const { token, logOut } = useUser()
+
+export const axiosInstance = axios.create({
+  baseURL: "https://api.exquisiteescape.com/api",
+});
+const $GATEWAY_ENDPOINT = import.meta.env.VITE_BASE_URL
 
 export const GATEWAY_ENDPOINT = axios.create({
-  baseURL: $GATEWAY_ENDPOINT,
-});
-export const GATEWAY_ENDPOINT_WITH_AUTH = axios.create({
-  baseURL: $GATEWAY_ENDPOINT,
-  headers: {
-    Authorization: `Bearer ${token.value}`,
-  },
-});
+	baseURL: $GATEWAY_ENDPOINT
+})
 export interface CustomAxiosResponse extends AxiosResponse {
   value?: any;
   type?: string;
@@ -21,7 +19,6 @@ export interface CustomAxiosResponse extends AxiosResponse {
 
 const instanceArray = [
   GATEWAY_ENDPOINT,
-  GATEWAY_ENDPOINT_WITH_AUTH,
 ];
 
 instanceArray.forEach((instance) => {
