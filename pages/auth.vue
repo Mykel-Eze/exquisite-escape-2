@@ -23,3 +23,7 @@ export default {
     layout: "authLayout",
 }
 </script>
+
+<style scoped>
+ 
+</style>
