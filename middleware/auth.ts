@@ -1,8 +1,8 @@
-import { defineNuxtMiddleware, useContext } from '@nuxtjs/composition-api';
+import { defineNuxtRouteMiddleware, useRouter } from 'nuxt/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-export default defineNuxtMiddleware(async (context: any) => {
-  const { redirect, route } = context;
+export default defineNuxtRouteMiddleware(async (to, from) => {
+  const router = useRouter();
   const auth = getAuth();
 
   const checkAuth = () => {
@@ -15,11 +15,11 @@ export default defineNuxtMiddleware(async (context: any) => {
 
   const user = await checkAuth();
 
-  if (!user && route.path !== '/auth') {
-    return redirect('/auth');
+  if (!user && to.path !== '/auth') {
+    return router.push('/auth');
   }
 
-  if (user && route.path === '/auth') {
-    return redirect('/dashboard/account');
+  if (user && to.path === '/auth') {
+    return router.push('/dashboard/account');
   }
 });
