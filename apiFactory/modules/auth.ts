@@ -20,7 +20,7 @@ export const authApiFactory = {
   return axiosInstance.post(`/users/reset-password/${reset_token}`, data);
 },
 $_google_oauth(code: string){
-  return axiosInstance.get(`/sessions/oauth/google?code=$code`);
+  return axiosInstance.get(`/sessions/oauth/google?code=${code}`);
 },
 $_activate_account(token: string){
   return axiosInstance.get(`/activate/${token}`);

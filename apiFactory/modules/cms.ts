@@ -1,8 +1,8 @@
 import { axiosInstance } from "../axios.config";
 
 export const cmsApiFactory = {
-  $_get_blogs(data: any) {
-    return axiosInstance.post("/blogs", data);
+  $_get_blogs() {
+    return axiosInstance.get("/blogs");
   },
   $_get_services(data: any) {
     return axiosInstance.post("/services", data);
