@@ -19,7 +19,7 @@
                                 Provide personal details and how we can reach you
                             </p>
                         </NuxtLink>
-                        <NuxtLink to="" class="account-item-block hover-scale">
+                        <NuxtLink to="/dashboard/flights" class="account-item-block hover-scale">
                             <img src="@/assets/images/icons/airplane-icon.svg" alt="airplane-icon" class="aib-icon">
                             <div class="aib-title">Flights</div>
                             <p class="aib-desc">
@@ -66,7 +66,7 @@
                             </p>
                         </NuxtLink>
 
-                        <NuxtLink to="" class="account-item-block hover-scale">
+                        <NuxtLink to="/dashboard/security" class="account-item-block hover-scale">
                             <img src="@/assets/images/icons/security-icon.svg" alt="security-icon" class="aib-icon">
                             <div class="aib-title">Security</div>
                             <p class="aib-desc">
@@ -78,6 +78,14 @@
                             <div class="aib-title">Support</div>
                             <p class="aib-desc">
                                 Need help with a recent activity? or talk to our support team
+                            </p>
+                        </NuxtLink>
+
+                        <NuxtLink to="/dashboard/booking-history" class="account-item-block hover-scale">
+                            <img src="@/assets/images/icons/booking-history-icon.svg" alt="help-icon" class="aib-icon">
+                            <div class="aib-title">Booking history</div>
+                            <p class="aib-desc">
+                                Check out the list of all your previous <br class="hidden-xs"> bookings
                             </p>
                         </NuxtLink>
                     </div>
