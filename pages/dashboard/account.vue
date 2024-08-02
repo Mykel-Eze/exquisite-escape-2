@@ -19,7 +19,7 @@
                                 Provide personal details and how we can reach you
                             </p>
                         </NuxtLink>
-                        <NuxtLink to="/dashboard/flights" class="account-item-block hover-scale">
+                        <NuxtLink to="/dashboard/flights-history" class="account-item-block hover-scale">
                             <img src="@/assets/images/icons/airplane-icon.svg" alt="airplane-icon" class="aib-icon">
                             <div class="aib-title">Flights</div>
                             <p class="aib-desc">
