@@ -12,7 +12,7 @@
 
     <section class="results-section">
       <div class="row">
-        <div class="container">
+        <div class="container c2">
           <div class="result-main-wrapper">
             <div class="result-filter-side">
               <div class="rfs">
