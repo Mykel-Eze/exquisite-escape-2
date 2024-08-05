@@ -480,3 +480,68 @@ button.mark-read-btn {
 @media(max-width: 600px) {}
 
 /*---=== end of Flights Page ===---*/
+
+/*---=== Security Page ===---*/
+.settings-content-wrapper {
+    display: grid;
+    grid-template-columns: 50% 1fr;
+    gap: 60px;
+}
+.settings-content-block {
+    padding: 33px;
+    border: 1px solid rgba(120, 120, 120, 20%);
+    border-radius: 12px;
+}
+.settings-content-wrapper .block-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-bottom: 25px;
+}
+.settings-content-wrapper .block-header h4 {
+    font-size: 16px;
+    color: #232323;
+    margin: 0;
+    font-family: var(--font-bold);
+    letter-spacing: normal;
+}
+.settings-content-wrapper .block-header span {
+    color: #8C8C8C;
+    font-size: 12px;
+    letter-spacing: normal;
+}
+.settings-content-wrapper form#change-password-form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+p.error-message {
+    font-size: 12px;
+    margin: 2px 0;
+    color: red;
+}
+._2fa-n-deactivate-blocks {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+._2fa-options, .deactivate-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+}
+
+@media(max-width: 992px) {
+    .settings-content-wrapper {
+        grid-template-columns: 100%;
+        gap: 30px;
+    }
+    ._2fa-n-deactivate-blocks {
+        gap: 30px;
+    }
+}
+
+@media(max-width: 600px) {}
+
+/*---=== end of Security Page ===---*/
