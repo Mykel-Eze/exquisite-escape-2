@@ -64,13 +64,25 @@
                             <div class="_2fa-options">
                                 <div>
                                     <label>
-                                        <input class="with-gap" name="_2fa-option" type="radio"  />
+                                        <input 
+                                            class="with-gap" 
+                                            name="_2fa-option" 
+                                            type="radio" 
+                                            value="email-sms"
+                                            v-model="selectedOption"
+                                        />
                                         <span>Receive OTP via email and SMS</span>
                                     </label>
                                 </div>
                                 <div>
                                     <label>
-                                        <input class="with-gap" name="_2fa-option" type="radio"  />
+                                        <input 
+                                            class="with-gap" 
+                                            name="_2fa-option" 
+                                            type="radio" 
+                                            value="authenticator-app"
+                                            v-model="selectedOption"
+                                        />
                                         <span>Receive OTP via authenticator app</span>
                                     </label>
                                 </div>
@@ -109,7 +121,8 @@ export default {
             newPassword: '',
             repeatPassword: '',
             newPasswordError: '',
-            repeatPasswordError: ''
+            repeatPasswordError: '',
+            selectedOption: ''
         }
     },
     computed: {
