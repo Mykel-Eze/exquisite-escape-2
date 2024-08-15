@@ -375,45 +375,59 @@ button.mark-read-btn {
 .ofd-detail {
     font-family: var(--font-smbold);
 }
-#flights-history-page .ticket-overview-block .left-side {
+#flights-history-page .ticket-overview-block .left-side,
+.preview-block-wrapper .ticket-overview-block .left-side {
     border-right: 1px dashed #9D9D9D;
 }
-#flights-history-page .ticket-overview-block .right-side {
+#flights-history-page .ticket-overview-block .right-side,
+.preview-block-wrapper .ticket-overview-block .right-side {
     background-color: white;
 }
-#flights-history-page .ticket-labels {
+#flights-history-page .ticket-labels,
+.preview-block-wrapper .ticket-labels {
     background-color: #F3F3F3;
     font-size: 8px;
 }
-#flights-history-page .ticket-labels.pending {
+#flights-history-page .ticket-labels.pending,
+.preview-block-wrapper .ticket-labels.pending {
     background-color: #EB7567;
     color: white;
 }
-#flights-history-page .ticket-labels.confirmed {
+#flights-history-page .ticket-labels.confirmed,
+.preview-block-wrapper .ticket-labels.confirmed {
     background-color: var(--pry-color);
     color: white;
 }
-#flights-history-page .ticket-state-code {
+#flights-history-page .ticket-state-code,
+.preview-block-wrapper .ticket-state-code {
     font-size: 18px;
 }
-#flights-history-page .ticket-time {
+#flights-history-page .ticket-time,
+.preview-block-wrapper .ticket-time {
     font-size: 12px;
 }
-#flights-history-page .ticket-state {
+#flights-history-page .ticket-state,
+.preview-block-wrapper .ticket-state {
     font-size: 8px;
 }
-#flights-history-page .ticket-airline img {
+#flights-history-page .ticket-airline img,
+.preview-block-wrapper .ticket-airline img {
     width: 36.5px;
 }
-#flights-history-page .ticket-airline {
+#flights-history-page .ticket-airline,
+.preview-block-wrapper .ticket-airline {
     font-size: 8px;
 }
-#flights-history-page .from-to-divider svg.flight-icon {
+#flights-history-page .from-to-divider svg.flight-icon,
+.preview-block-wrapper .from-to-divider svg.flight-icon {
     width: 29px;
     height: 15px;
 }
 .barcode-wrapper.center {
     transform: rotate(-90deg) translate(-40%, 10px);
+}
+.preview-block-wrapper .barcode-wrapper.center {
+    transform: rotate(-90deg) translate(-35%, 10px);
 }
 #history-table {
     border: 1px solid #C9C9C9;
@@ -461,17 +475,21 @@ button.mark-read-btn {
     font-size: 14px;
     font-weight: normal;
 }
-#flights-history-page section.results-section .container.c2 {
+#flights-history-page section.results-section .container.c2,
+#create-package-page section.results-section .container.c2 {
     width: 100% !important;
 }
-#flights-history-page .search-flight-wrapper .top-section.black-bg {
+#flights-history-page .search-flight-wrapper .top-section.black-bg,
+#create-package-page .packages-content-wrapper .top-section.black-bg {
     background-color: transparent;
 }
-#flights-history-page .search-flight-wrapper .top-section.black-bg .container {
+#flights-history-page .search-flight-wrapper .top-section.black-bg .container,
+#create-package-page .packages-content-wrapper .top-section.black-bg .container {
     width: 100% !important;
     padding: 0 !important;
 }
-#flights-history-page .search-flight-wrapper .search-tab-wrapper {
+#flights-history-page .search-flight-wrapper .search-tab-wrapper,
+#create-package-page .packages-content-wrapper .search-tab-wrapper {
     background-color: black;
 }
 
@@ -545,3 +563,195 @@ p.error-message {
 @media(max-width: 600px) {}
 
 /*---=== end of Security Page ===---*/
+
+/*---=== Packages Page ===---*/
+.packages-block-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+.packages-block-wrapper .tbc-row-3 {
+    display: flex;
+    gap: 20px;
+}
+.packages-block-wrapper .tbc-row-3 > div:not(:last-child) {
+    border-right: 1px solid var(--pry-color);
+    padding-right: 30px;
+}
+.packages-block-wrapper .tour-block-img {
+    height: 170px;
+    overflow: hidden;
+}
+.package-action-btn-wrapper > * {
+    padding: 10px 24px;
+    font-size: 14px;
+    border-radius: 10px;
+    font-family: var(--font-smbold);
+    border: 1px solid #66CAC4;
+    line-height: normal;
+}
+.package-action-btn-wrapper .cancel-btn {
+    color: #000;
+    background-color: #F3F3F3;
+}
+.package-action-btn-wrapper .continue-btn {
+    color: #fff;
+    background-color: var(--pry-color);
+}
+.package-action-btn-wrapper .back-btn {
+    color: #fff;
+    background-color: black;
+}
+.create-package-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.create-package-wrapper input, .create-package-wrapper textarea {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+}
+.create-package-wrapper textarea {
+    min-height: 200px !important;
+}
+.create-package-wrapper .form-group {
+    border: 1px solid #B2E5E2;
+    padding: 5px 20px;
+    border-radius: 10px;
+}
+.step-indicators {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(119, 119, 119, 0.3);
+}
+.step-indicator-container {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 16.66%;
+    /* 100% / 6 stages */
+    position: relative;
+}
+.step-indicator-container .step-indicator {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #9E9E9E;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 16px;
+}
+.stage-name {
+    font-size: 16px;
+    color: #333333;
+    word-wrap: break-word;
+    margin-top: 25px;
+}
+.stage-progress {
+    margin-top: 8px;
+    border-radius: 4px;
+    width: fit-content;
+    font-size: 10px;
+    padding: 4px 6px;
+    color: #BDBDBD;
+    border: 1px solid #BDBDBD;
+    opacity: 0.8;
+}
+.active .stage-progress {
+    background-color: #F6F4FD;
+    color: var(--pry-color);
+    border: none;
+    opacity: 1;
+}
+.completed .stage-progress {
+    background-color: #E6FBF1;
+    color: #20C374;
+}
+.step-indicator-container.active .step-indicator {
+    background-color: var(--pry-color);
+}
+.step-indicator-container.completed .step-indicator {
+    background-color: #20C374;
+}
+.step-indicator-container.active::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 25%;
+    width: 60%;
+    height: 2px;
+    background-color: #BDBDBD;
+}
+.step-indicator-container.active::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 25%;
+    width: 30%;
+    height: 2px;
+    background-color: var(--pry-color);
+}
+.step-indicator-container.completed::after {
+    width: 60%;
+    background-color: #20C374;
+}
+/* .step-indicator-container:last-child:before,
+.step-indicator-container:last-child::after {
+    display: none !important;
+} */
+
+.preview-block-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    margin-top: 50px;
+}
+.preview-item-block {
+    background-color: #F3F3F3;
+    padding: 30px 20px;
+    border-radius: 20px;
+    border: 1px solid #EDEDED;
+}
+.preview-item-block.closed-preview {
+    border: 1px solid #00A79D;
+}
+.preview-item-block img.caret-icon {
+    transition: transform 1s;
+    transform: rotate(180deg);
+}
+.preview-item-block.closed-preview img.caret-icon  {
+    transform: rotate(0deg);
+}
+.preview-item-price {
+    color: #141414;
+    font-size: 34px;
+    font-family: var(--font-smbold);
+    letter-spacing: -1px;
+}
+.preview-block-wrapper .ticket-name {
+    font-size: 20px;
+}
+button.view-preview-info {
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    background-color: white;
+    color: #606161;
+    font-size: 14px;
+    font-family: var(--font-smbold);
+    border: 1px solid #D0D5DD;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+@media(max-width: 992px) {}
+
+@media(max-width: 600px) {}
+/*---=== end of Packages Page ===---*/
