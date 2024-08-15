@@ -375,45 +375,59 @@ button.mark-read-btn {
 .ofd-detail {
     font-family: var(--font-smbold);
 }
-#flights-history-page .ticket-overview-block .left-side {
+#flights-history-page .ticket-overview-block .left-side,
+.preview-block-wrapper .ticket-overview-block .left-side {
     border-right: 1px dashed #9D9D9D;
 }
-#flights-history-page .ticket-overview-block .right-side {
+#flights-history-page .ticket-overview-block .right-side,
+.preview-block-wrapper .ticket-overview-block .right-side {
     background-color: white;
 }
-#flights-history-page .ticket-labels {
+#flights-history-page .ticket-labels,
+.preview-block-wrapper .ticket-labels {
     background-color: #F3F3F3;
     font-size: 8px;
 }
-#flights-history-page .ticket-labels.pending {
+#flights-history-page .ticket-labels.pending,
+.preview-block-wrapper .ticket-labels.pending {
     background-color: #EB7567;
     color: white;
 }
-#flights-history-page .ticket-labels.confirmed {
+#flights-history-page .ticket-labels.confirmed,
+.preview-block-wrapper .ticket-labels.confirmed {
     background-color: var(--pry-color);
     color: white;
 }
-#flights-history-page .ticket-state-code {
+#flights-history-page .ticket-state-code,
+.preview-block-wrapper .ticket-state-code {
     font-size: 18px;
 }
-#flights-history-page .ticket-time {
+#flights-history-page .ticket-time,
+.preview-block-wrapper .ticket-time {
     font-size: 12px;
 }
-#flights-history-page .ticket-state {
+#flights-history-page .ticket-state,
+.preview-block-wrapper .ticket-state {
     font-size: 8px;
 }
-#flights-history-page .ticket-airline img {
+#flights-history-page .ticket-airline img,
+.preview-block-wrapper .ticket-airline img {
     width: 36.5px;
 }
-#flights-history-page .ticket-airline {
+#flights-history-page .ticket-airline,
+.preview-block-wrapper .ticket-airline {
     font-size: 8px;
 }
-#flights-history-page .from-to-divider svg.flight-icon {
+#flights-history-page .from-to-divider svg.flight-icon,
+.preview-block-wrapper .from-to-divider svg.flight-icon {
     width: 29px;
     height: 15px;
 }
 .barcode-wrapper.center {
     transform: rotate(-90deg) translate(-40%, 10px);
+}
+.preview-block-wrapper .barcode-wrapper.center {
+    transform: rotate(-90deg) translate(-35%, 10px);
 }
 #history-table {
     border: 1px solid #C9C9C9;
@@ -694,6 +708,48 @@ p.error-message {
 .step-indicator-container:last-child::after {
     display: none !important;
 } */
+
+.preview-block-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    margin-top: 50px;
+}
+.preview-item-block {
+    background-color: #F3F3F3;
+    padding: 30px 20px;
+    border-radius: 20px;
+    border: 1px solid #EDEDED;
+}
+.preview-item-block.closed-preview {
+    border: 1px solid #00A79D;
+}
+.preview-item-block img.caret-icon {
+    transition: transform 1s;
+    transform: rotate(180deg);
+}
+.preview-item-block.closed-preview img.caret-icon  {
+    transform: rotate(0deg);
+}
+.preview-item-price {
+    color: #141414;
+    font-size: 34px;
+    font-family: var(--font-smbold);
+    letter-spacing: -1px;
+}
+.preview-block-wrapper .ticket-name {
+    font-size: 20px;
+}
+button.view-preview-info {
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    background-color: white;
+    color: #606161;
+    font-size: 14px;
+    font-family: var(--font-smbold);
+    border: 1px solid #D0D5DD;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
 
 @media(max-width: 992px) {}
 
