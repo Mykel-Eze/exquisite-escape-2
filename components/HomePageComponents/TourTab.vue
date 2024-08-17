@@ -44,7 +44,7 @@
           />
         </div>
         <div>
-          <SelectField
+          <!-- <SelectField
             label="Going to?"
             placeholder="Country"
             id="country"
@@ -56,7 +56,7 @@
             selectName="name"
             :option="[]"
             @select="tourObjSelectHandler($event, 'countryCode')"
-          />
+          /> -->
           <SelectField
             label="Things to do at?"
             placeholder="Province/State"
