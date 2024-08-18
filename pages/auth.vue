@@ -16,10 +16,9 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "SignInView",
-  layout: "authLayout",
-}
+<script setup>
+definePageMeta({
+  layout: "auth-layout"
+})
 </script>
 <style src="~/assets/css/auth.css"></style>

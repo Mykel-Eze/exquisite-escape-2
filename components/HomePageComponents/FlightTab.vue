@@ -47,7 +47,7 @@
           <div class="flex-div gap-3 rel arrival-depature-inputs">
             <div>
               <InputField
-                label="From where?"
+                label="From where"
                 placeholder="City or Airport"
                 id="depature"
                 type="text"
@@ -73,16 +73,16 @@
               </div>
             </div>
 
+            <!-- v-if="flightObj.tripType !== 'one-way'" -->
+
             <img
-              v-if="flightObj.tripType !== 'one-way'"
               src="~/assets/images/transfer-arrow.svg"
               alt="transfer-arrow"
-              class="transfer-arrosw"
+              class="transfer-arrow"
             />
             <div>
               <InputField
-                v-if="flightObj.tripType !== 'one-way'"
-                label="To where?"
+                label="To where"
                 placeholder="City or Airport"
                 id="destination"
                 type="text"
@@ -150,38 +150,14 @@
             v-model:value="flightObj.travelClass"
             @select="flightObjSelectHandler($event, 'travelClass')"
           />
-          <div class="tab-form-btn-wrapper">
-            <div
-              class="tfbw-div flex-div justify-center gap-[10px] text-[18px] mb-[20px]"
-            >
-              <img
-                src="~/assets/images/best-check.svg"
-                alt="best-check"
-                class="best-check"
-              />
-              <span>Best Deal Guaranteed </span>
-            </div>
-            <button
-              v-if="flightObj.tripType === 'multi-city'"
-              class="tab-form-btn tfb-2 flex-div gap-3"
-              type="button"
-              @click="duplicateGridSmBreak"
-            >
-              <span>Add Flight</span>
-              <img src="~/assets/images/plus-rectangle.svg" alt="plus-icon" />
-            </button>
-            <button
-              class="tab-form-btn flex-div gap-3"
-              @click.prevent="searchFlight()"
-            >
-              <span>Search Flights</span>
-              <img src="~/assets/images/plane-icon.svg" alt="plane-icon" />
-            </button>
-          </div>
         </div>
       </div>
-      <!-- <div class="tab-form-btn-wrapper">
-      <div class="flex-div justify-center gap-[10px] text-[18px] mb-[20px]">
+    </div>
+
+    <div class="tab-form-btn-wrapper">
+      <div
+        class="tfbw-div flex-div justify-center gap-[10px] text-[18px] mb-[20px]"
+      >
         <img
           src="~/assets/images/best-check.svg"
           alt="best-check"
@@ -190,7 +166,7 @@
         <span>Best Deal Guaranteed </span>
       </div>
       <button
-        v-if="tripType === 'multi-city'"
+        v-if="flightObj.tripType === 'multi-city'"
         class="tab-form-btn tfb-2 flex-div gap-3"
         type="button"
         @click="duplicateGridSmBreak"
@@ -198,18 +174,43 @@
         <span>Add Flight</span>
         <img src="~/assets/images/plus-rectangle.svg" alt="plus-icon" />
       </button>
-      <button class="tab-form-btn flex-div gap-3">
+      <button
+        class="tab-form-btn flex-div gap-3"
+        @click.prevent="searchFlight()"
+      >
         <span>Search Flights</span>
         <img src="~/assets/images/plane-icon.svg" alt="plane-icon" />
       </button>
-    </div> -->
     </div>
+    <!-- <div class="tab-form-btn-wrapper">
+    <div class="flex-div justify-center gap-[10px] text-[18px] mb-[20px]">
+      <img
+        src="~/assets/images/best-check.svg"
+        alt="best-check"
+        class="best-check"
+      />
+      <span>Best Deal Guaranteed </span>
+    </div>
+    <button
+      v-if="tripType === 'multi-city'"
+      class="tab-form-btn tfb-2 flex-div gap-3"
+      type="button"
+      @click="duplicateGridSmBreak"
+    >
+      <span>Add Flight</span>
+      <img src="~/assets/images/plus-rectangle.svg" alt="plus-icon" />
+    </button>
+    <button class="tab-form-btn flex-div gap-3">
+      <span>Search Flights</span>
+      <img src="~/assets/images/plane-icon.svg" alt="plane-icon" />
+    </button>
+  </div> -->
   </form>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import M from "materialize-css";
+// import M from "materialize-css";
 import { useRouter } from "vue-router";
 export default defineComponent({
   name: "FlightTab",

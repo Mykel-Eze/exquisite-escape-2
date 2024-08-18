@@ -101,6 +101,28 @@ input.ls-inp-field {
     margin-bottom: 0 !important;
     box-shadow: none !important;
 }
+.input-white-wrapper .ant-picker {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+.input-white-wrapper .ant-picker-input input {
+    height: 31px !important;
+    border: none !important;
+    font-size: 24px !important;
+    color: var(--sec-color) !important;
+    margin-bottom: 0 !important;
+    box-shadow: none !important;
+}
+.input-white-wrapper .ant-picker-input span.ant-picker-suffix {
+    display: none;
+}
+.input-white-wrapper .select-wrapper input.select-dropdown {
+    height: 31px !important;
+    border: none !important;
+    font-size: 24px !important;
+    color: var(--sec-color) !important;
+}
 img.transfer-arrow {
     position: absolute;
     left: 50%;
