@@ -17,7 +17,7 @@ section#landing-section {
     padding: 34px;
     max-width: 1250px;
     border-radius: 20px;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
 }
 .landing-section-title-desc {
@@ -165,6 +165,23 @@ img.transfer-arrow {
 .purpose-wrapper [type="radio"]:not(:checked)+span, 
 .purpose-wrapper [type="radio"]:checked+span {
     padding-left: 30px;
+}
+
+.search-dropdown-wrapper {
+    background-color: transparent;
+}
+.search-dropdown-wrapper ul {
+    box-shadow: 0px 24px 20px 0px rgba(16, 24, 40, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+}
+.search-dropdown-wrapper ul li {
+    cursor: pointer;
+    font-size: 14px;
+}
+.search-dropdown-wrapper ul li:hover {
+    background-color: rgba(0, 0, 0, 0.10);
 }
 
 @media(max-width: 992px) {

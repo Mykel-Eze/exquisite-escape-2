@@ -45,7 +45,7 @@
       <div class="flex flex-col gap-7">
         <div class="flex-div gap-3 grid-sm-break">
           <div class="flex-div gap-3 rel arrival-depature-inputs">
-            <div>
+            <div class="relative">
               <InputField
                 label="From where"
                 placeholder="City or Airport"
@@ -57,17 +57,28 @@
                 @input="($event) => inputHandler($event, 'from')"
               />
               <div
-                v-if="showDropdown.showFromDropdown"
-                class="absolute bg-white mt-1"
+                class="absolute bg-white mt-1 search-dropdown-wrapper w-full"
               >
                 <ul>
                   <li
-                    v-for="(flight, index) in fromFlightList"
-                    :key="index"
                     class="text-dark-gray py-2 px-4"
-                    @click="selectFlightHandler(flight, 'from')"
                   >
-                    {{ flight.name }}
+                    Lagos
+                  </li>
+                  <li
+                    class="text-dark-gray py-2 px-4"
+                  >
+                    Rivers
+                  </li>
+                  <li
+                    class="text-dark-gray py-2 px-4"
+                  >
+                    Abuja
+                  </li>
+                  <li
+                    class="text-dark-gray py-2 px-4"
+                  >
+                    Benue
                   </li>
                 </ul>
               </div>
