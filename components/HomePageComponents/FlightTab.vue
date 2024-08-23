@@ -57,28 +57,17 @@
                 @input="($event) => inputHandler($event, 'from')"
               />
               <div
-                class="absolute bg-white mt-1 search-dropdown-wrapper w-full"
+                v-if="showDropdown.showFromDropdown"
+                class="absolute bg-white mt-1 search-dropdown-wrapper"
               >
                 <ul>
                   <li
+                    v-for="(flight, index) in fromFlightList"
+                    :key="index"
                     class="text-dark-gray py-2 px-4"
+                    @click="selectFlightHandler(flight, 'from')"
                   >
-                    Lagos
-                  </li>
-                  <li
-                    class="text-dark-gray py-2 px-4"
-                  >
-                    Rivers
-                  </li>
-                  <li
-                    class="text-dark-gray py-2 px-4"
-                  >
-                    Abuja
-                  </li>
-                  <li
-                    class="text-dark-gray py-2 px-4"
-                  >
-                    Benue
+                    {{ flight.name }}
                   </li>
                 </ul>
               </div>
