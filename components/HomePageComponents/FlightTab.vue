@@ -18,18 +18,6 @@
           v-model:value="flightObj.tripType"
           @select="flightObjSelectHandler($event, 'tripType')"
         />
-        <!-- <SelectField
-          :options="[
-            { value: 1, name: '1 Passenger' },
-            { value: 2, name: '2 Passenger' },
-            { value: 3, name: '3 Passenger' },
-          ]"
-          label=""
-          selectKey="value"
-          selectName="name"
-          v-model:value="flightObj.passengersNumber"
-          @select="flightObjSelectHandler($event, 'passengersNumber')"
-        /> -->
         <PassengerSelector v-model="flightObj.passengersNumber" />
       </div>
       <div class="flex flex-col gap-7">
@@ -172,34 +160,11 @@
         <img src="~/assets/images/plane-icon.svg" alt="plane-icon" />
       </button>
     </div>
-    <!-- <div class="tab-form-btn-wrapper">
-    <div class="flex-div justify-center gap-[10px] text-[18px] mb-[20px]">
-      <img
-        src="~/assets/images/best-check.svg"
-        alt="best-check"
-        class="best-check"
-      />
-      <span>Best Deal Guaranteed </span>
-    </div>
-    <button
-      v-if="tripType === 'multi-city'"
-      class="tab-form-btn tfb-2 flex-div gap-3"
-      type="button"
-      @click="duplicateGridSmBreak"
-    >
-      <span>Add Flight</span>
-      <img src="~/assets/images/plus-rectangle.svg" alt="plus-icon" />
-    </button>
-    <button class="tab-form-btn flex-div gap-3">
-      <span>Search Flights</span>
-      <img src="~/assets/images/plane-icon.svg" alt="plane-icon" />
-    </button>
-  </div> -->
   </form>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 // import M from "materialize-css";
 import { useRouter } from "vue-router";
 export default defineComponent({
@@ -209,7 +174,7 @@ export default defineComponent({
     const flightObj = ref({
       tripType: "one-way",
       passengersNumber: 1,
-      depature: "",
+      departure: "",
       destination: "",
       departureDate: "",
       returnDate: "",
@@ -228,7 +193,7 @@ export default defineComponent({
     });
     const router = useRouter();
 
-    onMounted(async () => {
+    onMounted(() => {
       const elemsDatepicker = document.querySelectorAll(".datepicker");
       M.Datepicker.init(elemsDatepicker, {
         autoClose: true,
@@ -236,8 +201,8 @@ export default defineComponent({
         minDate: new Date(),
       });
 
-      const elemsDropdown2 = document.querySelector("select#tripType");
-      M.FormSelect.init(elemsDropdown2);
+      // const elemsDropdown2 = document.querySelector("select#tripType");
+      // M.FormSelect.init(elemsDropdown2);
     });
 
     const getCurrentDate = () => {
@@ -250,20 +215,21 @@ export default defineComponent({
 
     const duplicateGridSmBreak = () => {
       const gridSmBreak: any = document.querySelector(".grid-sm-break");
-      const clonedGridSmBreak = gridSmBreak.cloneNode(true);
+      if (gridSmBreak) {
+        const clonedGridSmBreak = gridSmBreak.cloneNode(true);
 
-      // Set default values for duplicated inputs
-      const inputs = clonedGridSmBreak.querySelectorAll(
-        ".arrival-depature-inputs input"
-      );
-      inputs.forEach((input: any) => {
-        input.value = input.defaultValue;
-      });
+        // Set default values for duplicated inputs
+        const inputs = clonedGridSmBreak.querySelectorAll(".arrival-depature-inputs input");
+        inputs.forEach((input: HTMLInputElement) => {
+          input.value = input.defaultValue;
+        });
 
-      gridSmBreak.parentNode.appendChild(clonedGridSmBreak);
+        gridSmBreak.parentNode?.appendChild(clonedGridSmBreak);
+      }
     };
+
     const removeRow = (index: number) => {
-      this.duplicatedRows.splice(index, 1);
+      duplicatedRows.value.splice(index, 1);
     };
     const datePicker = () => {
       const elemsDatepicker = document.querySelectorAll(".datepicker");
@@ -274,6 +240,10 @@ export default defineComponent({
       });
     };
     const inputHandler = async (e: any, inputKey: string) => {
+      function useApiPost(arg0: string, arg1: { keyword: any; subType: string; }): any {
+        throw new Error("Function not implemented.");
+      }
+      
       if (e.target.value.length >= 3) {
         const { data }: any = await useApiPost("/flight/airport-nearby", {
           keyword: e.target.value,

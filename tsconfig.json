@@ -14,5 +14,6 @@
   "rules": {
     "@typescript-eslint/no-unused-vars": "off"
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "global.d.ts"]
 }
