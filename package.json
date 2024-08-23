@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@nuxt/types": "^2.17.3",
+    "@vueuse/core": "^11.0.1",
     "@vueuse/firebase": "^10.10.0",
     "ant-design-vue": "^4.1.2",
     "axios": "^1.6.7",
@@ -30,7 +31,6 @@
     "materialize-css": "^1.0.0-rc.2",
     "nouislider": "^15.7.1",
     "nuxt-swiper": "^1.2.2",
-    "vue3-tel-input": "^1.0.4",
     "pinia": "^2.1.7",
     "typescript": "^5.3.3",
     "vue3-tel-input": "^1.0.4"
