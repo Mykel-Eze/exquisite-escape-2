@@ -6,17 +6,6 @@
   >
     <div class="input-field-wrapper">
       <div class="select-field-wrapper flex-div gap-[10px] mb-[30px]">
-        <!-- <SelectField 
-                    :options="[
-                        { value: 'one-way', label: 'One Way' },
-                        { value: 'round-trip', label: 'Round Trip' },
-                        { value: 'multi-city', label: 'Multi City' }
-                    ]"
-                    label=""
-                    v-model="tripType"
-                    id="tripType"
-                /> -->
-
         <SelectField
           :options="[
             { value: 'one-way', name: 'One-way' },
@@ -29,7 +18,7 @@
           v-model:value="flightObj.tripType"
           @select="flightObjSelectHandler($event, 'tripType')"
         />
-        <SelectField
+        <!-- <SelectField
           :options="[
             { value: 1, name: '1 Passenger' },
             { value: 2, name: '2 Passenger' },
@@ -40,7 +29,8 @@
           selectName="name"
           v-model:value="flightObj.passengersNumber"
           @select="flightObjSelectHandler($event, 'passengersNumber')"
-        />
+        /> -->
+        <PassengerSelector v-model="flightObj.passengersNumber" />
       </div>
       <div class="flex flex-col gap-7">
         <div class="flex-div gap-3 grid-sm-break">
