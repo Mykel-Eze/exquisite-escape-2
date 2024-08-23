@@ -91,7 +91,7 @@
               alt="transfer-arrow"
               class="transfer-arrow"
             />
-            <div>
+            <div class="relative">
               <InputField
                 label="To where"
                 placeholder="City or Airport"
@@ -104,7 +104,7 @@
               />
               <div
                 v-if="showDropdown.showToDropdown"
-                class="absolute bg-white mt-1"
+                class="absolute bg-white mt-1 search-dropdown-wrapper"
               >
                 <ul>
                   <li
