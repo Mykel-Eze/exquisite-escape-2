@@ -239,11 +239,8 @@ export default defineComponent({
         minDate: new Date(),
       });
     };
+
     const inputHandler = async (e: any, inputKey: string) => {
-      function useApiPost(arg0: string, arg1: { keyword: any; subType: string; }): any {
-        throw new Error("Function not implemented.");
-      }
-      
       if (e.target.value.length >= 3) {
         const { data }: any = await useApiPost("/flight/airport-nearby", {
           keyword: e.target.value,
