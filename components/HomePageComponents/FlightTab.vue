@@ -17,6 +17,7 @@
           selectName="name"
           v-model:value="flightObj.tripType"
           @select="flightObjSelectHandler($event, 'tripType')"
+          altClass="d1"
         />
         <PassengerSelector v-model="flightObj.passengersNumber" />
       </div>
@@ -127,6 +128,7 @@
             selectName="name"
             v-model:value="flightObj.travelClass"
             @select="flightObjSelectHandler($event, 'travelClass')"
+            altClass="d1"
           />
         </div>
       </div>
