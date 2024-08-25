@@ -6,17 +6,6 @@
   >
     <div class="input-field-wrapper">
       <div class="select-field-wrapper flex-div gap-[10px] mb-[30px]">
-        <!-- <SelectField 
-                    :options="[
-                        { value: 'one-way', label: 'One Way' },
-                        { value: 'round-trip', label: 'Round Trip' },
-                        { value: 'multi-city', label: 'Multi City' }
-                    ]"
-                    label=""
-                    v-model="tripType"
-                    id="tripType"
-                /> -->
-
         <SelectField
           :options="[
             { value: 'one-way', name: 'One-way' },
@@ -28,26 +17,16 @@
           selectName="name"
           v-model:value="flightObj.tripType"
           @select="flightObjSelectHandler($event, 'tripType')"
+          altClass="d1"
         />
-        <SelectField
-          :options="[
-            { value: 1, name: '1 Passenger' },
-            { value: 2, name: '2 Passenger' },
-            { value: 3, name: '3 Passenger' },
-          ]"
-          label=""
-          selectKey="value"
-          selectName="name"
-          v-model:value="flightObj.passengersNumber"
-          @select="flightObjSelectHandler($event, 'passengersNumber')"
-        />
+        <PassengerSelector v-model="flightObj.passengersNumber" />
       </div>
       <div class="flex flex-col gap-7">
         <div class="flex-div gap-3 grid-sm-break">
           <div class="flex-div gap-3 rel arrival-depature-inputs">
-            <div>
+            <div class="relative">
               <InputField
-                label="From where?"
+                label="From where"
                 placeholder="City or Airport"
                 id="depature"
                 type="text"
@@ -58,7 +37,7 @@
               />
               <div
                 v-if="showDropdown.showFromDropdown"
-                class="absolute bg-white mt-1"
+                class="absolute bg-white mt-1 search-dropdown-wrapper"
               >
                 <ul>
                   <li
@@ -73,16 +52,16 @@
               </div>
             </div>
 
+            <!-- v-if="flightObj.tripType !== 'one-way'" -->
+
             <img
-              v-if="flightObj.tripType !== 'one-way'"
               src="~/assets/images/transfer-arrow.svg"
               alt="transfer-arrow"
-              class="transfer-arrosw"
+              class="transfer-arrow"
             />
-            <div>
+            <div class="relative">
               <InputField
-                v-if="flightObj.tripType !== 'one-way'"
-                label="To where?"
+                label="To where"
                 placeholder="City or Airport"
                 id="destination"
                 type="text"
@@ -93,7 +72,7 @@
               />
               <div
                 v-if="showDropdown.showToDropdown"
-                class="absolute bg-white mt-1"
+                class="absolute bg-white mt-1 search-dropdown-wrapper"
               >
                 <ul>
                   <li
@@ -149,39 +128,16 @@
             selectName="name"
             v-model:value="flightObj.travelClass"
             @select="flightObjSelectHandler($event, 'travelClass')"
+            altClass="d1"
           />
-          <div class="tab-form-btn-wrapper">
-            <div
-              class="tfbw-div flex-div justify-center gap-[10px] text-[18px] mb-[20px]"
-            >
-              <img
-                src="~/assets/images/best-check.svg"
-                alt="best-check"
-                class="best-check"
-              />
-              <span>Best Deal Guaranteed </span>
-            </div>
-            <button
-              v-if="flightObj.tripType === 'multi-city'"
-              class="tab-form-btn tfb-2 flex-div gap-3"
-              type="button"
-              @click="duplicateGridSmBreak"
-            >
-              <span>Add Flight</span>
-              <img src="~/assets/images/plus-rectangle.svg" alt="plus-icon" />
-            </button>
-            <button
-              class="tab-form-btn flex-div gap-3"
-              @click.prevent="searchFlight()"
-            >
-              <span>Search Flights</span>
-              <img src="~/assets/images/plane-icon.svg" alt="plane-icon" />
-            </button>
-          </div>
         </div>
       </div>
-      <!-- <div class="tab-form-btn-wrapper">
-      <div class="flex-div justify-center gap-[10px] text-[18px] mb-[20px]">
+    </div>
+
+    <div class="tab-form-btn-wrapper">
+      <div
+        class="tfbw-div flex-div justify-center gap-[10px] text-[18px] mb-[20px]"
+      >
         <img
           src="~/assets/images/best-check.svg"
           alt="best-check"
@@ -190,7 +146,7 @@
         <span>Best Deal Guaranteed </span>
       </div>
       <button
-        v-if="tripType === 'multi-city'"
+        v-if="flightObj.tripType === 'multi-city'"
         class="tab-form-btn tfb-2 flex-div gap-3"
         type="button"
         @click="duplicateGridSmBreak"
@@ -198,18 +154,20 @@
         <span>Add Flight</span>
         <img src="~/assets/images/plus-rectangle.svg" alt="plus-icon" />
       </button>
-      <button class="tab-form-btn flex-div gap-3">
+      <button
+        class="tab-form-btn flex-div gap-3"
+        @click.prevent="searchFlight()"
+      >
         <span>Search Flights</span>
         <img src="~/assets/images/plane-icon.svg" alt="plane-icon" />
       </button>
-    </div> -->
     </div>
   </form>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import M from "materialize-css";
+import { defineComponent, ref, onMounted } from "vue";
+// import M from "materialize-css";
 import { useRouter } from "vue-router";
 export default defineComponent({
   name: "FlightTab",
@@ -218,7 +176,7 @@ export default defineComponent({
     const flightObj = ref({
       tripType: "one-way",
       passengersNumber: 1,
-      depature: "",
+      departure: "",
       destination: "",
       departureDate: "",
       returnDate: "",
@@ -237,7 +195,7 @@ export default defineComponent({
     });
     const router = useRouter();
 
-    onMounted(async () => {
+    onMounted(() => {
       const elemsDatepicker = document.querySelectorAll(".datepicker");
       M.Datepicker.init(elemsDatepicker, {
         autoClose: true,
@@ -245,8 +203,8 @@ export default defineComponent({
         minDate: new Date(),
       });
 
-      const elemsDropdown2 = document.querySelector("select#tripType");
-      M.FormSelect.init(elemsDropdown2);
+      // const elemsDropdown2 = document.querySelector("select#tripType");
+      // M.FormSelect.init(elemsDropdown2);
     });
 
     const getCurrentDate = () => {
@@ -259,20 +217,21 @@ export default defineComponent({
 
     const duplicateGridSmBreak = () => {
       const gridSmBreak: any = document.querySelector(".grid-sm-break");
-      const clonedGridSmBreak = gridSmBreak.cloneNode(true);
+      if (gridSmBreak) {
+        const clonedGridSmBreak = gridSmBreak.cloneNode(true);
 
-      // Set default values for duplicated inputs
-      const inputs = clonedGridSmBreak.querySelectorAll(
-        ".arrival-depature-inputs input"
-      );
-      inputs.forEach((input: any) => {
-        input.value = input.defaultValue;
-      });
+        // Set default values for duplicated inputs
+        const inputs = clonedGridSmBreak.querySelectorAll(".arrival-depature-inputs input");
+        inputs.forEach((input: HTMLInputElement) => {
+          input.value = input.defaultValue;
+        });
 
-      gridSmBreak.parentNode.appendChild(clonedGridSmBreak);
+        gridSmBreak.parentNode?.appendChild(clonedGridSmBreak);
+      }
     };
+
     const removeRow = (index: number) => {
-      this.duplicatedRows.splice(index, 1);
+      duplicatedRows.value.splice(index, 1);
     };
     const datePicker = () => {
       const elemsDatepicker = document.querySelectorAll(".datepicker");
@@ -282,6 +241,7 @@ export default defineComponent({
         minDate: new Date(),
       });
     };
+
     const inputHandler = async (e: any, inputKey: string) => {
       if (e.target.value.length >= 3) {
         const { data }: any = await useApiPost("/flight/airport-nearby", {
