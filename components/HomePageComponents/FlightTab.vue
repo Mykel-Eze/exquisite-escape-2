@@ -17,6 +17,7 @@
           selectName="name"
           v-model:value="flightObj.tripType"
           @select="flightObjSelectHandler($event, 'tripType')"
+          altClass="d1"
         />
         <PassengerSelector v-model="flightObj.passengersNumber" />
       </div>
@@ -127,6 +128,7 @@
             selectName="name"
             v-model:value="flightObj.travelClass"
             @select="flightObjSelectHandler($event, 'travelClass')"
+            altClass="d1"
           />
         </div>
       </div>
@@ -239,11 +241,8 @@ export default defineComponent({
         minDate: new Date(),
       });
     };
+
     const inputHandler = async (e: any, inputKey: string) => {
-      function useApiPost(arg0: string, arg1: { keyword: any; subType: string; }): any {
-        throw new Error("Function not implemented.");
-      }
-      
       if (e.target.value.length >= 3) {
         const { data }: any = await useApiPost("/flight/airport-nearby", {
           keyword: e.target.value,

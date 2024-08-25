@@ -5,7 +5,7 @@
         <div class="city-short-name">{{ data.departure.cityShortName }}</div>
         <span class="city-name">{{ data.departure.cityName }}</span>
       </div>
-      <SvgIcons icon="flight" class="flight-icon" />
+      <SvgIcons icon="flight" className="flight-icon" />
       <div class="city-name-wrapper">
         <div class="city-short-name">{{ data.arrival.cityShortName }}</div>
         <span class="city-name">{{ data.arrival.cityName }}</span>

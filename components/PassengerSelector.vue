@@ -1,34 +1,60 @@
 <template>
   <div class="passenger-selector">
-    <div @click="toggleDropdown" class="dropdown-header">
-      {{ totalPassengers }} Passenger{{ totalPassengers !== 1 ? 's' : '' }}
+    <div @click="toggleDropdown" class="flex-div" :class="isOpen ? 'toggleOpen' : ''">
+      <div class="dropdown-header">
+        {{ totalPassengers }} Passenger{{ totalPassengers !== 1 ? 's' : '' }}
+      </div>
+      <SvgIcons icon="caret" />
     </div>
     <div v-if="isOpen" class="dropdown-content2">
       <div class="passenger-type">
-        <span>Adults</span>
+        <div class="passenger">
+          <span>Adults</span>
+          <small>Age 12 or above</small>
+        </div>
         <div class="counter">
-          <button type="button" @click="decrement('adults')" :disabled="passengers.adults <= 1">-</button>
+          <button type="button" @click="decrement('adults')" :disabled="passengers.adults <= 1">
+            <span>-</span>
+          </button>
           <span>{{ passengers.adults }}</span>
-          <button type="button" @click="increment('adults')">+</button>
+          <button type="button" @click="increment('adults')" class="counter-add-btn">
+            <span>+</span>
+          </button>
         </div>
       </div>
       <div class="passenger-type">
-        <span>Children</span>
+        <div class="passenger">
+          <span>Children</span>
+          <small>Age 2 - 12</small>
+        </div>
         <div class="counter">
-          <button type="button" @click="decrement('children')" :disabled="passengers.children <= 0">-</button>
+          <button type="button" @click="decrement('children')" :disabled="passengers.children <= 0">
+            <span>-</span>
+          </button>
           <span>{{ passengers.children }}</span>
-          <button type="button" @click="increment('children')">+</button>
+          <button type="button" @click="increment('children')" class="counter-add-btn">
+            <span>+</span>
+          </button>
         </div>
       </div>
       <div class="passenger-type">
-        <span>Infants</span>
+        <div class="passenger">
+          <span>Infants</span>
+          <small>Under 2</small>
+        </div>
         <div class="counter">
-          <button type="button" @click="decrement('infants')" :disabled="passengers.infants <= 0">-</button>
+          <button type="button" @click="decrement('infants')" :disabled="passengers.infants <= 0">
+            <span>-</span>
+          </button>
           <span>{{ passengers.infants }}</span>
-          <button type="button" @click="increment('infants')">+</button>
+          <button type="button" @click="increment('infants')" class="counter-add-btn">
+            <span>+</span>
+          </button>
         </div>
       </div>
-      <button @click="closeDropdown" class="done-button">Done</button>
+      <div class="right-align">
+        <button @click="closeDropdown" class="done-button">Done</button>
+      </div>
     </div>
   </div>
 </template>
@@ -94,58 +120,89 @@ export default {
 
 <style scoped>
 .passenger-selector {
-  width: 200px;
-  font-family: Arial, sans-serif;
+  position: relative;
+  min-width: 160px;
 }
-
-.dropdown-header {
-  background-color: #f0f0f0;
-  padding: 10px;
+.passenger-selector .flex-div {
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid #FFF;
+  background: rgba(229, 246, 245, 0.20);
+  width: 100%;
+  height: 50px;
+  padding: 0px 20px;
   cursor: pointer;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  margin-bottom: 8px;
+  justify-content: space-between;
 }
-
+.dropdown-header {
+  font-size: 16px;
+}
 .dropdown-content2 {
   background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   padding: 10px;
-  margin-top: 5px;
+  position: absolute;
+  z-index: 3;
+  border-radius: 10px;
+  color: #606161;
+  box-shadow: 0px 24px 20px 0px rgba(16, 24, 40, 0.08);
 }
-
 .passenger-type {
   display: flex;
-  justify-content: space-between;
+  gap: 50px;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
-
+.passenger-type .passenger {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: max-content;
+}
+.passenger-type .passenger small {
+  font-size: 12px;
+  color: #9D9D9D;
+}
 .counter {
   display: flex;
   align-items: center;
 }
-
 .counter button {
-  width: 30px;
-  height: 30px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.counter span {
-  margin: 0 10px;
-}
-
-.done-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+  background-color: white;
+  border: 1px solid var(--pry-color);
   border-radius: 5px;
   cursor: pointer;
+  padding: 0;
+  color: var(--pry-color);
+  position: relative;
+}
+.counter > span {
+  margin: 0 10px;
+  font-size: 18px;
+}
+.counter .counter-add-btn {
+  background-color: rgba(0, 167, 157, 0.2);
+}
+.counter button span {
+  position: absolute;
+  top: -5%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.done-button {
+  width: 110px;
+  height: 38px;
+  font-size: 16px;
+  background-color: var(--pry-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 </style>

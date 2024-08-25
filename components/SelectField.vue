@@ -3,7 +3,7 @@
     <label>
       {{ label }} <sup v-if="requiredSign" class="required-sign">*</sup>
     </label>
-    <select class="select-inp" :value="value" @change="changeHandler">
+    <select class="select-inp" :class="altClass" :value="value" @change="changeHandler">
       <!-- <option value="">{{ label }}</option> -->
       <option v-for="option in options" :value="option[selectKey]" :key="option.index">
         {{ option[selectName] }}
@@ -48,10 +48,21 @@ export default {
       type: Boolean,
       default: false
     },
+    altClass: {
+      type: String,
+      default: ""
+    },
   },
   mounted() {
-    const elemsDropdown = document.querySelectorAll("select");
-    M.FormSelect.init(elemsDropdown);
+    // const elemsDropdown = document.querySelectorAll("select:not(.d1)");
+    // M.FormSelect.init(elemsDropdown);
+
+    const elemsDropdown1 = document.querySelectorAll("select");
+    M.FormSelect.init(elemsDropdown1, {
+      dropdownOptions:{
+        coverTrigger: false
+      }
+    });
   },
   // watch: {
   //     // Watch for changes in the 'options' prop and reinitialize Materialize CSS
