@@ -24,7 +24,7 @@
                     divClass="input-white-wrapper long-inp-wrapper"
                 />
                 <div class="input-white-wrapper flex-div flex-row">
-                    <InputField 
+                    <DatePicker 
                         label="Check-in"
                         :defaultValue="currentDate"
                         id="departure-date"
@@ -32,7 +32,7 @@
                         inputClass="ls-inp-field datepicker"
                     />
                     <span class="range-divider">-</span>
-                    <InputField 
+                    <DatePicker 
                         label="Check-out"
                         :defaultValue="currentDate"
                         id="return-date"
@@ -40,14 +40,15 @@
                         inputClass="ls-inp-field datepicker"
                     />
                 </div>
-                <InputField 
+                <!-- <InputField 
                     label="Rooms and guests"
                     defaultValue="1 Room, 1 Guest "
                     id="rooms-and-guests"
                     type="text"
                     inputClass="ls-inp-field"
                     divClass="input-white-wrapper"
-                />
+                /> -->
+                <RoomGuestSelector v-model="bookingDetails.roomsData" />
             </div>
         </div>
         <div class="tab-form-btn-wrapper">
@@ -70,7 +71,10 @@ export default {
     name: 'HotelTab',
     data() {
         return {
-            currentDate: this.getCurrentDate()
+            currentDate: this.getCurrentDate(),
+            bookingDetails: {
+                roomsData: [{ adults: 1, children: 0 }]
+            }
         }
     },
     mounted(){
@@ -88,6 +92,15 @@ export default {
             const day = date.getDate().toString().padStart(2, '0');
             return `${month} ${day}`;
         },
+    },
+    watch: {
+        'bookingDetails.roomsData': {
+        handler(newValue) {
+            console.log('Updated room data:', newValue)
+            // Handle the updated room and guest data
+        },
+        deep: true
+        }
     }
 }
 </script>
