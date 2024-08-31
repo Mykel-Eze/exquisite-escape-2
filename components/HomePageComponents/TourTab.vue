@@ -2,76 +2,63 @@
   <form action="#" class="search-inputs flex items-end">
     <div class="input-field-wrapper">
       <div class="select-field-wrapper flex-div gap-[20px] mb-[30px]">
-        <SelectField
-          :options="[
-            { value: '1 Night', name: '1 Night' },
-            { value: '2 Nights', name: '2 Nights' },
-            { value: '3 Nights', name: '3 Nights' },
-          ]"
-          label=""
-          selectKey="value"
-          selectName="name"
-          v-model:value="tourObj.noOfNight"
-          @select="tourObjSelectHandler($event, 'noOfNight')"
-        />
-        <SelectField
-          :options="[
-            { value: '1 Tourist', name: '1 Tourist' },
-            { value: '2 Tourists', name: '2 Tourists' },
-            { value: '3 Tourists', name: '3 Tourists' },
-          ]"
-          selectKey="value"
-          selectName="name"
-          label=""
-          v-model:value="tourObj.noOfTourist"
-          @select="tourObjSelectHandler($event, 'noOfTourist')"
-        />
+        <TouristSelector v-model:value="tourObj.noOfTourist" />
       </div>
       <div class="flex-div gap-3 grid-sm-break">
-        <div>
-          <SelectField
+        <div class="relative">
+          <InputField
             label="Going to?"
             placeholder="Country"
             id="country"
             type="text"
             inputClass="ls-inp-field"
             divClass="input-white-wrapper long-inp-wrapper"
-            v-model:value="tourObj.countryCode"
-            selectKey="value"
-            selectName="name"
-            :options="countryList"
-            @input="($event) => inputHandler($event, 'countryCode')"
+            :modelValue="tourObj.countryCode"
+            @update:modelValue="(value) => inputHandler(value, 'countryCode')"
           />
+
+          <div v-if="showCountryDropdown" class="absolute bg-white mt-1 search-dropdown-wrapper">
+            <ul>
+              <li 
+                v-for="country in filteredCountryList" 
+                :key="country.code" 
+                class="text-dark-gray py-2 px-4 cursor-pointer"
+                @click="selectCountry(country)"
+              >
+                {{ country.description.content }}
+              </li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <!-- <SelectField
-            label="Going to?"
-            placeholder="Country"
-            id="country"
-            type="text"
-            inputClass="ls-inp-field"
-            divClass="input-white-wrapper long-inp-wrapper"
-            :value="tourObj.countryCode"
-            selectKey="value"
-            selectName="name"
-            :option="[]"
-            @select="tourObjSelectHandler($event, 'countryCode')"
-          /> -->
-          <SelectField
+
+        <div class="relative">
+          <InputField
             label="Things to do at?"
             placeholder="Province/State"
             id="things-to-do"
             type="text"
             inputClass="ls-inp-field"
             divClass="input-white-wrapper"
-            v-model:value="tourObj.stateCode"
-            :option="[]"
-            @select="tourObjSelectHandler($event, 'stateCode')"
+            :modelValue="tourObj.stateCode"
+            @update:modelValue="(value) => inputHandler(value, 'stateCode')"
+            @focus="showStateDropdownOnFocus"
           />
+          <div v-if="showStateDropdown" class="absolute bg-white mt-1 search-dropdown-wrapper">
+            <ul>
+              <li 
+                v-for="state in stateList" 
+                :key="state.code" 
+                class="text-dark-gray py-2 px-4 cursor-pointer"
+                @click="selectState(state)"
+              >
+                {{ state.name }}
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div class="input-white-wrapper flex-div flex-row">
-          <InputField
+          <DatePicker
             label="Leaving on"
             :defaultValue="currentDate"
             id="departure-date"
@@ -80,7 +67,7 @@
             :value="tourObj.departureDate"
           />
           <span class="range-divider">-</span>
-          <InputField
+          <DatePicker
             label="Returning on"
             :defaultValue="currentDate"
             id="return-date"
@@ -111,8 +98,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import M from "materialize-css";
+import { defineComponent, ref, computed, onMounted } from "vue";
+import { useApiPost } from "../../composables/services/useApi";
+
+interface Country {
+  code: string;
+  description: {
+    content: string;
+  };
+  states: State[];
+}
+
+interface State {
+  code: string;
+  name: string;
+}
 
 export default defineComponent({
   setup() {
@@ -125,57 +125,92 @@ export default defineComponent({
       destinationDate: "",
     });
 
-    const countryList = ref({});
-    const stateList = ref({});
-    onMounted(async () => {
-      const elemsDatepicker = document.querySelectorAll(".datepicker");
-      M.Datepicker.init(elemsDatepicker, {
-        autoClose: true,
-        format: "mmm dd",
-        minDate: new Date(),
-      });
-      const { data } = await useApiPost("/hotel/countries/en", {
-        language: "en",
-        fields: "all",
-      });
-      countryList.value = data.value.data;
-    });
-    const getCurrentDate = () => {
-      const date = new Date();
-      const month = date.toLocaleString("default", { month: "short" });
-      const day = date.getDate().toString().padStart(2, "0");
-      return `${month} ${day}`;
-    };
-    const currentDate = getCurrentDate();
-    const tourObjSelectHandler = async (e: string, inputKey: string) => {
-      tourObj.value = {
-        ...tourObj.value,
-        [inputKey]: e,
-      };
-      if (inputKey === "countryCode") {
-        const { data } = await useApiPost("/hotel/destination", {
-          countryCode: [e],
-          language: "en",
-        });
-        stateList.value = data.value.data;
+    const countryList = ref<Country[]>([]);
+    const stateList = ref<State[]>([]);
+
+    const filteredCountryList = computed(() =>
+      tourObj.value.countryCode.length >= 3
+        ? countryList.value.filter((country) =>
+            country.description.content.toLowerCase().includes(tourObj.value.countryCode.toLowerCase())
+          )
+        : []
+    );
+
+    const showCountryDropdown = ref(false);
+    const showStateDropdown = ref(false);
+
+    const inputHandler = (value: string, inputKey: keyof typeof tourObj.value) => {
+      tourObj.value[inputKey] = value;
+
+      if (inputKey === 'countryCode') {
+        showCountryDropdown.value = value.length >= 1;
       }
     };
+
+    const selectCountry = (country: Country) => {
+      tourObj.value.countryCode = country.description.content;
+      showCountryDropdown.value = false;
+      fetchStates(country.code);
+    };
+
+    const selectState = (state: State) => {
+      tourObj.value.stateCode = state.name;
+      showStateDropdown.value = false;
+    };
+
+    const fetchStates = async (countryCode: string) => {
+      try {
+        const payload = {
+          from: 1,  // Start index
+          to: 100   // End index
+        };
+        const { data } = await useApiPost(`/hotel/countries`, payload);
+        const country = data.countries.find((c: Country) => c.code === countryCode);
+        if (country && country.states) {
+          stateList.value = country.states;
+        }
+      } catch (error) {
+        console.error("Failed to fetch states", error);
+      }
+    };
+
+    onMounted(async () => {
+      try {
+        const payload = {
+          from: 1,  // Start index
+          to: 100   // End index
+        };
+        const { data } = await useApiPost(`/hotel/countries`, payload);
+        countryList.value = data.countries;
+      } catch (error) {
+        console.error("Failed to fetch countries", error);
+      }
+    });
+
+    const showStateDropdownOnFocus = () => {
+      showStateDropdown.value = true;
+    };
+
     const searchTourHandler = async () => {
       const payload = {
         ...tourObj.value,
       };
       await useApiPost("/flight/search-offer", payload);
     };
+
     return {
-      currentDate,
+      currentDate: new Date().toLocaleDateString("default", { month: "short", day: "2-digit" }),
       tourObj,
-      countryList,
+      filteredCountryList,
       stateList,
-      tourObjSelectHandler,
+      showCountryDropdown,
+      showStateDropdown,
+      inputHandler,
+      selectCountry,
+      selectState,
+      showStateDropdownOnFocus,
       searchTourHandler,
     };
   },
 });
 </script>
-
-<style></style>
