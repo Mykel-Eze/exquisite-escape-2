@@ -1,23 +1,19 @@
 <template>
-  <form action="/search-results/transfers" class="search-inputs flex items-end">
+  <form action="/search-results/transfers" class="search-inputs flex items-end" autocomplete="off">
     <div class="input-field-wrapper">
       <div class="select-field-wrapper flex-div gap-[10px] mb-[30px]">
         <SelectField
           :options="[
-            { value: 'one-way', label: 'One Way' },
-            { value: 'round-trip', label: 'Round Trip' },
-            { value: 'multi-city', label: 'Multi City' },
+            { value: 'one-way', name: 'One-way' },
+            { value: 'round-trip', name: 'Round-trip' },
           ]"
           label=""
+          selectKey="value"
+          selectName="name"
+          v-model:value="transferObj.tripType"
+          @select="transferObjSelectHandler($event, 'tripType')"
         />
-        <SelectField
-          :options="[
-            { value: '1 passenger', label: '1 Passenger' },
-            { value: '2 passenger', label: '2 Passenger' },
-            { value: '3 passenger', label: '3 Passenger' },
-          ]"
-          label=""
-        />
+        <PassengerSelector v-model="transferObj.passengersNumber" />
       </div>
       <div class="flex flex-cols gap-3">
         <div class="flex-div gap-3 grid-sm-break">
@@ -44,7 +40,7 @@
               divClass="input-white-wrapper medium-inp-wrapper"
             />
           </div>
-          <InputField
+          <DatePicker
             label="Leaving on"
             :defaultValue="currentDate"
             id="leaving-date"
@@ -75,32 +71,41 @@
 </template>
 
 <script>
-import M from "materialize-css";
+import { ref, onMounted } from "vue";
+// import M from "materialize-css";
 
 export default {
   name: "TransferTab",
-  data() {
-    return {
-      currentDate: this.getCurrentDate(),
-    };
-  },
-  mounted() {
-    const datepicker = document.querySelectorAll(".datepicker");
-    M.Datepicker.init(datepicker, {
-      autoClose: true,
-      format: "mmm dd",
-      minDate: new Date(),
+  setup() {
+    const transferObj = ref({
+      tripType: "one-way",
+      passengersNumber: 1,
     });
-  },
-  methods: {
-    getCurrentDate() {
+
+    const getCurrentDate = () => {
       const date = new Date();
       const month = date.toLocaleString("default", { month: "short" });
       const day = date.getDate().toString().padStart(2, "0");
       return `${month} ${day}`;
-    },
+    };
+    const currentDate = ref(getCurrentDate());
+
+    onMounted(() => {});
+
+    const transferObjSelectHandler = (value, inputKey) => {
+      transferObj.value[inputKey] = value;
+    };
+
+    return {
+      currentDate,
+      transferObj, 
+      transferObjSelectHandler
+    };
   },
 };
 </script>
+
+
+
 
 <style></style>
