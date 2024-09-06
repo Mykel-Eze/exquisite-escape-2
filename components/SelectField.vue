@@ -4,8 +4,7 @@
       {{ label }} <sup v-if="requiredSign" class="required-sign">*</sup>
     </label>
     <select class="select-inp" :class="altClass" :value="value" @change="changeHandler">
-      <!-- <option value="">{{ label }}</option> -->
-      <option v-for="option in options" :value="option[selectKey]" :key="option.index">
+      <option v-for="option in options" :value="option[selectKey]" :key="option[selectKey]">
         {{ option[selectName] }}
       </option>
     </select>
@@ -42,45 +41,28 @@ export default {
     },
     selectName: {
       type: String,
-      default: "value",
+      default: "label",  // Updated default to "label" to match typical usage
     },
     requiredSign: {
       type: Boolean,
-      default: false
+      default: false,
     },
     altClass: {
       type: String,
-      default: ""
+      default: "",
     },
   },
   mounted() {
-    // const elemsDropdown = document.querySelectorAll("select:not(.d1)");
-    // M.FormSelect.init(elemsDropdown);
-
     const elemsDropdown1 = document.querySelectorAll("select");
     M.FormSelect.init(elemsDropdown1, {
-      dropdownOptions:{
-        coverTrigger: false
-      }
+      dropdownOptions: {
+        coverTrigger: false,
+      },
     });
   },
-  // watch: {
-  //     // Watch for changes in the 'options' prop and reinitialize Materialize CSS
-  //     options: 'initMaterialize',
-  // },
   methods: {
-    //     initMaterialize() {
-    //         // Destroy existing Materialize CSS instances
-    //         const elemsDropdown = document.querySelectorAll('select');
-    //         M.FormSelect.init(elemsDropdown, { destroy: true });
-
-    //         // Initialize Materialize CSS again
-    //         M.FormSelect.init(elemsDropdown);
-    //     },
     changeHandler(e) {
-      this.$nextTick(() => {
-        this.$emit("select", e.target.value);
-      });
+      this.$emit("update:modelValue", e.target.value); // Use "update:modelValue" for v-model compatibility
     },
   },
 };

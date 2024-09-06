@@ -10,12 +10,13 @@
       :value="value"
       @input="inputHandler"
     /> -->
-    <a-date-picker :value="value" @change="changeHandler" />
+    <a-date-picker :value="value" @change="changeHandler" format="DD-MMM-YYYY"  />
   </div>
 </template>
 
 <script>
 import dayjs from "dayjs";
+
 export default {
   name: "InputField",
   props: {
@@ -47,17 +48,12 @@ export default {
       type: String,
       default: "",
     },
-    // defaultPickerValue: {
-    //   type: st,
-    //   default: "",
-    // },
   },
   methods: {
     changeHandler(date, dateString) {
-      this.$emit("input", dateString, dayjs(date).format());
+      const formattedDate = dayjs(date).format('DD-MM-YYYY'); // Use your desired format here
+      this.$emit("input", dateString, formattedDate);
     },
   },
 };
 </script>
-
-<style></style>

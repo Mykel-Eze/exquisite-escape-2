@@ -27,6 +27,7 @@
               >
                 {{ country.description.content }}
               </li>
+              <!-- <li>Hello</li> -->
             </ul>
           </div>
         </div>
@@ -41,12 +42,12 @@
             divClass="input-white-wrapper"
             :modelValue="tourObj.stateCode"
             @update:modelValue="(value) => inputHandler(value, 'stateCode')"
-            @focus="showStateDropdownOnFocus"
+            @focus="showStateDropdown = true"
           />
           <div v-if="showStateDropdown" class="absolute bg-white mt-1 search-dropdown-wrapper">
             <ul>
               <li 
-                v-for="state in stateList" 
+                v-for="state in filteredStateList" 
                 :key="state.code" 
                 class="text-dark-gray py-2 px-4 cursor-pointer"
                 @click="selectState(state)"
@@ -60,7 +61,6 @@
         <div class="input-white-wrapper flex-div flex-row">
           <DatePicker
             label="Leaving on"
-            :defaultValue="currentDate"
             id="departure-date"
             type="text"
             inputClass="ls-inp-field datepicker"
@@ -69,7 +69,6 @@
           <span class="range-divider">-</span>
           <DatePicker
             label="Returning on"
-            :defaultValue="currentDate"
             id="return-date"
             type="text"
             inputClass="ls-inp-field datepicker"
@@ -98,8 +97,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted } from "vue";
-import { useApiPost } from "../../composables/services/useApi";
+import { defineComponent, ref, computed, onMounted, watch } from "vue";
+import { useApiGet, useApiPost } from "../../composables/services/useApi";
+import { useRouter } from 'vue-router';
+import { useToursStore } from '../../stores/tours';
 
 interface Country {
   code: string;
@@ -125,32 +126,47 @@ export default defineComponent({
       destinationDate: "",
     });
 
+    const store = useToursStore();
+    const router = useRouter();
+
     const countryList = ref<Country[]>([]);
     const stateList = ref<State[]>([]);
 
-    const filteredCountryList = computed(() =>
-      tourObj.value.countryCode.length >= 3
+    const showCountryDropdown = ref(false);
+    const showStateDropdown = ref(false);
+
+    const filteredCountryList = computed(() => {
+      const result = tourObj.value.countryCode.length >= 3
         ? countryList.value.filter((country) =>
             country.description.content.toLowerCase().includes(tourObj.value.countryCode.toLowerCase())
           )
-        : []
-    );
+        : [];
+      console.log(result); // Add this line to debug
+      return result;
+    });
 
-    const showCountryDropdown = ref(false);
-    const showStateDropdown = ref(false);
+    const filteredStateList = computed(() =>
+      tourObj.value.stateCode.length >= 1
+        ? stateList.value.filter((state) =>
+            state.name.toLowerCase().includes(tourObj.value.stateCode.toLowerCase())
+          )
+        : stateList.value
+    );
 
     const inputHandler = (value: string, inputKey: keyof typeof tourObj.value) => {
       tourObj.value[inputKey] = value;
 
       if (inputKey === 'countryCode') {
-        showCountryDropdown.value = value.length >= 1;
+        showCountryDropdown.value = value.length >= 3;
+        console.log('Dropdown Visible:', showCountryDropdown.value); // Debugging log
       }
     };
 
     const selectCountry = (country: Country) => {
       tourObj.value.countryCode = country.description.content;
       showCountryDropdown.value = false;
-      fetchStates(country.code);
+      stateList.value = country.states;
+      tourObj.value.stateCode = "";
     };
 
     const selectState = (state: State) => {
@@ -158,57 +174,47 @@ export default defineComponent({
       showStateDropdown.value = false;
     };
 
-    const fetchStates = async (countryCode: string) => {
-      try {
-        const payload = {
-          from: 1,  // Start index
-          to: 100   // End index
-        };
-        const { data } = await useApiPost(`/hotel/countries`, payload);
-        const country = data.countries.find((c: Country) => c.code === countryCode);
-        if (country && country.states) {
-          stateList.value = country.states;
-        }
-      } catch (error) {
-        console.error("Failed to fetch states", error);
-      }
-    };
-
     onMounted(async () => {
       try {
-        const payload = {
-          from: 1,  // Start index
-          to: 100   // End index
-        };
-        const { data } = await useApiPost(`/hotel/countries`, payload);
+        const { data } = await useApiGet(`/hotel/countries`);
         countryList.value = data.countries;
+
+        console.log(countryList.value)
       } catch (error) {
         console.error("Failed to fetch countries", error);
       }
     });
 
-    const showStateDropdownOnFocus = () => {
-      showStateDropdown.value = true;
-    };
+    watch(() => tourObj.value.countryCode, (newValue) => {
+      if (newValue.length < 2) {
+        showCountryDropdown.value = false;
+      }
+    });
+
+    watch(() => tourObj.value.stateCode, (newValue) => {
+      if (newValue.length < 1) {
+        showStateDropdown.value = false;
+      }
+    });
 
     const searchTourHandler = async () => {
-      const payload = {
-        ...tourObj.value,
-      };
-      await useApiPost("/flight/search-offer", payload);
+      const payload = { ...tourObj.value };
+      await store.searchTours(payload);
+
+      if (router.currentRoute.value.name === 'home') {
+        router.push({ name: 'tours' });  // Navigate to the tours page
+      }
     };
 
     return {
-      currentDate: new Date().toLocaleDateString("default", { month: "short", day: "2-digit" }),
       tourObj,
       filteredCountryList,
-      stateList,
+      filteredStateList,
       showCountryDropdown,
       showStateDropdown,
       inputHandler,
       selectCountry,
       selectState,
-      showStateDropdownOnFocus,
       searchTourHandler,
     };
   },
