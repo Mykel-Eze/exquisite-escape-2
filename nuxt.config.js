@@ -4,6 +4,7 @@
 export default {
   ssr: false,
   target: "static",
+
   app: {
     head: {
       link: [
@@ -32,22 +33,27 @@ export default {
       ],
     },
   },
+
   devtools: { enabled: false },
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
   imports: {
     dirs: ["constants/**", "composables/**"],
   },
+
   modules: ["nuxt-swiper"],
 
   loading: {
     color: "#00A79D",
     height: "5px",
   },
+
   plugins: [
     // "~/plugins/vue-plugins/dotenv.js",
     // "@/plugins/configuration/axios.js",
@@ -64,18 +70,23 @@ export default {
     "@/assets/scss/main.scss",
     "@/assets/css/styles.css",
   ],
+
   components: [
     {
       path: "~/components",
       pathPrefix: false,
     },
   ],
+
   runtimeConfig: {
     public: {
       BASE_URL: process.env.BASE_URL,
     },
   },
+
   router: {
     middleware: ['auth'],
   },
+
+  compatibilityDate: "2024-09-06",
 };
