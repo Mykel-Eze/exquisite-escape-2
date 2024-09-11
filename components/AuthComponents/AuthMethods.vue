@@ -2,6 +2,13 @@
   <section>
     <div class="auth-methods flex-div">
       <div class="auth-method">
+        <button @click="showEmailForm = true" type="button" class="auth-method-btn flex-div hover-scale">
+          <img src="~/assets/images/mail-icon.svg" alt="mail" class="auth-method-icon">
+          <span class="auth-method-text">Sign in with Email</span>
+        </button>
+      </div>
+
+      <div class="auth-method">
         <button @click="signInWithGoogle" type="button" class="auth-method-btn flex-div hover-scale">
           <img src="~/assets/images/google-icon.svg" alt="google" class="auth-method-icon">
           <span class="auth-method-text">Sign in with Google</span>
@@ -29,44 +36,75 @@
         </button>
       </div>
     </div>
-    <!-- <div v-if="user">
-      {{isLoggedIn}}
-      <p>Welcome, {{ user.displayName || user.email }}</p>
+
+    <div v-if="showEmailForm" class="email-form">
+      <input v-model="email" type="email" placeholder="Email" />
+      <input v-model="password" type="password" placeholder="Password" />
+      <button @click="signInWithEmail">Sign In</button>
+      <button @click="signUpWithEmail">Sign Up</button>
     </div>
-    <div v-if="error">
-      <p>Error: {{ error.message }}</p>
-    </div> -->
-    <!-- <div>
-      <form @submit.prevent="handleEmailSignIn">
-        <input v-model="email" type="email" placeholder="Email" />
-        <input v-model="password" type="password" placeholder="Password" />
-        <button type="submit">Sign in with Email</button>
-      </form>
-      <form @submit.prevent="handleEmailSignUp">
-        <input v-model="email" type="email" placeholder="Email" />
-        <input v-model="password" type="password" placeholder="Password" />
-        <button type="submit">Sign up with Email</button>
-      </form>
-      <div v-if="user">
-        <p>Welcome, {{ user.displayName || user.email }}</p>
-      </div>
-      <div v-if="error">
-        <p>Error: {{ error.message }}</p>
-      </div>
-    </div> -->
   </section>
 </template>
 
-<script setup lang="ts">
-import { useFirebase } from '../../composables/useFirebase';
-const { user, error, signInWithGoogle, signInWithFacebook, signInWithTwitter, signInWithApple, signInWithEmail, signUpWithEmail } = useFirebase();
-// const handleEmailSignIn = () => {
-//   signInWithEmail(email.value, password.value);
-// };
+<script setup>
+import { ref } from 'vue';
+import { useAuth } from '~/composables/auth/useAuth';
 
-// const handleEmailSignUp = () => {
-//   signUpWithEmail(email.value, password.value);
-// };
+const auth = useAuth();
+const showEmailForm = ref(false);
+const email = ref('');
+const password = ref('');
+
+const signInWithGoogle = () => {
+  // Implement Google OAuth flow
+  // This usually involves redirecting to Google's OAuth page
+  // After successful authentication, Google will redirect back with a code
+  // You'll need to handle this redirect in your Nuxt app
+  window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?...'; // Add your Google OAuth URL here
+};
+
+const signInWithFacebook = () => {
+  // Implement Facebook login
+  console.log('Facebook login not implemented');
+};
+
+const signInWithApple = () => {
+  // Implement Apple login
+  console.log('Apple login not implemented');
+};
+
+const signInWithTwitter = () => {
+  // Implement Twitter login
+  console.log('Twitter login not implemented');
+};
+
+const signInWithEmail = async () => {
+  try {
+    await auth.login(email.value, password.value);
+    // Handle successful login (e.g., redirect to dashboard)
+  } catch (error) {
+    console.error('Login failed:', error);
+  }
+};
+
+const signUpWithEmail = async () => {
+  try {
+    await auth.signup({ email: email.value, password: password.value });
+    // Handle successful signup (e.g., show verification message)
+  } catch (error) {
+    console.error('Signup failed:', error);
+  }
+};
 </script>
 
-<style></style>
+<style scoped>
+/* Add any additional styles here */
+.email-form {
+  margin-top: 20px;
+}
+.email-form input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+</style>

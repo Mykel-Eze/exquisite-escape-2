@@ -1,8 +1,18 @@
 import { ref } from 'vue';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, TwitterAuthProvider, OAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, type User } from 'firebase/auth';
-import { firebaseConfig } from '@/config/firebaseConfig';
-import { useUser } from '@/composables/auth/user'
+import { 
+  getAuth, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  FacebookAuthProvider, 
+  TwitterAuthProvider, 
+  OAuthProvider, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  onAuthStateChanged, type User 
+} from 'firebase/auth';
+import { firebaseConfig } from './config/firebaseConfig';
+import { useUser } from './auth/user'
 import { useRouter } from 'vue-router'; 
 const { createUser, setToken } = useUser()
 

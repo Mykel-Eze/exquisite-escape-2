@@ -1,50 +1,60 @@
-// composables/useAuth.ts
-import { useNuxtApp } from '#app'
-import { signInWithPopup } from 'firebase/auth'
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+import { authApiFactory } from '../../apiFactory/modules/auth'
 
-export const useAuth = () => {
-  const { $auth, $googleProvider, $facebookProvider, $twitterProvider, $appleProvider } = useNuxtApp()
+export const useAuth = defineStore('auth', () => {
+  const user = ref(null)
+  const error = ref(null)
 
-  const signInWithGoogle = async () => {
+  const login = async (email: string, password: string) => {
     try {
-      const result = await signInWithPopup($auth, $googleProvider)
-      return result.user
-    } catch (error) {
-      throw error
+      const response = await authApiFactory.$_login({ email, password })
+      user.value = response.data.user
+      return response
+    } catch (err) {
+      error.value = err.response?.data?.message || 'An error occurred'
+      throw err
     }
   }
 
-  const signInWithFacebook = async () => {
+  const signup = async (userData: any) => {
     try {
-      const result = await signInWithPopup($auth, $facebookProvider)
-      return result.user
-    } catch (error) {
-      throw error
+      const response = await authApiFactory.$_signup(userData)
+      user.value = response.data.user
+      return response
+    } catch (err) {
+      error.value = err.response?.data?.message || 'An error occurred'
+      throw err
     }
   }
 
-  const signInWithTwitter = async () => {
+  const logout = async () => {
     try {
-      const result = await signInWithPopup($auth, $twitterProvider)
-      return result.user
-    } catch (error) {
-      throw error
+      await authApiFactory.$_logout()
+      user.value = null
+    } catch (err) {
+      error.value = err.response?.data?.message || 'An error occurred'
+      throw err
     }
   }
 
-  const signInWithApple = async () => {
+  const googleOAuth = async (code: string) => {
     try {
-      const result = await signInWithPopup($auth, $appleProvider)
-      return result.user
-    } catch (error) {
-      throw error
+      const response = await authApiFactory.$_google_oauth(code)
+      user.value = response.data.user
+      return response
+    } catch (err) {
+      error.value = err.response?.data?.message || 'An error occurred'
+      throw err
     }
   }
 
   return {
-    signInWithGoogle,
-    signInWithFacebook,
-    signInWithTwitter,
-    signInWithApple,
+    user,
+    error,
+    login,
+    signup,
+    logout,
+    googleOAuth
   }
-}
+})

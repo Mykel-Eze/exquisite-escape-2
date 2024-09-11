@@ -87,6 +87,9 @@ export default {
   router: {
     middleware: ['auth'],
   },
+  "paths": {
+    "~/*": ["src/*"]
+  },
 
   compatibilityDate: "2024-09-06",
 };

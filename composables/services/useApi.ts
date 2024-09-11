@@ -1,6 +1,6 @@
 import type { FetchOptions } from "ofetch";
 
-import RequestInterceptorConfig from "~/utils/services/api/requestInterceptor";
+import RequestInterceptorConfig from "@/utils/services/api/requestInterceptor";
 
 type RequestMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
